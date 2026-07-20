@@ -288,8 +288,6 @@ html, body, #root {
   justify-content: center;
 }
 
-
-
 .mf-header-btn {
   display: inline-block;
   margin-top: 0; /* remove 20px */
@@ -305,9 +303,10 @@ html, body, #root {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* equal gap between items */
+  gap: 1rem;
   margin: 0 auto;
   padding: 0;
+  
 }
 .mf-nav-links .nav-link {
   font-family: var(--mf-font-body);
@@ -419,14 +418,6 @@ html, body, #root {
   width: 26px;
   height: 26px;
 }
-.mf-quote-section{
-  flex: 1;
-  max-width: 750px;
-  background: #eef1f8; 
-  border-radius: 24px;
-  padding: 50px 40px;
-  text-align: center;
-}
 /* ============ CAPSULE ANIMATION SECTION ============ */
 .mf-capsule-section {
   flex: 1;
@@ -434,7 +425,7 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color:aquamarine;
+  background: transparent;
   padding: 0;
 }
 .mf-capsule-stage {
