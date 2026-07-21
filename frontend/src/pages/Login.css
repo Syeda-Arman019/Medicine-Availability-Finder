@@ -1,0 +1,401 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+/* ===================================
+   LOGIN PAGE
+=================================== */
+
+.mf-login-page {
+  min-height: 100vh;
+  padding: 80px 20px;
+  background: linear-gradient(
+    180deg,
+    #f7faf9 0%,
+    #eef6f3 100%
+  );
+  font-family: "Manrope", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.mf-login-page::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(32, 214, 214, 0.08);
+  top: -220px;
+  left: -220px;
+}
+
+.mf-login-page::after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: rgba(12, 73, 152, 0.05);
+  bottom: -220px;
+  right: -220px;
+}
+
+/* ===================================
+   GRID
+=================================== */
+
+.mf-login-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ===================================
+   LEFT SIDE
+=================================== */
+
+.mf-login-left {
+  background: #eef1f8;
+  border-radius: 30px;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mf-login-left::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(32, 214, 214, 0.08);
+  top: -100px;
+  right: -100px;
+}
+
+.mf-login-tag {
+  display: inline-block;
+  background: #a8f1f1;
+  color: #0c4998;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.mf-login-left h1 {
+  font-family: "Fraunces", serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  color: #0c4998;
+  margin-bottom: 20px;
+}
+
+.mf-login-left h1 span {
+  color: #20d6d6;
+}
+
+.mf-login-left p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #60737c;
+  max-width: 550px;
+}
+/* ===================================
+   FEATURES
+=================================== */
+
+.mf-login-features {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mf-login-feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 16px 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+}
+
+.mf-login-feature span {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #dff9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.mf-login-feature h5 {
+  margin: 0;
+  color: #0c4998;
+  font-weight: 700;
+}
+
+.mf-login-feature p {
+  margin: 3px 0 0;
+  font-size: .9rem;
+}
+
+.mf-login-image {
+  width: 100%;
+  max-width: 380px;
+  display: block;
+  margin: 35px auto 20px;
+}
+
+/* ===================================
+   STATS
+=================================== */
+
+.mf-login-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.mf-login-stats h3 {
+  margin: 0;
+  color: #0c4998;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.mf-login-stats span {
+  color: #60737c;
+  font-size: .85rem;
+}
+
+/* ===================================
+   LOGIN CARD
+=================================== */
+
+.mf-login-card {
+  background: rgba(255,255,255,.96);
+  border-radius: 30px;
+  padding: 45px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 60px rgba(12,73,152,.12);
+}
+
+.mf-login-card h2 {
+  font-family: "Fraunces", serif;
+  color: #0c4998;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+}
+/* ===================================
+   FORM
+=================================== */
+
+.mf-input-group {
+  margin-bottom: 20px;
+}
+
+.mf-input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #0c4998;
+  font-weight: 700;
+}
+
+.mf-input-group input {
+  width: 100%;
+  height: 58px;
+  border: 2px solid #dce8e4;
+  border-radius: 16px;
+  padding: 0 18px;
+  outline: none;
+  transition: .3s;
+}
+
+.mf-input-group input:focus {
+  border-color: #20d6d6;
+  box-shadow: 0 0 0 4px rgba(32,214,214,.15);
+}
+
+.mf-password-wrap {
+  position: relative;
+}
+
+.mf-password-wrap input {
+  padding-right: 55px;
+}
+
+.mf-eye-btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #0c4998;
+  font-size: 1.2rem;
+}
+
+.mf-login-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  font-size: .9rem;
+}
+
+.mf-login-options a {
+  color: #0c4998;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.mf-login-btn {
+  width: 100%;
+  height: 58px;
+  border: none;
+  border-radius: 999px;
+  background: #20d6d6;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.mf-login-btn:hover {
+  transform: translateY(-2px);
+}
+
+.mf-divider {
+  text-align: center;
+  margin: 25px 0;
+  position: relative;
+}
+
+.mf-divider::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #dce8e4;
+  left: 0;
+  top: 50%;
+}
+
+.mf-divider span {
+  background: white;
+  padding: 0 15px;
+  position: relative;
+}
+
+.mf-social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mf-social-btn {
+  height: 54px;
+  border: 1px solid #dce8e4;
+  border-radius: 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mf-register-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 999px;
+  border: 2px solid #0c4998;
+  color: #0c4998;
+  font-weight: 700;
+}
+
+.mf-register-btn:hover {
+  background: #0c4998;
+  color: white;
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media (max-width: 992px) {
+
+  .mf-login-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .mf-login-left {
+    padding: 40px;
+  }
+
+  .mf-login-card {
+    max-width: 650px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .mf-login-page {
+    padding: 40px 15px;
+  }
+
+  .mf-login-left {
+    padding: 30px;
+  }
+
+  .mf-login-left h1 {
+    font-size: 2rem;
+  }
+
+  .mf-login-card {
+    padding: 30px 22px;
+  }
+
+  .mf-login-options {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .mf-login-stats {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .mf-login-left h1 {
+    font-size: 1.7rem;
+  }
+
+  .mf-login-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .mf-login-tag {
+    font-size: .75rem;
+  }
+}
