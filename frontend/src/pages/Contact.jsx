@@ -1,0 +1,291 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Contact.css";
+import contactMobile from "../assets/images/contact-mobile.png";
+
+function Contact() {
+  return (
+    <div className="mf-page mf-contact-page">
+
+      {/* ================= TOP BAR ================= */}
+
+      <div className="mf-topbar">
+        <div className="container mf-topbar-inner">
+
+          <Link to="/" className="mf-brand">
+            <span className="mf-logo" aria-hidden="true">
+              <svg viewBox="0 0 40 40" className="mf-logo-svg">
+                <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
+                <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
+              </svg>
+            </span>
+            <span className="mf-brand-text">
+              Med<span className="mf-brand-accent">Finder</span>
+            </span>
+          </Link>
+
+        </div>
+      </div>
+
+      {/* ================= NAVBAR ================= */}
+
+      <nav className="navbar navbar-expand-lg mf-navbar">
+        <div className="container mf-navbar-inner">
+
+          <button
+            className="navbar-toggler mf-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mfNav"
+            aria-controls="mfNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="mfNav">
+            <ul className="navbar-nav mf-nav-links">
+              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/medicines">Medicines</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/about">About Us</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/login">Login / Register</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/dashboard">Patient Dashboard</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/contact">Contact Us</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/faqs">FAQs</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/terms">Terms of Service</Link></li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+
+      {/* ================= HERO ================= */}
+
+      <section className="mf-contact-hero">
+        <div className="container mf-contact-container">
+
+          {/* LEFT */}
+          <div className="mf-contact-left">
+
+            <span className="mf-eyebrow">CONTACT US</span>
+
+            <h1 className="mf-contact-title">
+              We're Here <br />
+              To Help You
+            </h1>
+
+            <p className="mf-contact-text">
+              Need help finding medicines or locating nearby pharmacies?
+              Our MedFinder team is always ready to assist you with
+              medicine availability, pharmacy information and healthcare support.
+            </p>
+
+            <div className="mf-contact-info">
+
+  <div className="mf-info-card">
+    <div className="mf-info-icon">📞</div>
+    <div>
+      <h4>Phone</h4>
+      <a href="tel:+923001234567" className="mf-info-link">+92 300 1234567</a>
+      <a href="tel:+923217654321" className="mf-info-link">+92 321 7654321</a>
+    </div>
+  </div>
+
+  <div className="mf-info-card">
+    <div className="mf-info-icon">📧</div>
+    <div>
+      <h4>Email</h4>
+      <a href="mailto:support@medfinder.pk" className="mf-info-link">support@medfinder.pk</a>
+      <a href="mailto:info@medfinder.pk" className="mf-info-link">info@medfinder.pk</a>
+    </div>
+  </div>
+
+  <div className="mf-info-card">
+    <div className="mf-info-icon">📍</div>
+    <div>
+      <h4>Address</h4>
+      <p className="mf-info-text">Plot 12, Auto Bhan Road</p>
+      <p className="mf-info-text">Hyderabad, Sindh, Pakistan</p>
+    </div>
+  </div>
+
+  <div className="mf-info-card">
+    <div className="mf-info-icon">🕒</div>
+    <div>
+      <h4>Working Hours</h4>
+      <p className="mf-info-text">Monday – Saturday</p>
+      <p className="mf-info-text">9:00 AM – 6:00 PM</p>
+    </div>
+  </div>
+
+</div>
+
+            <div className="mf-contact-buttons">
+              <Link to="/medicines" className="mf-banner-btn">
+                Find Medicines
+              </Link>
+
+              <Link to="/about" className="mf-contact-btn2">
+                Learn More
+              </Link>
+            </div>
+
+          </div>
+
+          {/* RIGHT: phone stage + message box below it */}
+          <div className="mf-contact-right">
+
+            <div className="mf-phone-stage">
+              <div className="mf-contact-circle"></div>
+
+              <img
+                src={contactMobile}
+                alt="Contact MedFinder"
+                className="mf-contact-image"
+              />
+            </div>
+
+            <div className="mf-message-box">
+              <h3>Send Us a Message</h3>
+              <p>
+                We'd love to hear from you. Fill out the form and our team
+                will contact you shortly.
+              </p>
+
+              <input type="text" placeholder="Your Name" />
+              <input type="email" placeholder="Email Address" />
+              <input type="text" placeholder="Phone Number" />
+              <textarea rows="4" placeholder="Write your message..."></textarea>
+
+              <button type="button">
+                Send Message <span>➤</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= LOCATION ================= */}
+
+      <section className="mf-location-section">
+        <div className="container">
+
+          <div className="mf-location-header">
+            <span className="mf-eyebrow">OUR LOCATION</span>
+            <h2>Visit Our Office</h2>
+            <p>
+              Our MedFinder support team is always available to help you.
+              You can visit our office during working hours or contact us online.
+            </p>
+          </div>
+
+          <div className="mf-location-grid">
+
+            <div className="mf-location-card">
+              <h3>📍 MedFinder Office</h3>
+              <p>Plot 12, Auto Bhan Road</p>
+              <p>Hyderabad, Sindh, Pakistan</p>
+              <p>Monday – Saturday</p>
+              <p>9:00 AM – 6:00 PM</p>
+            </div>
+
+            <div className="mf-map">
+              <iframe
+                title="Google Map"
+                src="https://www.google.com/maps?q=Hyderabad%20Sindh%20Pakistan&output=embed"
+                loading="lazy"
+              ></iframe>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+
+      <footer className="mf-footer">
+
+        <div className="mf-footer-top">
+          <div className="mf-feature">
+            <span>🚚</span>
+            <div>
+              <h5>Fast Delivery</h5>
+              <p>Medicine reservation made easy</p>
+            </div>
+          </div>
+
+          <div className="mf-feature">
+            <span>💊</span>
+            <div>
+              <h5>Verified Pharmacies</h5>
+              <p>Trusted pharmacy partners</p>
+            </div>
+          </div>
+
+          <div className="mf-feature">
+            <span>📍</span>
+            <div>
+              <h5>Nearby Search</h5>
+              <p>Find medicines around you</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="mf-footer-grid">
+
+            <div className="mf-footer-brand">
+              <h2>
+                Med<span>Finder</span>
+              </h2>
+              <p>
+                Helping patients find medicine availability across nearby
+                pharmacies in real time.
+              </p>
+            </div>
+
+            <div>
+              <h4>Explore</h4>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/medicines">Medicines</Link></li>
+                <li><Link to="/about">About Us</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Support</h4>
+              <ul>
+                <li><Link to="/contact">Contact Us</Link></li>
+                <li><Link to="/faqs">FAQs</Link></li>
+                <li><Link to="/terms">Terms</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Account</h4>
+              <ul>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/register">Register</Link></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div className="mf-footer-bottom">
+            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+          </div>
+        </div>
+
+      </footer>
+
+    </div>
+  );
+}
+
+export default Contact;

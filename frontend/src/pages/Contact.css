@@ -1,0 +1,433 @@
+@import "./Home.css";
+
+/* ==========================================
+   CONTACT PAGE
+========================================== */
+
+.mf-contact-page {
+  background: #f7faf9;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   HERO SECTION
+========================================== */
+
+.mf-contact-hero {
+  position: relative;
+  padding: 70px 0 90px;
+  background: linear-gradient(90deg, #f7fbff 0%, #eef6ff 50%, #ffffff 100%);
+  overflow: hidden;
+}
+
+.mf-contact-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: start;
+  gap: 60px;
+}
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.mf-contact-left {
+  position: relative;
+  z-index: 2;
+  padding-top: 10px;
+  padding-left: 40px;
+}
+
+.mf-eyebrow {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: #dff8f6;
+  color: #0c4998;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.mf-contact-title {
+  font-family: var(--mf-font-display);
+  font-size: 52px;
+  line-height: 1.12;
+  color: #0c4998;
+  margin: 18px 0;
+}
+
+.mf-contact-text {
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: #5f7286;
+  max-width: 500px;
+  margin-bottom: 26px;
+}
+
+/* ==========================================
+   CONTACT INFO CARDS
+========================================== */
+
+.mf-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 26px 0;
+}
+
+.mf-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+  transition: .35s;
+}
+
+.mf-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, .12);
+}
+
+.mf-info-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #20d6d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.mf-info-card h4 {
+  margin: 0 0 5px;
+  color: #0c4998;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mf-info-card p,
+.mf-info-card .mf-info-link,
+.mf-info-card .mf-info-text {
+  display: block;
+  margin: 2px 0;
+  color: #66788a;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* Clickable phone / email links: hover + touch underline feedback */
+.mf-info-card .mf-info-link {
+  text-decoration: none;
+  color: #66788a;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.mf-info-card .mf-info-link:hover,
+.mf-info-card .mf-info-link:focus-visible {
+  color: #0c4998;
+  border-bottom-color: #0c4998;
+}
+
+/* Mobile / touch devices: same underline feedback on tap */
+.mf-info-card .mf-info-link:active {
+  color: #20d6d6;
+  border-bottom-color: #20d6d6;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.mf-contact-buttons {
+  display: flex;
+  gap: 18px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.mf-contact-btn2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  border: 2px solid #20d6d6;
+  border-radius: 40px;
+  text-decoration: none;
+  color: #0c4998;
+  font-weight: 700;
+  transition: .35s;
+}
+
+.mf-contact-btn2:hover {
+  background: #20d6d6;
+  color: #fff;
+}
+
+/* ==========================================
+   RIGHT SIDE — phone stage + message box
+========================================== */
+
+.mf-contact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.mf-phone-stage {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mf-contact-circle {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(32, 214, 214, .22) 0%,
+      rgba(90, 175, 255, .10) 60%,
+      transparent 80%);
+  filter: blur(20px);
+  z-index: 1;
+}
+
+.mf-contact-image {
+  position: relative;
+  z-index: 2;
+  width: 280px;
+  max-width: 80%;
+  display: block;
+  filter: drop-shadow(0 30px 45px rgba(12, 30, 80, .25));
+  animation: phoneFloat 5s ease-in-out infinite;
+}
+
+@keyframes phoneFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+/* ==========================================
+   MESSAGE BOX
+========================================== */
+
+.mf-message-box {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(160deg, #0c1b4a 0%, #0c4998 100%);
+  padding: 32px;
+  border-radius: 26px;
+  color: #ffffff;
+  box-shadow: 0 25px 55px rgba(12, 30, 80, .3);
+}
+
+.mf-message-box h3 {
+  margin: 0 0 10px;
+  font-size: 25px;
+  font-family: var(--mf-font-display);
+  color: #ffffff;
+}
+
+.mf-message-box p {
+  margin-bottom: 18px;
+  line-height: 1.65;
+  opacity: .85;
+  font-size: 13.5px;
+  color: #dce8ff;
+}
+
+.mf-message-box input,
+.mf-message-box textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 13px;
+  font-size: 14px;
+  font-family: var(--mf-font-body);
+  color: #06304f;
+}
+
+.mf-message-box textarea {
+  resize: none;
+}
+
+.mf-message-box button {
+  width: 100%;
+  border: none;
+  padding: 14px;
+  border-radius: 40px;
+  background: #20d6d6;
+  color: #06304f;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .35s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mf-message-box button:hover {
+  background: #17c1c1;
+  transform: translateY(-3px);
+}
+
+/* ==========================================
+   LOCATION SECTION
+========================================== */
+
+.mf-location-section {
+  padding: 90px 0;
+  background: #fff;
+}
+
+.mf-location-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.mf-location-header h2 {
+  font-size: 40px;
+  color: #0c4998;
+  margin: 15px 0;
+  font-family: var(--mf-font-display);
+}
+
+.mf-location-header p {
+  max-width: 700px;
+  margin: auto;
+  color: #6b7d90;
+  line-height: 1.8;
+}
+
+.mf-location-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+.mf-location-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+}
+
+.mf-location-card h3 {
+  color: #0c4998;
+  margin-bottom: 18px;
+}
+
+.mf-location-card p {
+  margin: 10px 0;
+  color: #617589;
+}
+
+.mf-map {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, .10);
+  min-height: 320px;
+}
+
+.mf-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+  display: block;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .mf-contact-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 0 20px;
+  }
+
+ 
+
+  .mf-contact-right {
+    padding-top: 10px;
+  }
+
+  .mf-location-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .mf-contact-hero {
+    padding: 50px 0 60px;
+  }
+
+  .mf-contact-title {
+    font-size: 36px;
+  }
+
+  .mf-contact-text {
+    font-size: 15.5px;
+  }
+
+  .mf-phone-stage {
+    height: 380px;
+  }
+
+  .mf-contact-image {
+    width: 220px;
+  }
+
+  .mf-contact-circle {
+    width: 280px;
+    height: 280px;
+  }
+
+  .mf-message-box {
+    padding: 22px;
+  }
+
+  .mf-contact-buttons {
+    flex-direction: column;
+  }
+
+  .mf-contact-btn2,
+  .mf-banner-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mf-location-header h2 {
+    font-size: 30px;
+  }
+}
