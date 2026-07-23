@@ -1,0 +1,245 @@
+/* ================= MEDICINES PAGE SPECIFIC STYLES ================= */
+
+.medicines-page {
+  background-color: #f7faf9;
+  min-height: 100vh;
+}
+
+/* Page Header Banner */
+.med-header-banner {
+  background: linear-gradient(135deg, #040e91 0%, #082f63 100%);
+  color: #ffffff;
+  padding: 60px 0 50px;
+  text-align: center;
+}
+
+.med-tag {
+  display: inline-block;
+  background: rgba(32, 214, 214, 0.2);
+  color: #20d6d6;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.med-header-banner h1 {
+  font-family: "Fraunces", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.med-header-banner p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Main Content & Filters */
+.med-content-section {
+  padding: 40px 15px 80px;
+}
+
+.med-filter-bar {
+  margin-bottom: 30px;
+}
+
+.med-filter-bar h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #082f63;
+  margin-bottom: 15px;
+}
+
+.med-category-chips {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.med-chip {
+  background: #ffffff;
+  border: 1.5px solid #cfe0ff;
+  color: #082f63;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.med-chip:hover {
+  background: #eef5ff;
+  border-color: #0c4998;
+}
+
+.med-chip.active {
+  background: #040e91;
+  color: #ffffff;
+  border-color: #040e91;
+  box-shadow: 0 4px 12px rgba(4, 14, 145, 0.2);
+}
+
+/* Results Count */
+.med-results-count {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+/* Medicines Grid Layout */
+.med-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* Medicine Card Design */
+.med-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1.5px solid #cfe0ff;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.med-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(8, 47, 99, 0.1);
+}
+
+.med-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #e6f9f4;
+  color: #10b981;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.med-img-box {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.med-img-box img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.med-category-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #20d6d6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.med-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #082f63;
+  margin: 5px 0 4px;
+}
+
+.med-pack {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+.med-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.med-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #040e91;
+}
+
+.med-add-btn {
+  background: #040e91;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.med-add-btn:hover {
+  background: #20d6d6;
+  color: #040e91;
+  transform: translateY(-2px);
+}
+
+/* No Results Container */
+.med-no-results {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 60px 20px;
+  text-align: center;
+  border: 2px dashed #cfe0ff;
+}
+
+.no-res-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.med-no-results h3 {
+  color: #082f63;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.med-no-results p {
+  color: #6b7280;
+  max-width: 450px;
+  margin: 0 auto 20px;
+}
+
+.med-reset-btn {
+  background: #20d6d6;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .med-header-banner h1 {
+    font-size: 2.2rem;
+  }
+  
+  .med-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+}
