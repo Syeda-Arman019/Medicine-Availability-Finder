@@ -1,185 +1,214 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaGoogle, FaFacebookF } from "react-icons/fa";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import "./Login.css";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add authentication logic here
+  };
+
   return (
-    <section className="mf-login-page">
-      <div className="container">
-        <div className="mf-login-wrapper">
+    <div className="login-page">
+      {/* ===== HEADER ===== */}
+      <header className="login-header">
+        <Link to="/" className="login-logo">
+          <span className="login-logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" className="mf-logos-svg">
+              <rect
+                x="4"
+                y="16"
+                width="32"
+                height="8"
+                rx="4"
+                transform="rotate(-45 20 20)"
+                fill="#7ccbe6"
+              />
+              <rect
+                x="20"
+                y="16"
+                width="16"
+                height="8"
+                rx="4"
+                transform="rotate(-45 20 20)"
+                fill="#d1f3ed"
+              />
+            </svg>
+          </span>
 
-          {/* LEFT SIDE */}
-          <div className="mf-login-left">
+          <span className="mf-brand-text">
+            <span className="mf-styled-letter">M</span>ed
+            <span className="mf-styled-letter mf-brand-accent">F</span>inder
+          </span>
+        </Link>
 
-            <span className="mf-login-tag">
-              Welcome Back
-            </span>
+        <Link to="/" className="back-home-btn">
+          Back to Home
+        </Link>
+      </header>
 
-            <h1>
-              Access Your
-              <span> MedFinder </span>
-              Account
-            </h1>
+      {/* ===== MAIN SECTION ===== */}
+      <section className="login-container">
+        <div className="login-left">
+          <span className="login-tag">MEDICINE AVAILABILITY FINDER</span>
 
-            <p>
-              Find medicines faster, manage reservations,
-              and connect with verified pharmacies near you.
-            </p>
+          <h1>
+            Welcome Back
+            <br />
+            To MedFinder
+          </h1>
 
-            <div className="mf-login-features">
+          <p>
+            Login to search medicines, check availability, reserve medicines and
+            connect with nearby verified pharmacies in real-time.
+          </p>
 
-              <div className="mf-login-feature">
+          {/* ===== FEATURE CARDS WITH UPDATED LINKS ===== */}
+          <div className="login-features">
+            {/* Medicine Search */}
+            <Link to="/medicines" className="feature-card-link">
+              <div className="feature-card">
                 <span>💊</span>
-                <div>
-                  <h5>Medicine Search</h5>
-                  <p>Instant availability updates</p>
-                </div>
+                <h4>Medicine Search</h4>
               </div>
-
-              <div className="mf-login-feature">
-                <span>📍</span>
-                <div>
-                  <h5>Nearby Pharmacies</h5>
-                  <p>Locate trusted pharmacies</p>
-                </div>
-              </div>
-
-              <div className="mf-login-feature">
-                <span>⚡</span>
-                <div>
-                  <h5>Quick Reservations</h5>
-                  <p>Reserve before you travel</p>
-                </div>
-              </div>
-
-            </div>
-
-            <img
-              src="/images/login-doctor.png"
-              alt="Doctor"
-              className="mf-login-image"
-            />
-
-            <div className="mf-login-stats">
-
-              <div>
-                <h3>500+</h3>
-                <span>Medicines</span>
-              </div>
-
-              <div>
-                <h3>100+</h3>
-                <span>Pharmacies</span>
-              </div>
-
-              <div>
-                <h3>24/7</h3>
-                <span>Availability</span>
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* RIGHT SIDE */}
-          <div className="mf-login-card">
-
-            <h2>Login</h2>
-
-            <form>
-
-              <div className="mf-input-group">
-                <label>Email Address</label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div className="mf-input-group">
-
-                <label>Password</label>
-
-                <div className="mf-password-wrap">
-
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                  />
-
-                  <button
-                    type="button"
-                    className="mf-eye-btn"
-                    onClick={() =>
-                      setShowPassword(!showPassword)
-                    }
-                  >
-                    {showPassword ? (
-                      <FiEyeOff />
-                    ) : (
-                      <FiEye />
-                    )}
-                  </button>
-
-                </div>
-
-              </div>
-
-              <div className="mf-login-options">
-
-                <label>
-                  <input type="checkbox" />
-                  Remember Me
-                </label>
-
-                <Link to="/forgot-password">
-                  Forgot Password?
-                </Link>
-
-              </div>
-
-              <button
-                type="submit"
-                className="mf-login-btn"
-              >
-                Login
-              </button>
-
-            </form>
-
-            <div className="mf-divider">
-              <span>OR</span>
-            </div>
-
-            <div className="mf-social-login">
-
-              <button className="mf-social-btn">
-                <FaGoogle />
-                Continue with Google
-              </button>
-
-              <button className="mf-social-btn">
-                <FaFacebookF />
-                Continue with Facebook
-              </button>
-
-            </div>
-
-            <Link
-              to="/register"
-              className="mf-register-btn"
-            >
-              Create New Account
             </Link>
 
+            {/* Nearby Pharmacies - Dummy Link */}
+            <Link to="#" className="feature-card-link">
+              <div className="feature-card">
+                <span>📍</span>
+                <h4>Nearby Pharmacies</h4>
+              </div>
+            </Link>
+
+            {/* Fast Reservations */}
+            <Link to="/medicines" className="feature-card-link">
+              <div className="feature-card">
+                <span>⚡</span>
+                <h4>Fast Reservations</h4>
+              </div>
+            </Link>
+
+            {/* 24/7 Availability - Dummy Link */}
+            <Link to="#" className="feature-card-link">
+              <div className="feature-card">
+                <span>🕒</span>
+                <h4>24/7 Availability</h4>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className="login-card">
+          <h2>Login Account</h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="login-email">Email Address</label>
+              <input
+                id="login-email"
+                type="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="login-password">Password</label>
+
+              <div className="password-box">
+                <input
+                  id="login-password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  required
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div className="login-options">
+              <label>
+                <input type="checkbox" />
+                Remember me
+              </label>
+
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+
+            <button type="submit" className="login-btn">
+              Login
+            </button>
+          </form>
+
+          <div className="divider">OR</div>
+
+          <button type="button" className="google-btn">
+            Continue with Google
+          </button>
+
+          <p className="signup-text">
+            Don't have an account? <Link to="/register">Register Now</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="login-footer">
+        <div className="login-footer-content">
+          <h3 className="footer-logo">
+            <svg viewBox="0 0 40 40" className="mf-Footerlogo-svg">
+              <rect
+                x="4"
+                y="16"
+                width="32"
+                height="8"
+                rx="4"
+                transform="rotate(-45 20 20)"
+                fill="#7ccbe6"
+              />
+              <rect
+                x="20"
+                y="16"
+                width="16"
+                height="8"
+                rx="4"
+                transform="rotate(-45 20 20)"
+                fill="#d1f3ed"
+              />
+            </svg>
+
+            <span className="mf-brand-text">
+              <span className="mf-styled-letter">M</span>ed
+              <span className="mf-styled-letter mf-brand-accent">F</span>inder
+            </span>
+          </h3>
+
+          <p>
+            Helping patients find medicine availability across nearby pharmacies in
+            real time.
+          </p>
+
+          <div className="footer-links">
+            <Link to="/">Home</Link>
+            <Link to="#">Contact</Link>
+            <Link to="#">FAQs</Link>
           </div>
 
+          <div className="footer-copy">
+            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+          </div>
         </div>
-      </div>
-    </section>
+      </footer>
+    </div>
   );
 }
