@@ -134,7 +134,7 @@ export const MEDICINES = [
     category: "Fever & Cold",
     image: "/images/arinac.png",
     pharmacies: [
-      { id: 103, name: "Awan Pharmacy", location: "Auto Bhan Road, Hyderabad", distance: "4.0 km", status: "In Stock", phone: "0302-9876543" }
+      { id: 103, name: "Davago Pharmacy", location: "Auto Bhan Road, Hyderabad", distance: "4.0 km", status: "In Stock", phone: "0302-9876543" }
     ]
   },
   {

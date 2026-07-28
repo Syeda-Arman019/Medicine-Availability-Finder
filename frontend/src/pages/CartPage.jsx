@@ -4,12 +4,64 @@ import { Trash2, Plus, Minus, ArrowLeft, ShoppingBag, MapPin, Clock } from "luci
 import "./CartPage.css";
 
 export default function CartPage({ cart = [], updateQuantity, removeFromCart }) {
-  const [selectedPharmacy, setSelectedPharmacy] = useState("MedPlus Pharmacy - Main Branch");
+  console.log(cart);
+  
+  // State matches the dropdown key directly
+  const [selectedPharmacy, setSelectedPharmacy] = useState("MedPlus Pharmacy");
 
-  const subtotal = cart.reduce((acc, item) => acc + (item.numericPrice || 0) * item.quantity, 0);
+  const subtotal = cart.reduce(
+    (acc, item) => acc + (parseFloat(item.price) || 0) * item.quantity,
+    0
+  );
 
-  const handleReservation = () => {
-    alert(`🟢 Reservation Successful!\n\nYour medicines have been reserved at: ${selectedPharmacy}.\n\nPlease show your reservation code #MF-${Math.floor(1000 + Math.random() * 9000)} at the counter within 4 hours.`);
+  const handleReservation = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (!user || !user.user_id) {
+        alert("Please log in to confirm your reservation.");
+        return;
+      }
+
+      const pharmacyMap = {
+        "MedPlus Pharmacy": 1,
+        "Care Pharmacy": 2,
+        "City Health Pharmacy": 3,
+      };
+
+      const response = await fetch("http://127.0.0.1:5000/reserve", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: user.user_id,
+          pharmacy_id: pharmacyMap[selectedPharmacy],
+          total_amount: subtotal,
+          cart_items: cart.map((item) => ({
+            medicine_id: item.medicine_id,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message || "Reservation confirmed successfully!");
+        
+        // Clear items from cart state after success
+       cart.map((item) => item.medicine_id)
+    .forEach((id) => removeFromCart(id));
+      } else {
+        alert(data.error || "Reservation failed. Please try again.");
+      }
+
+    } catch (error) {
+      console.error("Reservation Error:", error);
+      alert("Reservation failed. Please check backend server.");
+    }
   };
 
   return (
@@ -47,37 +99,39 @@ export default function CartPage({ cart = [], updateQuantity, removeFromCart }) 
                   </thead>
                   <tbody>
                     {cart.map((item) => (
-                      <tr key={item.id}>
+                      <tr key={item.medicine_id}>
                         <td>
                           <div className="cart-item-info">
                             {item.image && (
-                              <img src={item.image} alt={item.name} />
+                              <img src={item.image} alt={item.medicine_name} />
                             )}
                             <div>
-                              <h5 className="mb-0">{item.name}</h5>
-                              <small className="text-muted">{item.pack}</small>
+                              <h5 className="mb-0">{item.medicine_name}</h5>
+                              <small className="text-muted">
+                                {item.description}
+                              </small>
                             </div>
                           </div>
                         </td>
-                        <td>Rs. {item.numericPrice}</td>
+                        <td>Rs. {item.price}</td>
                         <td>
                           <div className="qty-controls">
-                            <button onClick={() => updateQuantity(item.id, -1)}>
+                            <button onClick={() => updateQuantity(item.medicine_id, -1)}>
                               <Minus size={14} />
                             </button>
                             <span>{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.id, 1)}>
+                            <button onClick={() => updateQuantity(item.medicine_id, 1)}>
                               <Plus size={14} />
                             </button>
                           </div>
                         </td>
                         <td className="item-total">
-                          Rs. {item.numericPrice * item.quantity}
+                          Rs. {(parseFloat(item.price) || 0) * item.quantity}
                         </td>
                         <td>
                           <button
                             className="remove-btn"
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => removeFromCart(item.medicine_id)}
                             title="Remove item"
                           >
                             <Trash2 size={18} />
@@ -105,9 +159,9 @@ export default function CartPage({ cart = [], updateQuantity, removeFromCart }) 
                     value={selectedPharmacy}
                     onChange={(e) => setSelectedPharmacy(e.target.value)}
                   >
-                    <option value="MedPlus Pharmacy - Main Branch">MedPlus Pharmacy - Main Branch</option>
-                    <option value="Care Pharmacy - Station Road">Care Pharmacy - Station Road</option>
-                    <option value="City Health Pharmacy - Saddar">City Health Pharmacy - Saddar</option>
+                    <option value="MedPlus Pharmacy">MedPlus Pharmacy - Unit 7, Latifabad</option>
+                    <option value="Care Pharmacy">Care Pharmacy - Qasimabad</option>
+                    <option value="City Health Pharmacy">City Health Pharmacy - Saddar</option>
                   </select>
                 </div>
 

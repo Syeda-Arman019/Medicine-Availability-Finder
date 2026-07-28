@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
-export default function Login() {
-  const navigate = useNavigate();
-
-  // State for password visibility
+export default function Register() {
+  // Password Visibility States
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
+    full_name: "",
     email: "",
+    phone: "",
     password: "",
+    confirmPassword: "",
   });
 
-  // Handle Input Change Dynamically
+  // Handle Input Changes Dynamically
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -23,41 +25,51 @@ export default function Login() {
     }));
   };
 
-  // Submit Handler connected with Flask API
+  // Form Submit Handler connected with Flask Backend
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
     try {
-      const response = await fetch("http://127.0.0.1:5000/login", {
+      const response = await fetch("http://127.0.0.1:5000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          full_name: formData.full_name,
           email: formData.email,
+          phone: formData.phone,
           password: formData.password,
         }),
       });
 
       const data = await response.json();
 
-      alert(data.message || "Login completed!");
+      alert(data.message || "Request completed!");
 
-      if (response.ok) {
-        console.log("Logged-in User Data:", data.user);
+      // Reset Form Inputs
+      setFormData({
+        full_name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+      });
 
-        // Optional: Save user session/token to localStorage if returned by API
-        if (data.user) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-        }
-
-        // Redirect user to Home page (or change to '/dashboard' as needed)
-        navigate("/");
-      }
     } catch (error) {
       console.error(error);
-      alert("Login failed! Please check your network or server connection.");
+      alert("Registration failed!");
     }
+  };
+
+  // Google Sign-In Demo Handler
+  const handleGoogleSignIn = () => {
+    alert("Google Sign-In functionality coming soon!");
   };
 
   return (
@@ -101,18 +113,20 @@ export default function Login() {
 
       {/* ===== MAIN SECTION ===== */}
       <section className="login-container">
+        {/* ===== LEFT SIDE ===== */}
         <div className="login-left">
-          <span className="login-tag">MEDICINE AVAILABILITY FINDER</span>
+          <span className="login-tag">JOIN MEDFINDER TODAY</span>
 
           <h1>
-            Welcome Back
+            Create An
             <br />
-            To MedFinder
+            Account
           </h1>
 
           <p>
-            Login to search medicines, check availability, reserve medicines and
-            connect with nearby verified pharmacies in real-time.
+            Join MedFinder to search medicines, check real-time availability,
+            reserve medicines instantly, and connect with nearby verified
+            pharmacies.
           </p>
 
           {/* ===== FEATURE CARDS ===== */}
@@ -147,16 +161,30 @@ export default function Login() {
           </div>
         </div>
 
-        {/* ===== LOGIN CARD ===== */}
+        {/* ===== REGISTER CARD ===== */}
         <div className="login-card">
-          <h2>Login Account</h2>
+          <h2>Create Account</h2>
 
           <form onSubmit={handleSubmit}>
+            {/* Full Name */}
+            <div className="input-group">
+              <label htmlFor="reg-name">Full Name</label>
+              <input
+                id="reg-name"
+                type="text"
+                name="full_name"
+                value={formData.full_name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
             {/* Email Address */}
             <div className="input-group">
-              <label htmlFor="login-email">Email Address</label>
+              <label htmlFor="reg-email">Email Address</label>
               <input
-                id="login-email"
+                id="reg-email"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -166,21 +194,33 @@ export default function Login() {
               />
             </div>
 
+            {/* Phone Number */}
+            <div className="input-group">
+              <label htmlFor="reg-phone">Phone Number</label>
+              <input
+                id="reg-phone"
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
             {/* Password */}
             <div className="input-group">
-              <label htmlFor="login-password">Password</label>
-
+              <label htmlFor="reg-password">Password</label>
               <div className="password-box">
                 <input
-                  id="login-password"
+                  id="reg-password"
                   type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Enter your password"
+                  placeholder="Create a password"
                   required
                 />
-
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -191,28 +231,48 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="login-options">
-              <label>
-                <input type="checkbox" />
-                Remember me
-              </label>
-
-              <Link to="/forgot-password">Forgot Password?</Link>
+            {/* Confirm Password */}
+            <div className="input-group">
+              <label htmlFor="reg-confirm-password">Confirm Password</label>
+              <div className="password-box">
+                <input
+                  id="reg-confirm-password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm your password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  aria-label={
+                    showConfirmPassword ? "Hide password" : "Show password"
+                  }
+                >
+                  {showConfirmPassword ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
 
             <button type="submit" className="login-btn">
-              Login
+              Register
             </button>
           </form>
 
           <div className="divider">OR</div>
 
-          <button type="button" className="google-btn">
+          <button
+            type="button"
+            className="google-btn"
+            onClick={handleGoogleSignIn}
+          >
             Continue with Google
           </button>
 
           <p className="signup-text">
-            Don't have an account? <Link to="/register">Register Now</Link>
+            Already have an account? <Link to="/login">Login Now</Link>
           </p>
         </div>
       </section>

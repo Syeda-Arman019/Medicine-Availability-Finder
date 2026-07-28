@@ -3,27 +3,18 @@ from database.db import get_db_connection
 
 medicine_bp = Blueprint("medicine", __name__)
 
-@medicine_bp.route("/add-medicine", methods=["POST"])
-def add_medicine():
-    data = request.get_json()
-
-    medicine_name = data["medicine_name"]
-    company = data["company"]
-    description = data["description"]
+# Get All Medicines
+@medicine_bp.route("/medicines", methods=["GET"])
+def get_medicines():
 
     connection = get_db_connection()
-    cursor = connection.cursor()
+    cursor = connection.cursor(dictionary=True)
 
-    cursor.execute("""
-        INSERT INTO medicines (medicine_name, company, description)
-        VALUES (%s, %s, %s)
-    """, (medicine_name, company, description))
+    cursor.execute("SELECT * FROM medicines")
 
-    connection.commit()
+    medicines = cursor.fetchall()
 
     cursor.close()
     connection.close()
 
-    return jsonify({
-        "message": "Medicine added successfully!"
-    })
+    return jsonify(medicines)

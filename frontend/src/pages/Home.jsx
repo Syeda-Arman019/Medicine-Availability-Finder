@@ -139,7 +139,7 @@ export default function Home() {
                     <ul className="mf-cart-list">
                       {cart.map((item, i) => (
                         <li key={i}>
-                          <span>{item.name}</span>
+                          <span>{item.medicine_name || item.name}</span>
                           <span className="mf-cart-price">{item.price}</span>
                           <button
                             onClick={() => removeFromCart(i)}

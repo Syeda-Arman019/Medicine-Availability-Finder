@@ -1,1 +1,12 @@
-node_modules/git add .git add .git status
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Environment Variables
+.envgit rm -r --cached backend/__pycache__
+git rm -r --cached backend/database/__pycache__
+git rm -r --cached backend/routes/__pycache__

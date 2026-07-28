@@ -14,21 +14,21 @@ def search_medicine():
 
     query = """
     SELECT 
-        medicines.medicine_name AS medicine,
-        pharmacies.name AS pharmacy,
-        inventory.price,
-        inventory.quantity,
-        inventory.availability
+        m.medicine_name,
+        p.pharmacy_name,
+        p.address,
+        p.phone,
+        s.quantity
 
-    FROM inventory
+    FROM stock s
 
-    JOIN medicines 
-    ON inventory.medicine_id = medicines.id
+    JOIN medicines m
+    ON s.medicine_id = m.medicine_id
 
-    JOIN pharmacies
-    ON inventory.pharmacy_id = pharmacies.id
+    JOIN pharmacies p
+    ON s.pharmacy_id = p.pharmacy_id
 
-    WHERE medicines.medicine_name LIKE %s
+    WHERE m.medicine_name LIKE %s
     """
 
     cursor.execute(query, ("%" + medicine_name + "%",))
