@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./FAQs.css";
 import faqIllustration from "../assets/images/faq-illustration.png";
 import supportHeadphone from "../assets/images/support-headphone.png";
+import "./Home.css";
 
 const CATEGORIES = [
   { key: "all", label: "All Questions", icon: "▦" },
@@ -74,7 +75,7 @@ export default function FAQs() {
   return (
     <div className="mf-page mf-faq-page">
 
-      {/* ================= TOP BAR (same as Home/Contact) ================= */}
+      {/* ================= TOP BAR (MATCHED WITH CONTACT/HOME) ================= */}
       <div className="mf-topbar">
         <div className="container mf-topbar-inner">
           <Link to="/" className="mf-brand">
@@ -85,13 +86,13 @@ export default function FAQs() {
               </svg>
             </span>
             <span className="mf-brand-text">
-              Med<span className="mf-brand-accent">Finder</span>
+              <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
         </div>
       </div>
 
-      {/* ================= NAVBAR (same as Home/Contact) ================= */}
+      {/* ================= NAVBAR (MATCHED WITH CONTACT/HOME) ================= */}
       <nav className="navbar navbar-expand-lg mf-navbar">
         <div className="container mf-navbar-inner">
           <button
@@ -124,7 +125,6 @@ export default function FAQs() {
       {/* ================= FAQ HERO ================= */}
       <section className="mf-faq-hero">
         <div className="container mf-faq-hero-inner">
-
           <div className="mf-faq-hero-left">
             <span className="mf-eyebrow">FREQUENTLY ASKED QUESTIONS</span>
             <h1 className="mf-faq-title">
@@ -137,20 +137,18 @@ export default function FAQs() {
           </div>
 
           <div className="mf-faq-hero-right">
-           <img
-  src={faqIllustration}
-  alt="Frequently Asked Questions"
-  className="mf-faq-illustration"
-/>
+            <img
+              src={faqIllustrationC}
+              alt="Frequently Asked Questions"
+              className="mf-faq-illustration"
+            />
           </div>
-
         </div>
       </section>
 
-      {/* ================= CATEGORY TABS ================= */}
+      {/* ================= CATEGORY TABS & ACCORDION ================= */}
       <section className="mf-faq-body">
         <div className="container mf-faq-body-grid">
-
           <div className="mf-faq-main">
 
             <div className="mf-faq-tabs">
@@ -169,7 +167,7 @@ export default function FAQs() {
               ))}
             </div>
 
-            {/* ================= ACCORDION ================= */}
+            {/* ACCORDION LIST */}
             <div className="mf-faq-list">
               {filteredFaqs.map((faq, index) => (
                 <div className="mf-faq-item" key={index}>
@@ -195,13 +193,13 @@ export default function FAQs() {
 
           </div>
 
-          {/* ================= SIDEBAR: STILL NEED HELP ================= */}
+          {/* SIDEBAR: STILL NEED HELP */}
           <aside className="mf-faq-sidebar">
             <img
-  src={supportHeadphone}
-  alt="Customer Support"
-  className="mf-faq-sidebar-img"
-/>
+              src={supportHeadphone}
+              alt="Customer Support"
+              className="mf-faq-sidebar-img"
+            />
             <h3>Still Need Help?</h3>
             <p>
               Our support team is here for you. Reach out and we'll get back
@@ -211,13 +209,11 @@ export default function FAQs() {
               ✉ Contact Us
             </Link>
           </aside>
-
         </div>
       </section>
 
-      {/* ================= FOOTER (same as Home/Contact) ================= */}
+      {/* ================= FOOTER (MATCHED WITH CONTACT/HOME) ================= */}
       <footer className="mf-footer">
-
         <div className="mf-footer-top">
           <div className="mf-feature">
             <span>🚚</span>
@@ -246,11 +242,16 @@ export default function FAQs() {
 
         <div className="container">
           <div className="mf-footer-grid">
-
             <div className="mf-footer-brand">
-              <h2>
-                Med<span>Finder</span>
-              </h2>
+              <div className="mf-footer-logo">
+                <svg viewBox="0 0 40 40" className="mf-footer-logo-svg">
+                  <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
+                  <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
+                </svg>
+                <h2 className="mf-footer-title">
+                  <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-footer-accent">F</span>inder
+                </h2>
+              </div>
               <p>
                 Helping patients find medicine availability across nearby
                 pharmacies in real time.
@@ -283,14 +284,12 @@ export default function FAQs() {
                 <li><Link to="/register">Register</Link></li>
               </ul>
             </div>
-
           </div>
 
           <div className="mf-footer-bottom">
             © {new Date().getFullYear()} MedFinder. All Rights Reserved.
           </div>
         </div>
-
       </footer>
 
     </div>

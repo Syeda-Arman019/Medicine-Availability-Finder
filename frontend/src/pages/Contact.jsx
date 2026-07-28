@@ -2,16 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 import contactMobile from "../assets/images/contact-mobile.png";
+import "./Home.css";
 
-function Contact() {
+export default function Contact() {
   return (
-    <div className="mf-page mf-contact-page">
-
-      {/* ================= TOP BAR ================= */}
-
+    <div className="mf-page contact-page">
+      {/* ================= TOP BAR (WITHOUT SEARCH & CART) ================= */}
       <div className="mf-topbar">
         <div className="container mf-topbar-inner">
-
           <Link to="/" className="mf-brand">
             <span className="mf-logo" aria-hidden="true">
               <svg viewBox="0 0 40 40" className="mf-logo-svg">
@@ -20,18 +18,15 @@ function Contact() {
               </svg>
             </span>
             <span className="mf-brand-text">
-              Med<span className="mf-brand-accent">Finder</span>
+              <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
-
         </div>
       </div>
 
       {/* ================= NAVBAR ================= */}
-
       <nav className="navbar navbar-expand-lg mf-navbar">
         <div className="container mf-navbar-inner">
-
           <button
             className="navbar-toggler mf-toggler"
             type="button"
@@ -56,18 +51,15 @@ function Contact() {
               <li className="nav-item"><Link className="nav-link" to="/terms">Terms of Service</Link></li>
             </ul>
           </div>
-
         </div>
       </nav>
 
       {/* ================= HERO ================= */}
-
       <section className="mf-contact-hero">
         <div className="container mf-contact-container">
 
           {/* LEFT */}
           <div className="mf-contact-left">
-
             <span className="mf-eyebrow">CONTACT US</span>
 
             <h1 className="mf-contact-title">
@@ -82,63 +74,57 @@ function Contact() {
             </p>
 
             <div className="mf-contact-info">
+              <div className="mf-info-card">
+                <div className="mf-info-icon">📞</div>
+                <div>
+                  <h4>Phone</h4>
+                  <a href="tel:+923001234567" className="mf-info-link">+92 300 1234567</a>
+                  <a href="tel:+923217654321" className="mf-info-link">+92 321 7654321</a>
+                </div>
+              </div>
 
-  <div className="mf-info-card">
-    <div className="mf-info-icon">📞</div>
-    <div>
-      <h4>Phone</h4>
-      <a href="tel:+923001234567" className="mf-info-link">+92 300 1234567</a>
-      <a href="tel:+923217654321" className="mf-info-link">+92 321 7654321</a>
-    </div>
-  </div>
+              <div className="mf-info-card">
+                <div className="mf-info-icon">📧</div>
+                <div>
+                  <h4>Email</h4>
+                  <a href="mailto:support@medfinder.pk" className="mf-info-link">support@medfinder.pk</a>
+                  <a href="mailto:info@medfinder.pk" className="mf-info-link">info@medfinder.pk</a>
+                </div>
+              </div>
 
-  <div className="mf-info-card">
-    <div className="mf-info-icon">📧</div>
-    <div>
-      <h4>Email</h4>
-      <a href="mailto:support@medfinder.pk" className="mf-info-link">support@medfinder.pk</a>
-      <a href="mailto:info@medfinder.pk" className="mf-info-link">info@medfinder.pk</a>
-    </div>
-  </div>
+              <div className="mf-info-card">
+                <div className="mf-info-icon">📍</div>
+                <div>
+                  <h4>Address</h4>
+                  <p className="mf-info-text">Plot 12, Auto Bhan Road</p>
+                  <p className="mf-info-text">Hyderabad, Sindh, Pakistan</p>
+                </div>
+              </div>
 
-  <div className="mf-info-card">
-    <div className="mf-info-icon">📍</div>
-    <div>
-      <h4>Address</h4>
-      <p className="mf-info-text">Plot 12, Auto Bhan Road</p>
-      <p className="mf-info-text">Hyderabad, Sindh, Pakistan</p>
-    </div>
-  </div>
-
-  <div className="mf-info-card">
-    <div className="mf-info-icon">🕒</div>
-    <div>
-      <h4>Working Hours</h4>
-      <p className="mf-info-text">Monday – Saturday</p>
-      <p className="mf-info-text">9:00 AM – 6:00 PM</p>
-    </div>
-  </div>
-
-</div>
+              <div className="mf-info-card">
+                <div className="mf-info-icon">🕒</div>
+                <div>
+                  <h4>Working Hours</h4>
+                  <p className="mf-info-text">Monday – Saturday</p>
+                  <p className="mf-info-text">9:00 AM – 6:00 PM</p>
+                </div>
+              </div>
+            </div>
 
             <div className="mf-contact-buttons">
               <Link to="/medicines" className="mf-banner-btn">
                 Find Medicines
               </Link>
-
               <Link to="/about" className="mf-contact-btn2">
                 Learn More
               </Link>
             </div>
-
           </div>
 
-          {/* RIGHT: phone stage + message box below it */}
+          {/* RIGHT */}
           <div className="mf-contact-right">
-
             <div className="mf-phone-stage">
               <div className="mf-contact-circle"></div>
-
               <img
                 src={contactMobile}
                 alt="Contact MedFinder"
@@ -162,17 +148,14 @@ function Contact() {
                 Send Message <span>➤</span>
               </button>
             </div>
-
           </div>
 
         </div>
       </section>
 
       {/* ================= LOCATION ================= */}
-
       <section className="mf-location-section">
         <div className="container">
-
           <div className="mf-location-header">
             <span className="mf-eyebrow">OUR LOCATION</span>
             <h2>Visit Our Office</h2>
@@ -183,7 +166,6 @@ function Contact() {
           </div>
 
           <div className="mf-location-grid">
-
             <div className="mf-location-card">
               <h3>📍 MedFinder Office</h3>
               <p>Plot 12, Auto Bhan Road</p>
@@ -199,16 +181,12 @@ function Contact() {
                 loading="lazy"
               ></iframe>
             </div>
-
           </div>
-
         </div>
       </section>
 
       {/* ================= FOOTER ================= */}
-
       <footer className="mf-footer">
-
         <div className="mf-footer-top">
           <div className="mf-feature">
             <span>🚚</span>
@@ -237,11 +215,16 @@ function Contact() {
 
         <div className="container">
           <div className="mf-footer-grid">
-
             <div className="mf-footer-brand">
-              <h2>
-                Med<span>Finder</span>
-              </h2>
+              <div className="mf-footer-logo">
+                <svg viewBox="0 0 40 40" className="mf-footer-logo-svg">
+                  <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
+                  <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
+                </svg>
+                <h2 className="mf-footer-title">
+                  <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-footer-accent">F</span>inder
+                </h2>
+              </div>
               <p>
                 Helping patients find medicine availability across nearby
                 pharmacies in real time.
@@ -274,18 +257,13 @@ function Contact() {
                 <li><Link to="/register">Register</Link></li>
               </ul>
             </div>
-
           </div>
 
           <div className="mf-footer-bottom">
             © {new Date().getFullYear()} MedFinder. All Rights Reserved.
           </div>
         </div>
-
       </footer>
-
     </div>
   );
 }
-
-export default Contact;
