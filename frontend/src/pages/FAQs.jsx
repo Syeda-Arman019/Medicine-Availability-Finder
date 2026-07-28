@@ -138,7 +138,7 @@ export default function FAQs() {
 
           <div className="mf-faq-hero-right">
             <img
-              src={faqIllustrationC}
+              src={faqIllustration}
               alt="Frequently Asked Questions"
               className="mf-faq-illustration"
             />
