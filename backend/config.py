@@ -6,4 +6,4 @@ class Config:
     DB_USER = "root"
     DB_PASSWORD = ""
     DB_NAME = "medicine_finder"
-    DB_PORT = 3307
+    DB_PORT = 3306

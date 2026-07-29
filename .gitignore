@@ -7,6 +7,6 @@ __pycache__/
 .venv/
 
 # Environment Variables
-.envgit rm -r --cached backend/__pycache__
+.env
 git rm -r --cached backend/database/__pycache__
 git rm -r --cached backend/routes/__pycache__

@@ -9,6 +9,7 @@ from routes.inventory_routes import inventory_bp
 from routes.search_routes import search_bp
 from routes.auth_routes import auth_bp
 from routes.reservation_routes import reservation_bp
+from routes.chatbot_routes import chatbot_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,6 +22,7 @@ app.register_blueprint(inventory_bp)
 app.register_blueprint(search_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(reservation_bp)
+app.register_blueprint(chatbot_bp)
 
 try:
     db = mysql.connector.connect(
