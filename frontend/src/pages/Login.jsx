@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { darkMode, toggleDarkMode } = useTheme();
 
   // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +63,7 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
+    <div className={`login-page ${darkMode ? "dark-theme" : ""}`}>
       {/* ===== HEADER ===== */}
       <header className="login-header">
         <Link to="/" className="login-logo">
@@ -94,9 +96,22 @@ export default function Login() {
           </span>
         </Link>
 
-        <Link to="/" className="back-home-btn">
-          Back to Home
-        </Link>
+        <div className="login-header-actions">
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+
+          <Link to="/" className="back-home-btn">
+            Back to Home
+          </Link>
+        </div>
       </header>
 
       {/* ===== MAIN SECTION ===== */}
@@ -124,7 +139,7 @@ export default function Login() {
               </div>
             </Link>
 
-            <Link to="#" className="feature-card-link">
+            <Link to="/Dashboard" className="feature-card-link">
               <div className="feature-card">
                 <span>📍</span>
                 <h4>Nearby Pharmacies</h4>
@@ -138,7 +153,7 @@ export default function Login() {
               </div>
             </Link>
 
-            <Link to="#" className="feature-card-link">
+            <Link to="/FAQs" className="feature-card-link">
               <div className="feature-card">
                 <span>🕒</span>
                 <h4>24/7 Availability</h4>
@@ -253,7 +268,7 @@ export default function Login() {
             real time.
           </p>
 
-          <div className="footer-links">
+          <div className="footer-lianks">
             <Link to="/">Home</Link>
             <Link to="#">Contact</Link>
             <Link to="#">FAQs</Link>

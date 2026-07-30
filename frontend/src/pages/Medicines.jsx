@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 import "./Medicines.css";
 
 export default function Medicines({ cart = [], addToCart, removeFromCart }) {
+  const { darkMode, toggleDarkMode } = useTheme();
   const [cartOpen, setCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -46,7 +48,7 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
   );
 
   return (
-    <div className="mf-page medicines-page">
+    <div className={`mf-page medicines-page ${darkMode ? "dark-theme" : ""}`}>
       {/* ---------- TOP BAR: BRAND + SEARCH + CART ---------- */}
       <div className="mf-topbar">
         <div className="container mf-topbar-inner">
@@ -113,70 +115,89 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
             </button>
           </form>
 
-          {/* Cart Dropdown */}
-          <div className="mf-cart-wrap">
+          <div className="d-flex align-items-center gap-2">
+            {/* Dark Mode Toggle */}
             <button
-              className="mf-cart-btn"
-              onClick={() => setCartOpen((open) => !open)}
-              aria-label="Open cart"
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleDarkMode}
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label="Toggle dark mode"
             >
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="10" cy="21" r="1.4" fill="currentColor" />
-                <circle cx="17" cy="21" r="1.4" fill="currentColor" />
-              </svg>
-              <span className="mf-cart-badge">{totalCartCount}</span>
+              {darkMode ? "☀️" : "🌙"}
             </button>
 
-            {cartOpen && (
-              <div className="mf-cart-dropdown">
-                <div className="mf-cart-dropdown-head">
-                  <span>Your cart</span>
-                  <button
-                    onClick={() => setCartOpen(false)}
-                    aria-label="Close cart"
-                  >
-                    ✕
-                  </button>
+            {/* Cart Dropdown */}
+            <div className="mf-cart-wrap">
+              <button
+                className="mf-cart-btn"
+                onClick={() => setCartOpen((open) => !open)}
+                aria-label="Open cart"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="10" cy="21" r="1.4" fill="currentColor" />
+                  <circle cx="17" cy="21" r="1.4" fill="currentColor" />
+                </svg>
+                <span className="mf-cart-badge">{totalCartCount}</span>
+              </button>
+
+              {cartOpen && (
+                <div className="mf-cart-dropdown">
+                  <div className="mf-cart-dropdown-head">
+                    <span>Your cart</span>
+                    <button
+                      onClick={() => setCartOpen(false)}
+                      aria-label="Close cart"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  {cart.length === 0 ? (
+                    <p className="mf-cart-empty">No medicines added yet.</p>
+                  ) : (
+                    <>
+                      <ul className="mf-cart-list">
+                        {cart.map((item, i) => (
+                          <li key={item.medicine_id || item.id || i}>
+                            <div className="mf-cart-info">
+                              <span>{item.medicine_name || item.name}</span>
+                              {item.quantity && <small>x{item.quantity}</small>}
+                            </div>
+                            <span className="mf-cart-price">{item.price}</span>
+                            <button
+                              onClick={() =>
+                                removeFromCart(
+                                  item.medicine_id !== undefined
+                                    ? item.medicine_id
+                                    : item.id !== undefined
+                                    ? item.id
+                                    : i
+                                )
+                              }
+                              className="mf-delete-btn"
+                              aria-label="Remove"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link to="/cart" className="mf-cart-checkout">
+                        View Full Cart
+                      </Link>
+                    </>
+                  )}
                 </div>
-                {cart.length === 0 ? (
-                  <p className="mf-cart-empty">No medicines added yet.</p>
-                ) : (
-                  <>
-                    <ul className="mf-cart-list">
-                      {cart.map((item, i) => (
-                     <li key={item.medicine_id || item.id || i}>
-  <div className="mf-cart-info">
-    <span>{item.medicine_name || item.name}</span>
-    {item.quantity && <small>x{item.quantity}</small>}
-  </div>
-  <span className="mf-cart-price">{item.price}</span>
-  <button
-    onClick={() =>
-      removeFromCart(item.medicine_id !== undefined ? item.medicine_id : (item.id !== undefined ? item.id : i))
-    }
-    className="mf-delete-btn"
-    aria-label="Remove"
-  >
-    <Trash2 size={16} />
-  </button>
-</li>
-                      ))}
-                    </ul>
-                    <Link to="/cart" className="mf-cart-checkout">
-                      View Full Cart
-                    </Link>
-                  </>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -213,7 +234,7 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
                   About Us
                 </Link>
               </li>
-            
+
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">
                   Patient Dashboard

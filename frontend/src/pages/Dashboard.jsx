@@ -249,7 +249,7 @@ export default function Dashboard() {
             <div className="support-card">
               <PhoneCall size={24} className="support-icon" />
               <h6>Need Assistance?</h6>
-              <p>24/7 MedFinder Help Desk available for stock verification.</p>
+              <p>24/7 MediFinder Help Desk available for stock verification.</p>
               <Link to="/contact" className="btn btn-sm btn-outline-light w-100 rounded-pill">Contact Support</Link>
             </div>
 

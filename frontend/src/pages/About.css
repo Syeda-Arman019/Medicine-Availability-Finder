@@ -520,3 +520,163 @@
   .about-btn, .about-btn-outline, .cta-btn { width: 100%; text-align: center; }
   .about-description, .about-content p { font-size: 16px; }
 }
+
+.mf-topbar-inner {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+
+/* ==================== DARK THEME EXTRAS & OVERRIDES ==================== */
+body.dark-theme .db-card,
+body.dark-theme .stat-card,
+body.dark-theme .pharmacy-card,
+[data-theme="dark"] .db-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .pharmacy-card {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+body.dark-theme .text-muted,
+[data-theme="dark"] .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .text-dark,
+[data-theme="dark"] .text-dark {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .reservation-info,
+body.dark-theme .total-amount,
+body.dark-theme .reservation-details,
+body.dark-theme .amount-text,
+[data-theme="dark"] .reservation-info,
+[data-theme="dark"] .total-amount,
+[data-theme="dark"] .reservation-details,
+[data-theme="dark"] .amount-text {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .total-amount strong,
+body.dark-theme .reservation-info strong,
+[data-theme="dark"] .total-amount strong,
+[data-theme="dark"] .reservation-info strong {
+  color: var(--mf-accent) !important;
+}
+
+body.dark-theme .btn-logout,
+[data-theme="dark"] .btn-logout {
+  background: #3b1111;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+
+body.dark-theme .status-tag.warning,
+[data-theme="dark"] .status-tag.warning {
+  background: #451a03;
+  color: #fde047;
+}
+
+body.dark-theme .status-tag.success,
+[data-theme="dark"] .status-tag.success {
+  background: #052e16;
+  color: #86efac;
+}
+
+body.dark-theme .status-tag.danger,
+[data-theme="dark"] .status-tag.danger {
+  background: #450a0a;
+  color: #fca5a5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991.98px) {
+  .mf-db-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mf-db-sidebar {
+    position: fixed;
+    top: 65px;
+    left: -280px;
+    bottom: 0;
+    z-index: 99;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+    will-change: left;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mf-db-sidebar.open {
+    left: 0;
+  }
+}
+
+/* ===== ABOUT PAGE DARK THEME OVERRIDES ===== */
+
+.dark-theme .about-page,
+.dark-theme .about-hero,
+.dark-theme .about-section,
+.dark-theme .why-section,
+.dark-theme .mission-vision-section,
+.dark-theme .stats-section {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+.dark-theme .why-card,
+.dark-theme .stat-box,
+.dark-theme .image-box,
+.dark-theme .image-placeholder,
+.dark-theme .list-item {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark-theme .why-card h4,
+.dark-theme .about-content h2,
+.dark-theme .section-heading h2,
+.dark-theme .mission-content h2,
+.dark-theme .about-title {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .why-card p,
+.dark-theme .about-content p,
+.dark-theme .section-heading p,
+.dark-theme .mission-content p,
+.dark-theme .about-description {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .floating-box {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+.dark-theme .cta-box {
+  background: linear-gradient(135deg, #0284c7, #38bdf8) !important;
+}

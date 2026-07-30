@@ -4,7 +4,7 @@
    CONTACT PAGE
 ========================================== */
 
-.mf-contact-page {
+.contact-page {
   background: #f7faf9;
   overflow-x: hidden;
 }
@@ -124,7 +124,6 @@
   font-size: 14px;
 }
 
-/* Clickable phone / email links: hover + touch underline feedback */
 .mf-info-card .mf-info-link {
   text-decoration: none;
   color: #66788a;
@@ -140,7 +139,6 @@
   border-bottom-color: #0c4998;
 }
 
-/* Mobile / touch devices: same underline feedback on tap */
 .mf-info-card .mf-info-link:active {
   color: #20d6d6;
   border-bottom-color: #20d6d6;
@@ -375,8 +373,6 @@
     padding: 0 20px;
   }
 
- 
-
   .mf-contact-right {
     padding-top: 10px;
   }
@@ -430,4 +426,93 @@
   .mf-location-header h2 {
     font-size: 30px;
   }
+}
+
+/* ==========================================
+   CONTACT PAGE — DARK THEME OVERRIDES
+========================================== */
+
+.dark-theme .contact-page,
+.dark-theme .mf-contact-hero,
+.dark-theme .mf-location-section {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+.dark-theme .mf-eyebrow {
+  background: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-contact-title {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-contact-text {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .mf-info-card {
+  background-color: #1e293b !important;
+  box-shadow: none;
+  border: 1px solid #334155;
+}
+
+.dark-theme .mf-info-card h4 {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-info-card p,
+.dark-theme .mf-info-card .mf-info-link,
+.dark-theme .mf-info-card .mf-info-text {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .mf-info-card .mf-info-link:hover,
+.dark-theme .mf-info-card .mf-info-link:focus-visible {
+  color: #38bdf8 !important;
+  border-bottom-color: #38bdf8 !important;
+}
+
+.dark-theme .mf-contact-btn2 {
+  border-color: #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-contact-btn2:hover {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+}
+
+.dark-theme .mf-contact-circle {
+  background: radial-gradient(circle,
+      rgba(56, 189, 248, .22) 0%,
+      rgba(56, 189, 248, .08) 60%,
+      transparent 80%) !important;
+}
+
+.dark-theme .mf-message-box {
+  background: linear-gradient(160deg, #020617 0%, #0284c7 100%) !important;
+}
+
+.dark-theme .mf-location-header h2 {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-location-header p {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .mf-location-card {
+  background-color: #1e293b !important;
+  box-shadow: none;
+  border: 1px solid #334155;
+}
+
+.dark-theme .mf-location-card h3 {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .mf-location-card p {
+  color: #94a3b8 !important;
 }

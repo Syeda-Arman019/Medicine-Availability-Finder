@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Trash2, Plus, Minus, ArrowLeft, ShoppingBag, MapPin, Clock } from "lucide-react";
 import "./CartPage.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function CartPage({ cart = [], updateQuantity, removeFromCart }) {
   console.log(cart);
-  
+
+  const { darkMode, toggleDarkMode } = useTheme();
+
   // State matches the dropdown key directly
   const [selectedPharmacy, setSelectedPharmacy] = useState("MedPlus Pharmacy");
 
@@ -65,11 +68,24 @@ export default function CartPage({ cart = [], updateQuantity, removeFromCart }) 
   };
 
   return (
-    <div className="cart-page-wrapper">
+    <div className={`cart-page-wrapper ${darkMode ? "dark-theme" : ""}`}>
       <div className="container py-5">
-        <Link to="/medicines" className="back-link">
-          <ArrowLeft size={18} /> Continue Browsing
-        </Link>
+        <div className="cart-top-row d-flex justify-content-between align-items-center">
+          <Link to="/medicines" className="back-link">
+            <ArrowLeft size={18} /> Continue Browsing
+          </Link>
+
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+        </div>
 
         <h1 className="cart-heading my-4">
           <ShoppingBag className="me-2" /> Reserved Medicines Cart

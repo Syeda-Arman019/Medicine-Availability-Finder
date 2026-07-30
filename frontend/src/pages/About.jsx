@@ -1,19 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 import "./About.css";
-import "./Home.css"; // Shared styles for Header and Footer
+import "./Home.css";
 
-import ourStoryImage from "../assets/images/our-story.png";
 import missionImage from "../assets/images/our-mission.png";
 import visionImage from "../assets/images/our-vision.png";
 import aboutBanner from "../assets/images/about-banner.png";
 
 export default function About() {
+  const { darkMode, toggleDarkMode } = useTheme();
+
   return (
-    <div className="mf-page about-page">
-      {/* ================= TOP BAR (WITHOUT SEARCH & CART) ================= */}
+    <div className={`mf-page about-page ${darkMode ? "dark-theme" : ""}`}>
+      {/* ================= TOP BAR WITH DARK MODE TOGGLER ================= */}
       <div className="mf-topbar">
-        <div className="container mf-topbar-inner">
+        <div className="container mf-topbar-inner d-flex justify-content-between align-items-center">
           <Link to="/" className="mf-brand">
             <span className="mf-logo" aria-hidden="true">
               <svg viewBox="0 0 40 40" className="mf-logo-svg">
@@ -25,10 +27,23 @@ export default function About() {
               <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
+
+          {/* Dark Mode Icon Button */}
+          <div className="mf-topbar-actions">
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleDarkMode}
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? "☀️" : "🌙"}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* ================= NAVBAR (WITHOUT CREATE ACCOUNT BUTTON) ================= */}
+      {/* ================= NAVBAR ================= */}
       <nav className="navbar navbar-expand-lg mf-navbar">
         <div className="container mf-navbar-inner">
           <button
@@ -48,7 +63,6 @@ export default function About() {
               <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/medicines">Medicines</Link></li>
               <li className="nav-item"><Link className="nav-link active" to="/about">About Us</Link></li>
-             
               <li className="nav-item"><Link className="nav-link" to="/dashboard">Patient Dashboard</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/contact">Contact Us</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/faqs">FAQs</Link></li>
@@ -63,7 +77,7 @@ export default function About() {
         <div className="container">
           <img
             src={aboutBanner}
-            alt="About MedFinder"
+            alt="About MediFinder"
             className="mf-banner-img"
           />
         </div>
@@ -73,14 +87,8 @@ export default function About() {
       <section className="why-section">
         <div className="container">
           <div className="section-heading">
-            <span className="section-tag">
-              WHY CHOOSE US
-            </span>
-
-            <h2>
-              Why People Trust MedFinder
-            </h2>
-
+            <span className="section-tag">WHY CHOOSE US</span>
+            <h2>Why People Trust MediFinder</h2>
             <p>
               We make medicine searching faster, easier and more reliable
               by connecting patients with trusted nearby pharmacies.
@@ -91,33 +99,22 @@ export default function About() {
             <div className="why-card">
               <div className="why-icon">💊</div>
               <h4>Live Availability</h4>
-              <p>
-                Check medicine stock instantly before visiting any pharmacy.
-              </p>
+              <p>Check medicine stock instantly before visiting any pharmacy.</p>
             </div>
-
             <div className="why-card">
               <div className="why-icon">🏥</div>
               <h4>Verified Pharmacies</h4>
-              <p>
-                Search medicines from trusted and registered pharmacies.
-              </p>
+              <p>Search medicines from trusted and registered pharmacies.</p>
             </div>
-
             <div className="why-card">
               <div className="why-icon">📍</div>
               <h4>Nearby Search</h4>
-              <p>
-                Find medicines available at pharmacies near your location.
-              </p>
+              <p>Find medicines available at pharmacies near your location.</p>
             </div>
-
             <div className="why-card">
               <div className="why-icon">⚡</div>
               <h4>Fast Results</h4>
-              <p>
-                Get accurate medicine availability within seconds.
-              </p>
+              <p>Get accurate medicine availability within seconds.</p>
             </div>
           </div>
         </div>
@@ -130,26 +127,14 @@ export default function About() {
             {/* Mission */}
             <div className="mission-card">
               <div className="mission-image">
-                <img
-                  src={missionImage}
-                  alt="Our Mission"
-                  className="mission-img"
-                />
+                <img src={missionImage} alt="Our Mission" className="mission-img" />
               </div>
-
               <div className="mission-content">
-                <span className="section-tag">
-                  OUR MISSION
-                </span>
-
-                <h2>
-                  Making Healthcare More Accessible
-                </h2>
-
+                <span className="section-tag">OUR MISSION</span>
+                <h2>Making Healthcare More Accessible</h2>
                 <p>
                   Our mission is to simplify medicine searching by connecting
                   patients with trusted pharmacies through one reliable platform.
-                  We help users quickly find medicines without unnecessary delays.
                 </p>
               </div>
             </div>
@@ -157,27 +142,15 @@ export default function About() {
             {/* Vision */}
             <div className="mission-card reverse">
               <div className="mission-content">
-                <span className="section-tag">
-                  OUR VISION
-                </span>
-
-                <h2>
-                  A Smarter Healthcare Future
-                </h2>
-
+                <span className="section-tag">OUR VISION</span>
+                <h2>A Smarter Healthcare Future</h2>
                 <p>
                   We aim to build a digital healthcare ecosystem where everyone
-                  can easily find medicines anytime, anywhere through trusted
-                  pharmacy partners.
+                  can easily find medicines anytime, anywhere.
                 </p>
               </div>
-
               <div className="mission-image">
-                <img
-                  src={visionImage}
-                  alt="Our Vision"
-                  className="vision-img"
-                />
+                <img src={visionImage} alt="Our Vision" className="vision-img" />
               </div>
             </div>
           </div>
@@ -189,19 +162,9 @@ export default function About() {
         <div className="container cta-box">
           <div>
             <h2>Can't Find Your Medicine?</h2>
-
-            <p>
-              Search thousands of medicines available in nearby pharmacies
-              with MedFinder.
-            </p>
+            <p>Search thousands of medicines available in nearby pharmacies.</p>
           </div>
-
-          <Link
-            to="/medicines"
-            className="cta-btn"
-          >
-            Search Now
-          </Link>
+          <Link to="/medicines" className="cta-btn">Search Now</Link>
         </div>
       </section>
 
@@ -215,7 +178,6 @@ export default function About() {
               <p>Medicine reservation made easy</p>
             </div>
           </div>
-
           <div className="mf-feature">
             <span>💊</span>
             <div>
@@ -223,7 +185,6 @@ export default function About() {
               <p>Trusted pharmacy partners</p>
             </div>
           </div>
-
           <div className="mf-feature">
             <span>📍</span>
             <div>
@@ -245,10 +206,7 @@ export default function About() {
                   <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-footer-accent">F</span>inder
                 </h2>
               </div>
-              <p>
-                Helping patients find medicine availability across nearby
-                pharmacies in real time.
-              </p>
+              <p>Helping patients find medicine availability in real time.</p>
             </div>
 
             <div>

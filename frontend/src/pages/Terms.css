@@ -372,3 +372,60 @@ font-size:2.2rem;
   color:#666;
   line-height:1.8;
 }
+
+/* ==========================================
+   TERMS PAGE — DARK THEME OVERRIDES
+========================================== */
+
+.dark-theme .terms-dashboard,
+.dark-theme .works-page {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+.dark-theme .terms-hero {
+  background: linear-gradient(135deg, #0284c7 0%, #020617 100%) !important;
+}
+
+.dark-theme .terms-card {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  box-shadow: none;
+}
+
+.dark-theme .terms-card-header h3 {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .terms-card-header button {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+}
+
+.dark-theme .terms-card-content {
+  border-top-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+.dark-theme .terms-card-content li {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .trust-box {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  box-shadow: none;
+}
+
+.dark-theme .trust-box h3 {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .trust-box p {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .terms-right::after {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+}

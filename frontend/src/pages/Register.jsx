@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { darkMode, toggleDarkMode } = useTheme();
 
   // Password Visibility States
   const [showPassword, setShowPassword] = useState(false);
@@ -82,7 +84,7 @@ export default function Register() {
   };
 
   return (
-    <div className="login-page">
+    <div className={`login-page ${darkMode ? "dark-theme" : ""}`}>
       {/* ===== HEADER ===== */}
       <header className="login-header">
         <Link to="/" className="login-logo">
@@ -115,9 +117,22 @@ export default function Register() {
           </span>
         </Link>
 
-        <Link to="/" className="back-home-btn">
-          Back to Home
-        </Link>
+        <div className="login-header-actions">
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+
+          <Link to="/" className="back-home-btn">
+            Back to Home
+          </Link>
+        </div>
       </header>
 
       {/* ===== MAIN SECTION ===== */}
@@ -133,7 +148,7 @@ export default function Register() {
           </h1>
 
           <p>
-            Join MedFinder to search medicines, check real-time availability,
+            Join MediFinder to search medicines, check real-time availability,
             reserve medicines instantly, and connect with nearby verified
             pharmacies.
           </p>
@@ -147,7 +162,7 @@ export default function Register() {
               </div>
             </Link>
 
-            <Link to="#" className="feature-card-link">
+            <Link to="/Dashboard" className="feature-card-link">
               <div className="feature-card">
                 <span>📍</span>
                 <h4>Nearby Pharmacies</h4>
@@ -161,7 +176,7 @@ export default function Register() {
               </div>
             </Link>
 
-            <Link to="#" className="feature-card-link">
+            <Link to="/FAQs" className="feature-card-link">
               <div className="feature-card">
                 <span>🕒</span>
                 <h4>24/7 Availability</h4>

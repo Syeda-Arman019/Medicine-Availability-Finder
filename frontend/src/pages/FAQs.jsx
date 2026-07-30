@@ -4,6 +4,7 @@ import "./FAQs.css";
 import faqIllustration from "../assets/images/faq-illustration.png";
 import supportHeadphone from "../assets/images/support-headphone.png";
 import "./Home.css";
+import { useTheme } from "../context/ThemeContext";
 
 const CATEGORIES = [
   { key: "all", label: "All Questions", icon: "▦" },
@@ -19,7 +20,7 @@ const FAQ_DATA = [
     category: "medicines",
     question: "How can I search for a medicine?",
     answer:
-      "Use the search bar on the Home page or Medicines page. Type the medicine name and MedFinder will show you nearby pharmacies that currently have it in stock.",
+      "Use the search bar on the Home page or Medicines page. Type the medicine name and MediFinder will show you nearby pharmacies that currently have it in stock.",
   },
   {
     category: "medicines",
@@ -49,7 +50,7 @@ const FAQ_DATA = [
     category: "account",
     question: "Is my personal information safe?",
     answer:
-      "Yes. MedFinder uses secure encryption for all personal and account data, and we never share your information with third parties without consent.",
+      "Yes. MediFinder uses secure encryption for all personal and account data, and we never share your information with third parties without consent.",
   },
   {
     category: "general",
@@ -60,6 +61,7 @@ const FAQ_DATA = [
 ];
 
 export default function FAQs() {
+  const { darkMode, toggleDarkMode } = useTheme();
   const [activeCategory, setActiveCategory] = useState("all");
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -73,7 +75,7 @@ export default function FAQs() {
   };
 
   return (
-    <div className="mf-page mf-faq-page">
+    <div className={`mf-page mf-faq-page ${darkMode ? "dark-theme" : ""}`}>
 
       {/* ================= TOP BAR (MATCHED WITH CONTACT/HOME) ================= */}
       <div className="mf-topbar">
@@ -89,6 +91,17 @@ export default function FAQs() {
               <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
+
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
         </div>
       </div>
 

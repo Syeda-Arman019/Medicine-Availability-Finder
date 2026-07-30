@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import "./Home.css";
 import "./Terms.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Terms() {
-  const [activeTerm, setActiveTerm] = useState("acceptance");
+  const { darkMode, toggleDarkMode } = useTheme();
+  const [activeTerm, setActiveTerm] = useState("");
 
   // Cart and Search States for Header
   const [cart, setCart] = useState([]);
@@ -17,7 +19,7 @@ export default function Terms() {
   };
 
   return (
-    <div className="mf-page">
+    <div className={`mf-page ${darkMode ? "dark-theme" : ""}`}>
       {/* ---------- TOP BAR: BRAND + SEARCH + CART ---------- */}
       <div className="mf-topbar">
         <div className="container mf-topbar-inner">
@@ -51,7 +53,16 @@ export default function Terms() {
             </span>
           </Link>
 
-
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
         </div>
       </div>
 

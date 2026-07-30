@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import "./Contact.css";
 import contactMobile from "../assets/images/contact-mobile.png";
 import "./Home.css";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Contact() {
+  const { darkMode, toggleDarkMode } = useTheme();
+
   return (
-    <div className="mf-page contact-page">
+    <div className={`mf-page contact-page ${darkMode ? "dark-theme" : ""}`}>
       {/* ================= TOP BAR (WITHOUT SEARCH & CART) ================= */}
       <div className="mf-topbar">
         <div className="container mf-topbar-inner">
@@ -21,6 +24,17 @@ export default function Contact() {
               <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
+
+          {/* Dark Mode Toggle */}
+          <button
+            type="button"
+            className="theme-toggle-btn"
+            onClick={toggleDarkMode}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
         </div>
       </div>
 
@@ -69,7 +83,7 @@ export default function Contact() {
 
             <p className="mf-contact-text">
               Need help finding medicines or locating nearby pharmacies?
-              Our MedFinder team is always ready to assist you with
+              Our MediFinder team is always ready to assist you with
               medicine availability, pharmacy information and healthcare support.
             </p>
 
@@ -87,8 +101,7 @@ export default function Contact() {
                 <div className="mf-info-icon">📧</div>
                 <div>
                   <h4>Email</h4>
-                  <a href="mailto:support@medfinder.pk" className="mf-info-link">support@medfinder.pk</a>
-                  <a href="mailto:info@medfinder.pk" className="mf-info-link">info@medfinder.pk</a>
+                  <a href="mailto:medifinder.project@gmail.com" className="mf-info-link">medifinder.project@gmail.com</a>
                 </div>
               </div>
 
@@ -127,7 +140,7 @@ export default function Contact() {
               <div className="mf-contact-circle"></div>
               <img
                 src={contactMobile}
-                alt="Contact MedFinder"
+                alt="Contact MediFinder"
                 className="mf-contact-image"
               />
             </div>
@@ -160,14 +173,14 @@ export default function Contact() {
             <span className="mf-eyebrow">OUR LOCATION</span>
             <h2>Visit Our Office</h2>
             <p>
-              Our MedFinder support team is always available to help you.
+              Our MediFinder support team is always available to help you.
               You can visit our office during working hours or contact us online.
             </p>
           </div>
 
           <div className="mf-location-grid">
             <div className="mf-location-card">
-              <h3>📍 MedFinder Office</h3>
+              <h3>📍 MediFinder Office</h3>
               <p>Plot 12, Auto Bhan Road</p>
               <p>Hyderabad, Sindh, Pakistan</p>
               <p>Monday – Saturday</p>

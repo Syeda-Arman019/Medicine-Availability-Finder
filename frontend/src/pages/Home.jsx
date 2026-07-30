@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import { MEDICINES } from "./MedicinesData";
 import Header from "../components/Header";
-import { useTheme } from "../context/ThemeContext"; // 👈 1. ThemeContext Import
+import { useTheme } from "../context/ThemeContext"; // 
 import "./Home.css";
 
 // ================= ANIMATED NUMBER =================
@@ -151,30 +151,56 @@ export default function Home() {
                 <span className="mf-cart-badge">{cart.length}</span>
               </button>
 
-              {cartOpen && (
-                <div className="mf-cart-dropdown">
-                  <div className="mf-cart-dropdown-head">
-                    <span>Your cart</span>
-                    <button onClick={() => setCartOpen(false)} aria-label="Close cart">
-                      ✕
-                    </button>
-                  </div>
-                  {cart.length === 0 ? (
-                    <p className="mf-cart-empty">No medicines added yet.</p>
-                  ) : (
-                    <ul className="mf-cart-list">
-                      {cart.map((item, i) => (
-                        <li key={i}>
-                          <span>{item.name}</span>
-                          <button onClick={() => removeFromCart(i)} aria-label="Remove">
-                            <Trash2 size={16} />
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              )}
+             {cartOpen && (
+  <div className="mf-cart-dropdown">
+    <div className="mf-cart-dropdown-head">
+      <span>Your cart</span>
+      <button onClick={() => setCartOpen(false)} aria-label="Close cart">
+        ✕
+      </button>
+    </div>
+
+    {cart.length === 0 ? (
+      <p className="mf-cart-empty">No medicines added yet.</p>
+    ) : (
+      <>
+        <ul className="mf-cart-list">
+          {cart.map((item, i) => (
+            <li key={item.medicine_id || item.id || i}>
+              <div className="mf-cart-info">
+                <span>{item.medicine_name || item.name}</span>
+                {item.quantity && <small>x{item.quantity}</small>}
+              </div>
+              <span className="mf-cart-price">{item.price}</span>
+              <button
+                onClick={() =>
+                  removeFromCart(
+                    item.medicine_id !== undefined
+                      ? item.medicine_id
+                      : item.id !== undefined
+                      ? item.id
+                      : i
+                  )
+                }
+                aria-label="Remove"
+              >
+                <Trash2 size={16} />
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <Link
+          to="/cart"
+          className="mf-cart-checkout"
+          onClick={() => setCartOpen(false)}
+        >
+          View Full Cart
+        </Link>
+      </>
+    )}
+  </div>
+)}
             </div>
           </div>
         </div>

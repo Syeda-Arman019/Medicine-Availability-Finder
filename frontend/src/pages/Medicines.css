@@ -243,3 +243,51 @@
     gap: 15px;
   }
 }
+
+/* ===== MEDICINES PAGE DARK THEME OVERRIDES ===== */
+.dark-theme .medicines-page,
+.dark-theme .med-header-banner,
+.dark-theme .med-content-section {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+.dark-theme .med-card {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark-theme .med-title {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .med-pack,
+.dark-theme .med-category-label {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .med-price {
+  color: #38bdf8 !important;
+}
+
+.dark-theme .med-chip {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark-theme .med-chip.active {
+  background-color: #38bdf8 !important;
+  color: #0f172a !important;
+}
+
+.dark-theme .med-filter-bar h3,
+.dark-theme .med-results-count {
+  color: #f8fafc !important;
+}
+
+.dark-theme .med-no-results {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+}

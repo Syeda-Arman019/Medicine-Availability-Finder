@@ -3,18 +3,12 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  // Directly initialize state from localStorage
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
 
-  // App load hone par localStorage se theme set karo
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.body.classList.add("dark-theme");
-    }
-  }, []);
-
-  // Theme change hone par body class aur localStorage update karo
+  // Sync body class and localStorage whenever darkMode changes
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark-theme");
@@ -34,5 +28,4 @@ export function ThemeProvider({ children }) {
   );
 }
 
-// Custom hook components me import karne ke liye
 export const useTheme = () => useContext(ThemeContext);
