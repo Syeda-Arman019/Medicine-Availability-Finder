@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import FAQs from "./pages/FAQs";
 import CartPage from "./pages/CartPage";
 import Dashboard from "./pages/Dashboard";
+import Chatbot from "./components/Chatbot";
 
 export default function App() {
   // 1. Cart State & Helper Logic
@@ -64,38 +65,38 @@ export default function App() {
 
   // 2. Render Routes
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/faqs" element={<FAQs />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      
-      {/* ThemeContext use ho raha hai isliye props pass karne ki zaroorat nahi */}
-      <Route path="/dashboard" element={<Dashboard />} />
-      
-      <Route
-        path="/medicines"
-        element={
-          <Medicines
-            cart={cart}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
-          />
-        }
-      />
-      <Route path="/terms" element={<Terms />} />
-      <Route
-        path="/cart"
-        element={
-          <CartPage
-            cart={cart}
-            updateQuantity={updateQuantity}
-            removeFromCart={removeFromCart}
-          />
-        }
-      />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/medicines"
+          element={
+            <Medicines
+              cart={cart}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+        <Route path="/terms" element={<Terms />} />
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+      </Routes>
+      <Chatbot />
+    </>  
   );
 }
