@@ -13,6 +13,9 @@
   --mf-muted: #5a7570;
   --mf-line: #dce8e4;
   --mf-white: #ffffff;
+  --mf-card-bg: #ffffff;
+  --mf-topbar-bg: #040e91;
+  --mf-sidebar-bg: #ffffff;
 
   --mf-font-display: "Fraunces", Georgia, serif;
   --mf-font-body: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -22,12 +25,32 @@
   --mf-shadow: 0 10px 30px -10px rgba(12, 73, 152, 0.08);
 }
 
+/* ==================== DARK MODE VARIABLES ==================== */
+body.dark-theme,
+[data-theme="dark"] {
+  --mf-bg: #0f172a;
+  --mf-bg-soft: #1e293b;
+  --mf-ink: #f8fafc;
+  --mf-primary: #38bdf8;
+  --mf-primary-dark: #0f172a;
+  --mf-accent: #0fefeb;
+  --mf-accent-2: #fbbf24;
+  --mf-muted: #94a3b8;
+  --mf-line: #334155;
+  --mf-white: #1e293b;
+  --mf-card-bg: #1e293b;
+  --mf-topbar-bg: #0f172a;
+  --mf-sidebar-bg: #1e293b;
+  --mf-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
 .mf-db-wrapper {
   background-color: var(--mf-bg);
   min-height: 100vh;
   font-family: var(--mf-font-body);
   color: var(--mf-ink);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mf-db-wrapper *,
@@ -69,12 +92,13 @@
 
 /* ==================== TOP BAR ==================== */
 .mf-db-topbar {
-  background: var(--mf-primary-dark);
+  background: var(--mf-topbar-bg);
   padding: 12px 30px;
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
 }
 
 .mf-db-topbar-inner {
@@ -126,7 +150,8 @@
   padding: 10px 16px 10px 42px;
   border-radius: 999px;
   border: 1px solid var(--mf-line);
-  background: #ffffff;
+  background: var(--mf-card-bg);
+  color: var(--mf-ink);
   font-family: var(--mf-font-body);
   font-size: 0.9rem;
   outline: none;
@@ -218,7 +243,7 @@
 
 .mf-db-sidebar {
   width: 260px;
-  background: #ffffff;
+  background: var(--mf-sidebar-bg);
   border-right: 1px solid var(--mf-line);
   padding: 24px 16px;
   display: flex;
@@ -370,15 +395,15 @@
 }
 
 .stat-card {
-  background: var(--mf-white);
+  background: var(--mf-card-bg);
   padding: 20px;
   border-radius: 20px;
   border: 1px solid var(--mf-line);
-  box-shadow: 0 15px 30px rgba(15, 46, 43, 0.06);
+  box-shadow: var(--mf-shadow);
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
 .stat-card:hover {
@@ -395,8 +420,8 @@
   flex-shrink: 0;
 }
 
-.stat-icon-bg.cyan { background: rgb(156, 243, 243); color: var(--mf-primary); }
-.stat-icon-bg.blue { background: #eef6f3; color: var(--mf-primary-dark); }
+.stat-icon-bg.cyan { background: rgb(156, 243, 243); color: #0c4998; }
+.stat-icon-bg.blue { background: #eef6f3; color: #040e91; }
 .stat-icon-bg.purple { background: #f2eafd; color: #7c3aed; }
 .stat-icon-bg.yellow { background: #fff8e6; color: #d97706; }
 
@@ -428,10 +453,11 @@
 }
 
 .db-card {
-  background: var(--mf-white);
+  background: var(--mf-card-bg);
   border-radius: 20px;
   border: 1px solid var(--mf-line);
-  box-shadow: 0 15px 30px rgba(15, 46, 43, 0.06);
+  box-shadow: var(--mf-shadow);
+  transition: background 0.3s ease, border 0.3s ease;
 }
 
 .db-card-title {
@@ -456,6 +482,8 @@
 .mf-custom-input .form-control {
   border-radius: 30px 0 0 30px;
   border: 1px solid var(--mf-line);
+  background: var(--mf-card-bg);
+  color: var(--mf-ink);
   padding: 10px 18px;
 }
 
@@ -472,6 +500,7 @@
 /* TABLE STYLING */
 .custom-table {
   font-size: 0.88rem;
+  color: var(--mf-ink);
 }
 
 .custom-table th {
@@ -481,6 +510,11 @@
   font-size: 0.78rem;
   text-transform: uppercase;
   border-bottom: 1px solid var(--mf-line);
+}
+
+.custom-table td {
+  border-color: var(--mf-line);
+  color: var(--mf-ink);
 }
 
 .medicine-name {
@@ -509,7 +543,7 @@
 
 .btn-primary-soft {
   background: rgb(156, 243, 243);
-  color: var(--mf-primary);
+  color: #0c4998;
   font-weight: 700;
   border: none;
   text-decoration: none;
@@ -526,6 +560,7 @@
   border: 1px solid var(--mf-line);
   border-radius: 16px;
   padding: 16px;
+  transition: background 0.3s ease;
 }
 
 .pharm-header {
@@ -544,7 +579,7 @@
   font-weight: 600;
   font-size: 0.95rem;
   margin: 0;
-  color: var(--mf-primary-dark);
+  color: var(--mf-ink);
 }
 
 .pharm-rating {
@@ -612,10 +647,99 @@
   color: #ffffff;
 }
 
+/* ==================== RESERVATION CARDS & BOOTSTRAP OVERRIDES ==================== */
+.reservation-card-item {
+  background-color: var(--mf-bg-soft) !important;
+  border: 1px solid var(--mf-line) !important;
+  color: var(--mf-ink) !important;
+  border-radius: 12px;
+}
+
+.reservation-info,
+.total-amount,
+.reservation-details,
+.amount-text {
+  color: var(--mf-ink) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.total-amount strong,
+.reservation-info strong {
+  color: var(--mf-primary) !important;
+  font-weight: 700;
+}
+
 /* FOOTER */
 .mf-db-footer {
   border-top: 1px solid var(--mf-line);
-  background: #ffffff;
+  background: var(--mf-card-bg);
+  transition: background 0.3s ease;
+}
+
+/* ==================== DARK THEME EXTRAS & OVERRIDES ==================== */
+body.dark-theme .db-card,
+body.dark-theme .stat-card,
+body.dark-theme .pharmacy-card,
+[data-theme="dark"] .db-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .pharmacy-card {
+  background: #1e293b !important;
+  color: #ffffff !important;
+}
+
+body.dark-theme .text-muted,
+[data-theme="dark"] .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .text-dark,
+[data-theme="dark"] .text-dark {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .reservation-info,
+body.dark-theme .total-amount,
+body.dark-theme .reservation-details,
+body.dark-theme .amount-text,
+[data-theme="dark"] .reservation-info,
+[data-theme="dark"] .total-amount,
+[data-theme="dark"] .reservation-details,
+[data-theme="dark"] .amount-text {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .total-amount strong,
+body.dark-theme .reservation-info strong,
+[data-theme="dark"] .total-amount strong,
+[data-theme="dark"] .reservation-info strong {
+  color: var(--mf-accent) !important;
+}
+
+body.dark-theme .btn-logout,
+[data-theme="dark"] .btn-logout {
+  background: #3b1111;
+  border-color: #7f1d1d;
+  color: #fca5a5;
+}
+
+body.dark-theme .status-tag.warning,
+[data-theme="dark"] .status-tag.warning {
+  background: #451a03;
+  color: #fde047;
+}
+
+body.dark-theme .status-tag.success,
+[data-theme="dark"] .status-tag.success {
+  background: #052e16;
+  color: #86efac;
+}
+
+body.dark-theme .status-tag.danger,
+[data-theme="dark"] .status-tag.danger {
+  background: #450a0a;
+  color: #fca5a5;
 }
 
 /* RESPONSIVE */

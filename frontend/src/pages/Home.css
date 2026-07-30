@@ -10,11 +10,13 @@ html, body, #root {
   overflow-x: hidden;
 }
 
-/* ============ DESIGN TOKENS ============ */
+/* ============ DESIGN TOKENS (LIGHT DEFAULT) ============ */
 .mf-page {
   --mf-bg: #f7faf9;
+  --mf-bg-card: #ffffff;
   --mf-bg-soft: #eef6f3;
   --mf-ink: #0f56ad;
+  --mf-text-main: #1e293b;
   --mf-primary: #0c4998;
   --mf-primary-dark: #040e91;
   --mf-accent: #0fefeb;
@@ -31,9 +33,10 @@ html, body, #root {
   margin: 0;
   padding: 0;
   background: var(--mf-bg);
-  color: var(--mf-ink);
+  color: var(--mf-text-main);
   font-family: var(--mf-font-body);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mf-page *,
@@ -638,7 +641,7 @@ html, body, #root {
 .mf-product-card {
   flex: 0 0 200px;
   scroll-snap-align: start;
-  background: var(--mf-white);
+  background: var(--mf-bg-card);
   border: 1px solid var(--mf-line);
   border-radius: 16px;
   padding: 1rem;
@@ -695,7 +698,7 @@ html, body, #root {
   justify-content: space-between;
   gap: 10px;
   padding: 1px 60px 50px;
-  background: #ffffff;
+  background: var(--mf-bg-card);
 }
 
 .mf-quote-section {
@@ -925,6 +928,220 @@ html, body, #root {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* =========================================================
+   UNIFIED BRANDING & LOGO FIXES
+   ========================================================= */
+
+.mf-logo-svg,
+.mf-logos-svg {
+  width: 40px !important;
+  height: 40px !important;
+  flex-shrink: 0;
+}
+
+.mf-footer-logo-svg,
+.mf-Footerlogo-svg {
+  width: 42px !important;
+  height: 42px !important;
+  flex-shrink: 0;
+}
+
+.mf-brand-text,
+.login-header .mf-brand-text {
+  font-family: var(--mf-font-body);
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mf-styled-letter,
+.login-header .mf-styled-letter,
+.login-footer .mf-styled-letter {
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  line-height: 0.8;
+  display: inline-block;
+  vertical-align: middle;
+  color: #20d6d6 !important;
+  text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+}
+
+/* =========================================================
+   COMPLETE DARK MODE OVERRIDES (SUPPORT FOR BODY & CONTAINER)
+   ========================================================= */
+
+/* 1. Tokens Override */
+body.dark-theme,
+.dark-theme {
+  --mf-bg: #0f172a;
+  --mf-bg-card: #1e293b;
+  --mf-bg-soft: #1e293b;
+  --mf-ink: #38bdf8;
+  --mf-text-main: #f8fafc;
+  --mf-primary: #38bdf8;
+  --mf-primary-dark: #0284c7;
+  --mf-muted: #94a3b8;
+  --mf-line: #334155;
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+/* 2. Page & Layout Elements */
+.dark-theme .mf-page,
+.dark-theme .mf-navbar,
+.dark-theme .mf-products,
+.dark-theme .mf-split-section {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+.dark-theme .mf-navbar {
+  border-bottom-color: #334155;
+}
+
+.dark-theme .mf-nav-links .nav-link {
+  color: #cbd5e1;
+}
+
+.dark-theme .mf-nav-links .nav-link:hover,
+.dark-theme .mf-nav-links .nav-link.active {
+  color: #38bdf8;
+}
+
+/* 3. Topbar & Search Inputs */
+.dark-theme .mf-topbar {
+  background-color: #020617;
+}
+
+.dark-theme .mf-topbar-search {
+  background-color: #334155;
+}
+
+.dark-theme .mf-topbar-search input {
+  color: #ffffff;
+}
+
+.dark-theme .mf-topbar-search input::placeholder {
+  color: #94a3b8;
+}
+
+/* 4. Cart Dropdown */
+.dark-theme .mf-cart-dropdown {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+}
+
+.dark-theme .mf-cart-list li {
+  border-bottom-color: #334155;
+}
+
+/* 5. Hero Banner & Quote Card */
+.dark-theme .mf-banner {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 70%);
+}
+
+.dark-theme .mf-quote-section {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+}
+
+.dark-theme .mf-quote-section .mf-headline {
+  color: #38bdf8;
+}
+
+.dark-theme .mf-quote-section .mf-subtext {
+  color: #cbd5e1;
+}
+
+.dark-theme .mf-capsule-tagline {
+  color: #f8fafc;
+}
+
+/* 6. Product Section & Cards */
+.dark-theme .mf-products-head h2 {
+  color: #f8fafc;
+}
+
+.dark-theme .mf-product-card {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.dark-theme .mf-product-card h4 {
+  color: #f8fafc;
+}
+
+.dark-theme .mf-product-price {
+  color: #38bdf8;
+}
+
+/* 7. Stats Section */
+.dark-theme .mf-stats-section {
+  background-color: #020617;
+}
+
+.dark-theme .mf-stat-card {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+.dark-theme .mf-stat-icon {
+  background-color: #334155;
+}
+
+.dark-theme .mf-stat-card h2 {
+  color: #38bdf8;
+}
+
+.dark-theme .mf-stat-card p {
+  color: #cbd5e1;
+}
+
+/* 8. Global Input & Form Controls */
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea,
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+  border: 1px solid #475569 !important;
+}
+
+body.dark-theme input::placeholder,
+.dark-theme input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* 9. Footers */
+body.dark-theme .mf-footer,
+.dark-theme .mf-footer {
+  background-color: #020617 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .mf-footer-top {
+  background-color: #0284c7;
+}
+
+.dark-theme .mf-feature span {
+  background-color: #1e293b;
+  color: #38bdf8;
+}
+
+.dark-theme .mf-feature h5 {
+  color: #ffffff;
+}
+
+.dark-theme .mf-feature p {
+  color: #e2e8f0;
+}
+
 /* ============ RESPONSIVE MEDIA QUERIES ============ */
 @media (min-width: 992px) {
   .mf-toggler {
@@ -995,49 +1212,4 @@ html, body, #root {
   .mf-stats-container {
     grid-template-columns: 1fr;
   }
-}
-
-/* =========================================================
-   UNIFIED BRANDING & LOGO FIXES (HOME + LOGIN EQUALITY)
-   ========================================================= */
-
-/* 1. Header Logo Icons */
-.mf-logo-svg,
-.mf-logos-svg {
-  width: 40px !important;
-  height: 40px !important;
-  flex-shrink: 0;
-}
-
-/* 2. Footer Logo Icons */
-.mf-footer-logo-svg,
-.mf-Footerlogo-svg {
-  width: 42px !important;
-  height: 42px !important;
-  flex-shrink: 0;
-}
-
-/* 3. Header Text Consistency */
-.mf-brand-text,
-.login-header .mf-brand-text {
-  font-family: var(--mf-font-body);
-  font-size: 1.8rem !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  display: inline-flex;
-  align-items: center;
-}
-
-/* 4. Styled Letter 'M' & 'F' Script Consistency */
-.mf-styled-letter,
-.login-header .mf-styled-letter,
-.login-footer .mf-styled-letter {
-  font-family: 'Great Vibes', cursive !important;
-  font-size: 2.8rem !important;
-  font-weight: 700 !important;
-  line-height: 0.8;
-  display: inline-block;
-  vertical-align: middle;
-  color: #20d6d6 !important;
-  text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
 }

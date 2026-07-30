@@ -86,7 +86,7 @@ export default function FAQs() {
               </svg>
             </span>
             <span className="mf-brand-text">
-              <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-brand-accent">F</span>inder
+              <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
         </div>
@@ -112,7 +112,7 @@ export default function FAQs() {
               <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/medicines">Medicines</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/about">About Us</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/login">Login / Register</Link></li>
+             
               <li className="nav-item"><Link className="nav-link" to="/dashboard">Patient Dashboard</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/contact">Contact Us</Link></li>
               <li className="nav-item"><Link className="nav-link active" to="/faqs">FAQs</Link></li>
@@ -249,7 +249,7 @@ export default function FAQs() {
                   <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
                 </svg>
                 <h2 className="mf-footer-title">
-                  <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-footer-accent">F</span>inder
+                  <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-footer-accent">F</span>inder
                 </h2>
               </div>
               <p>
@@ -287,7 +287,7 @@ export default function FAQs() {
           </div>
 
           <div className="mf-footer-bottom">
-            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
           </div>
         </div>
       </footer>

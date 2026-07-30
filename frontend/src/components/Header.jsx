@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 import "./Layout.css";
 
 export default function Header() {
+  const { darkMode, toggleDarkMode } = useTheme();
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -55,46 +57,60 @@ export default function Header() {
             </button>
           </form>
 
-          <div className="mf-cart-wrap">
+          <div className="d-flex align-items-center gap-2">
+            {/* ☀️ / 🌙 Dark Mode Toggle Button */}
             <button
-              className="mf-cart-btn"
-              onClick={() => setCartOpen(!cartOpen)}
+              type="button"
+              className="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center"
+              onClick={toggleDarkMode}
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              style={{ width: "38px", height: "38px", fontSize: "16px", cursor: "pointer" }}
             >
-              🛒
-              <span className="mf-cart-badge">{cart.length}</span>
+              {darkMode ? "☀️" : "🌙"}
             </button>
 
-            {cartOpen && (
-              <div className="mf-cart-dropdown">
-                <div className="mf-cart-dropdown-head">
-                  <span>Your cart</span>
+            {/* Cart Wrap */}
+            <div className="mf-cart-wrap">
+              <button
+                className="mf-cart-btn"
+                onClick={() => setCartOpen(!cartOpen)}
+              >
+                🛒
+                <span className="mf-cart-badge">{cart.length}</span>
+              </button>
 
-                  <button onClick={() => setCartOpen(false)}>
-                    ✕
-                  </button>
+              {cartOpen && (
+                <div className="mf-cart-dropdown">
+                  <div className="mf-cart-dropdown-head">
+                    <span>Your cart</span>
+
+                    <button onClick={() => setCartOpen(false)}>
+                      ✕
+                    </button>
+                  </div>
+
+                  {cart.length === 0 ? (
+                    <p className="mf-cart-empty">
+                      No medicines added yet.
+                    </p>
+                  ) : (
+                    <ul className="mf-cart-list">
+                      {cart.map((item, i) => (
+                        <li key={i}>
+                          <span>{item.name}</span>
+
+                          <button
+                            onClick={() => removeFromCart(i)}
+                          >
+                            ✕
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-
-                {cart.length === 0 ? (
-                  <p className="mf-cart-empty">
-                    No medicines added yet.
-                  </p>
-                ) : (
-                  <ul className="mf-cart-list">
-                    {cart.map((item, i) => (
-                      <li key={i}>
-                        <span>{item.name}</span>
-
-                        <button
-                          onClick={() => removeFromCart(i)}
-                        >
-                          ✕
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

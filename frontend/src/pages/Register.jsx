@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   // Password Visibility States
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -50,20 +52,27 @@ export default function Register() {
 
       const data = await response.json();
 
-      alert(data.message || "Request completed!");
+      if (response.ok) {
+        alert("Registration completed successfully! You can now log in.");
 
-      // Reset Form Inputs
-      setFormData({
-        full_name: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-      });
+        // Reset Form Inputs
+        setFormData({
+          full_name: "",
+          email: "",
+          phone: "",
+          password: "",
+          confirmPassword: "",
+        });
 
+        // Redirect to Login Page
+        navigate("/login");
+      } else {
+        // Backend error response (e.g. Email is already registered!)
+        alert(data.error || data.message || "Registration failed!");
+      }
     } catch (error) {
       console.error(error);
-      alert("Registration failed!");
+      alert("Registration failed! Server issue or network error.");
     }
   };
 
@@ -101,7 +110,7 @@ export default function Register() {
           </span>
 
           <span className="mf-brand-text">
-            <span className="mf-styled-letter">M</span>ed
+            <span className="mf-styled-letter">M</span>edi
             <span className="mf-styled-letter mf-brand-accent">F</span>inder
           </span>
         </Link>
@@ -224,7 +233,9 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-label={
+                    showPassword ? "Hide password" : "Show password"
+                  }
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
@@ -246,7 +257,9 @@ export default function Register() {
                 />
                 <button
                   type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  onClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }
                   aria-label={
                     showConfirmPassword ? "Hide password" : "Show password"
                   }
@@ -303,7 +316,7 @@ export default function Register() {
             </svg>
 
             <span className="mf-brand-text">
-              <span className="mf-styled-letter">M</span>ed
+              <span className="mf-styled-letter">M</span>edi
               <span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </h3>
@@ -320,7 +333,7 @@ export default function Register() {
           </div>
 
           <div className="footer-copy">
-            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
           </div>
         </div>
       </footer>

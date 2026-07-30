@@ -14,6 +14,7 @@ import CartPage from "./pages/CartPage";
 import Dashboard from "./pages/Dashboard";
 
 export default function App() {
+  // 1. Cart State & Helper Logic
   const [cart, setCart] = useState([]);
 
   // Helper function to safely extract the item ID (handles medicine_id from Flask OR id)
@@ -61,6 +62,7 @@ export default function App() {
     );
   };
 
+  // 2. Render Routes
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -69,7 +71,10 @@ export default function App() {
       <Route path="/faqs" element={<FAQs />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      
+      {/* ThemeContext use ho raha hai isliye props pass karne ki zaroorat nahi */}
       <Route path="/dashboard" element={<Dashboard />} />
+      
       <Route
         path="/medicines"
         element={

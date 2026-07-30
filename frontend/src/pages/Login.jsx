@@ -89,7 +89,7 @@ export default function Login() {
           </span>
 
           <span className="mf-brand-text">
-            <span className="mf-styled-letter">M</span>ed
+            <span className="mf-styled-letter">M</span>edi
             <span className="mf-styled-letter mf-brand-accent">F</span>inder
           </span>
         </Link>
@@ -107,7 +107,7 @@ export default function Login() {
           <h1>
             Welcome Back
             <br />
-            To MedFinder
+            To MediFinder
           </h1>
 
           <p>
@@ -243,7 +243,7 @@ export default function Login() {
             </svg>
 
             <span className="mf-brand-text">
-              <span className="mf-styled-letter">M</span>ed
+              <span className="mf-styled-letter">M</span>edi
               <span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </h3>
@@ -260,7 +260,7 @@ export default function Login() {
           </div>
 
           <div className="footer-copy">
-            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
           </div>
         </div>
       </footer>

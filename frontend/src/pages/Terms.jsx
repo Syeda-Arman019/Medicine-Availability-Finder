@@ -46,7 +46,7 @@ export default function Terms() {
               </svg>
             </span>
             <span className="mf-brand-text">
-              <span className="mf-styled-letter">M</span>ed
+              <span className="mf-styled-letter">M</span>edi
               <span className="mf-styled-letter mf-brand-accent">F</span>inder
             </span>
           </Link>
@@ -87,11 +87,7 @@ export default function Terms() {
                   About Us
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login / Register
-                </Link>
-              </li>
+          
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">
                   Patient Dashboard
@@ -339,7 +335,7 @@ export default function Terms() {
                   />
                 </svg>
                 <h2 className="mf-footer-title">
-                  <span className="mf-styled-letter">M</span>ed
+                  <span className="mf-styled-letter">M</span>edi
                   <span className="mf-styled-letter mf-footer-accent">F</span>inder
                 </h2>
               </div>
@@ -395,7 +391,7 @@ export default function Terms() {
           </div>
 
           <div className="mf-footer-bottom">
-            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
           </div>
         </div>
       </footer>

@@ -181,4 +181,8 @@ pip install flask-cors.counter {
     right: 0;
     border-right-color: var(--border);
   }
+  body.dark-theme {
+  background: #0f172a;
+  color: #ffffff;
+}
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext"; // 👈 ThemeContext Hook Import
 import {
   Search,
   Building2,
@@ -23,12 +24,16 @@ import {
   Settings,
   HelpCircle,
   Pill,
-  Heart
+  Heart,
+  Sun,
+  Moon
 } from "lucide-react";
 import "./Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { darkMode, toggleDarkMode } = useTheme(); // 👈 Context se State aur Toggle use kar rahe hain
+
   const [user, setUser] = useState({ 
     name: "User", 
     email: "", 
@@ -145,7 +150,7 @@ export default function Dashboard() {
                 </svg>
               </span>
               <span className="mf-brand-text ms-2">
-                <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-brand-accent">F</span>inder
+                <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
               </span>
             </Link>
           </div>
@@ -161,6 +166,15 @@ export default function Dashboard() {
           </div>
 
           <div className="mf-db-user-actions">
+            {/* Theme Toggle Button */}
+            <button
+              className="mf-db-icon-btn"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              onClick={toggleDarkMode} // 👈 Updated to Context Toggle Method
+            >
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
             <button className="mf-db-icon-btn" title="Notifications">
               <Bell size={20} />
               <span className="badge-dot"></span>
@@ -571,12 +585,102 @@ export default function Dashboard() {
         </main>
       </div>
 
-      {/* FOOTER */}
-      <footer className="mf-db-footer">
-        <div className="container text-center py-3">
-          <small className="text-muted">
-            © {new Date().getFullYear()} MedFinder Healthcare Platform. Connected with Latifabad, Qasimabad, & Saddar Pharmacies.
-          </small>
+      {/* UPDATED FOOTER */}
+      <footer className="mf-footer">
+        <div className="mf-footer-top">
+          <div className="mf-feature">
+            <span>💊</span>
+            <div>
+              <h5>Live Medicine Search</h5>
+              <p>Find medicines instantly</p>
+            </div>
+          </div>
+
+          <div className="mf-feature">
+            <span>🏥</span>
+            <div>
+              <h5>Connected Pharmacies</h5>
+              <p>Check nearby stock availability</p>
+            </div>
+          </div>
+
+          <div className="mf-feature">
+            <span>📦</span>
+            <div>
+              <h5>Quick Reservations</h5>
+              <p>Reserve medicines before visiting</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="mf-footer-grid">
+            <div className="mf-footer-brand">
+              <div className="mf-footer-logo">
+                <svg viewBox="0 0 40 40" className="mf-footer-logo-svg">
+                  <rect
+                    x="4"
+                    y="16"
+                    width="32"
+                    height="8"
+                    rx="4"
+                    transform="rotate(-45 20 20)"
+                    fill="#7ccbe6"
+                  />
+                  <rect
+                    x="20"
+                    y="16"
+                    width="16"
+                    height="8"
+                    rx="4"
+                    transform="rotate(-45 20 20)"
+                    fill="#d1f3ed"
+                  />
+                </svg>
+
+                <h2 className="mf-footer-title">
+                  <span className="mf-styled-letter">M</span>edi
+                  <span className="mf-styled-letter mf-footer-accent">F</span>inder
+                </h2>
+              </div>
+
+              <p>
+                Helping patients find medicine availability across nearby pharmacies
+                in real time.
+              </p>
+            </div>
+
+            <div>
+              <h4>Explore</h4>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/medicines">Medicines</Link></li>
+                <li><Link to="/about">About Us</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Patient Hub</h4>
+              <ul>
+                <li><Link to="/dashboard">Patient Dashboard</Link></li>
+                <li><Link to="/cart">My Cart</Link></li>
+                <li><Link to="/cart">Reservations</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>Support</h4>
+              <ul>
+                <li><Link to="/contact">Contact Us</Link></li>
+                <li><Link to="/faqs">FAQs</Link></li>
+                <li><Link to="/terms">Terms of Service</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mf-footer-bottom">
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
+          </div>
         </div>
       </footer>
     </div>

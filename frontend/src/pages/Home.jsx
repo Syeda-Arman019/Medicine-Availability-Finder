@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
 import { MEDICINES } from "./MedicinesData";
+import Header from "../components/Header";
+import { useTheme } from "../context/ThemeContext"; // 👈 1. ThemeContext Import
 import "./Home.css";
 
 // ================= ANIMATED NUMBER =================
@@ -52,6 +54,7 @@ const AnimatedNumber = ({ target }) => {
 
 // ================= HOME =================
 export default function Home() {
+  const { darkMode } = useTheme(); // 👈 2. Context se darkMode value read ki
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -80,129 +83,70 @@ export default function Home() {
   });
 
   return (
-    <div className="mf-page">
-      {/* ---------- TOP BAR: brand + search + cart ---------- */}
-      <div className="mf-topbar">
-        <div className="container mf-topbar-inner">
-          <Link to="/" className="mf-brand">
-            <span className="mf-logo" aria-hidden="true">
-              <svg viewBox="0 0 40 40" className="mf-logo-svg">
-                <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
-                <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
-              </svg>
-            </span>
-            <span className="mf-brand-text">
-              <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-brand-accent">F</span>inder
-            </span>
-          </Link>
-
-          {/* Connected Search Box */}
-          <form className="mf-topbar-search" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="Search medicines, e.g. Panadol..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button type="submit" aria-label="Search">
-              <svg viewBox="0 0 24 24">
-                <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="2" />
-                <line x1="15" y1="15" x2="21" y2="21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </button>
-          </form>
-
-          <div className="mf-cart-wrap">
-            <button
-              className="mf-cart-btn"
-              onClick={() => setCartOpen((open) => !open)}
-              aria-label="Open cart"
-            >
-              <svg viewBox="0 0 24 24">
-                <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="10" cy="21" r="1.4" fill="currentColor" />
-                <circle cx="17" cy="21" r="1.4" fill="currentColor" />
-              </svg>
-              <span className="mf-cart-badge">{cart.length}</span>
-            </button>
-
-            {cartOpen && (
-              <div className="mf-cart-dropdown">
-                <div className="mf-cart-dropdown-head">
-                  <span>Your cart</span>
-                  <button onClick={() => setCartOpen(false)} aria-label="Close cart">✕</button>
+    // 👈 3. Root div par dynamic `dark-theme` class attach ki
+      <div className={`mf-page ${darkMode ? "dark-theme" : ""}`}>
+       return (
+          <div className="mf-db-wrapper">
+            {/* TOP BAR */}
+            <header className="mf-db-topbar">
+              <div className="mf-db-topbar-inner">
+                <div className="mf-db-brand-wrap">
+                  <button
+                    className="mf-db-mobile-toggle d-lg-none"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle Navigation"
+                  >
+                    {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                  </button>
+                  <Link to="/" className="mf-brand">
+                    <span className="mf-logo">
+                      <svg viewBox="0 0 40 40" className="mf-logo-svg">
+                        <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
+                        <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
+                      </svg>
+                    </span>
+                    <span className="mf-brand-text ms-2">
+                      <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
+                    </span>
+                  </Link>
                 </div>
-                {cart.length === 0 ? (
-                  <p className="mf-cart-empty">No medicines added yet.</p>
-                ) : (
-                  <>
-                    <ul className="mf-cart-list">
-                      {cart.map((item, i) => (
-                        <li key={i}>
-                          <span>{item.medicine_name || item.name}</span>
-                          <span className="mf-cart-price">{item.price}</span>
-                          <button
-                            onClick={() => removeFromCart(i)}
-                            aria-label="Remove"
-                            className="mf-delete-btn"
-                          >
-                            <Trash2 size={18} />
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* CART PAGE LINK ADDED HERE */}
-                    <div style={{ padding: '8px 0', borderTop: '1px solid #e2e8f0', marginTop: '10px' }}>
-                      <Link 
-                        to="/cart" 
-                        className="mf-cart-checkout"
-                        onClick={() => setCartOpen(false)}
-                      >
-                        View Full Cart & Reserve →
-                      </Link>
+      
+                <div className="mf-db-top-search">
+                  <Search size={18} className="search-icon" />
+                  <input
+                    type="text"
+                    placeholder="Search medicines, pharmacies or active holds..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+      
+                <div className="mf-db-user-actions">
+                  {/* Theme Toggle Button */}
+                  <button
+                    className="mf-db-icon-btn"
+                    title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                    onClick={toggleDarkMode} // 👈 Updated to Context Toggle Method
+                  >
+                    {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+                  </button>
+      
+                  <button className="mf-db-icon-btn" title="Notifications">
+                    <Bell size={20} />
+                    <span className="badge-dot"></span>
+                  </button>
+                  
+                  <div className="mf-db-profile-pill">
+                    <div className="avatar-circle">{user.name.charAt(0).toUpperCase()}</div>
+                    <div className="user-info d-none d-md-block">
+                      <span className="user-name">{user.name}</span>
+                      <span className="user-role">{user.role}</span>
                     </div>
-                  </>
-                )}
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </header>
       </div>
-
-      {/* ---------- NAVBAR ---------- */}
-      <nav className="navbar navbar-expand-lg mf-navbar">
-        <div className="container mf-navbar-inner">
-          <button
-            className="navbar-toggler mf-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mfNav"
-            aria-controls="mfNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="mfNav">
-            <ul className="navbar-nav mf-nav-links">
-              <li className="nav-item"><Link className="nav-link active" to="/">Home</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/medicines">Medicines</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/about">About Us</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/login">Login / Register</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/dashboard">Patient Dashboard</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/contact">Contact Us</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/faqs">FAQs</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/terms">Terms of Service</Link></li>
-            </ul>
-          </div>
-
-          <Link to="/login" className="mf-header-btn">
-            Create Account
-          </Link>
-        </div>
-      </nav>
 
       {/* ---------- HERO BANNER ---------- */}
       <header className="mf-banner">
@@ -219,7 +163,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ---------- PRODUCT SECTION (WITH FILTER & CATEGORY CHIPS) ---------- */}
+      {/* ---------- PRODUCT SECTION ---------- */}
       <section className="mf-products">
         <div className="container mf-products-head">
           <div>
@@ -320,7 +264,7 @@ export default function Home() {
 
           <div className="mf-stat-card">
             <div className="mf-stat-icon">🏥</div>
-            <h2><AnimatedNumber target={5} /></h2>
+            <h2><AnimatedNumber target={3} /></h2>
             <p>Pharmacies Connected</p>
           </div>
 
@@ -375,7 +319,7 @@ export default function Home() {
                   <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
                 </svg>
                 <h2 className="mf-footer-title">
-                  <span className="mf-styled-letter">M</span>ed<span className="mf-styled-letter mf-footer-accent">F</span>inder
+                  <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-footer-accent">F</span>inder
                 </h2>
               </div>
               <p>Helping patients find medicine availability across nearby pharmacies in real time.</p>
@@ -410,10 +354,10 @@ export default function Home() {
           </div>
 
           <div className="mf-footer-bottom">
-            © {new Date().getFullYear()} MedFinder. All Rights Reserved.
+            © {new Date().getFullYear()} MediFinder. All Rights Reserved.
           </div>
         </div>
       </footer>
     </div>
-  );
+  )
 }
