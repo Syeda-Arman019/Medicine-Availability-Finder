@@ -418,3 +418,232 @@
   background: #38bdf8 !important;
   color: #0f172a !important;
 }
+/* =========================
+   MOBILE CART RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+
+  .cart-page-wrapper {
+    padding: 20px 10px 50px;
+    overflow-x: hidden;
+  }
+
+  .cart-page-wrapper .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .cart-heading {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 20px 0 !important;
+  }
+
+  /* Upper Cart Card */
+  .cart-items-card {
+    width: 100%;
+    padding: 12px;
+    overflow: hidden;
+  }
+
+  .cart-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* Hide Price on mobile */
+  .cart-table th:nth-child(2),
+  .cart-table td:nth-child(2) {
+    display: none;
+  }
+
+  /* Columns */
+  .cart-table th:nth-child(1),
+  .cart-table td:nth-child(1) {
+    width: 42%;
+  }
+
+  .cart-table th:nth-child(3),
+  .cart-table td:nth-child(3) {
+    width: 25%;
+    text-align: center;
+  }
+
+  .cart-table th:nth-child(4),
+  .cart-table td:nth-child(4) {
+    width: 20%;
+    text-align: center;
+  }
+
+  .cart-table th:nth-child(5),
+  .cart-table td:nth-child(5) {
+    width: 13%;
+    text-align: center;
+  }
+
+  /* Table Text */
+  .cart-table th {
+    padding: 10px 3px;
+    font-size: 0.65rem;
+  }
+
+  .cart-table td {
+    padding: 13px 3px;
+    font-size: 0.8rem;
+  }
+
+  /* Medicine */
+  .cart-item-info {
+    gap: 7px;
+  }
+
+  .cart-item-info img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cart-item-info h5 {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .cart-item-info small {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  /* Quantity */
+  .qty-controls {
+    padding: 2px 3px;
+  }
+
+  .qty-controls button {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+  }
+
+  .qty-controls button svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .qty-controls span {
+    padding: 0 6px;
+    font-size: 0.78rem;
+  }
+
+  /* Total */
+  .item-total {
+    font-size: 0.75rem !important;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* Delete */
+  .remove-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .remove-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Lower Summary */
+  .order-summary-card {
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .order-summary-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .summary-row {
+    font-size: 0.9rem;
+  }
+
+  .grand-total {
+    font-size: 1.1rem;
+  }
+
+  .form-select {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .hold-info-box small {
+    font-size: 0.7rem;
+  }
+
+  .checkout-btn {
+    font-size: 0.95rem;
+    padding: 14px;
+  }
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+   ========================= */
+
+@media (max-width: 390px) {
+
+  .cart-heading {
+    font-size: 1.35rem;
+  }
+
+  .cart-items-card {
+    padding: 8px;
+  }
+
+  .cart-table th {
+    font-size: 0.58rem;
+  }
+
+  .cart-table td {
+    padding: 11px 2px;
+  }
+
+  .cart-item-info img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .cart-item-info h5 {
+    font-size: 0.76rem;
+  }
+
+  .cart-item-info small {
+    font-size: 0.6rem;
+  }
+
+  .qty-controls button {
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+  }
+
+  .qty-controls span {
+    font-size: 0.72rem;
+    padding: 0 4px;
+  }
+
+  .item-total {
+    font-size: 0.7rem !important;
+  }
+
+  .remove-btn {
+    width: 25px;
+    height: 25px;
+  }
+
+  .order-summary-card {
+    padding: 16px;
+  }
+}

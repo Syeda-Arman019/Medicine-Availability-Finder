@@ -9,10 +9,8 @@ import {
   MapPin,
   Clock,
   ArrowRight,
-  User as UserIcon,
   LogOut,
   ShoppingBag,
-  Bell,
   CheckCircle2,
   AlertCircle,
   Menu,
@@ -33,13 +31,13 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useTheme();
 
-  const [user, setUser] = useState({ 
-    name: "User", 
-    email: "", 
-    role: "Patient", 
-    location: "Hyderabad, Sindh" 
+  const [user, setUser] = useState({
+    name: "User",
+    email: "",
+    role: "Patient",
+    location: "Hyderabad, Sindh"
   });
-  
+
   const [reservations, setReservations] = useState([]);
   const [loadingReservations, setLoadingReservations] = useState(true);
   const [medicines, setMedicines] = useState([]);
@@ -50,7 +48,6 @@ export default function Dashboard() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // 1. Fetch User Data & Reservations
     const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
@@ -81,7 +78,6 @@ export default function Dashboard() {
         } else {
           setLoadingReservations(false);
         }
-
       } catch (error) {
         console.error("Error parsing user storage:", error);
         setLoadingReservations(false);
@@ -90,26 +86,19 @@ export default function Dashboard() {
       setLoadingReservations(false);
     }
 
-    // 2. Fetch Medicines from Backend
     fetch("http://127.0.0.1:5000/medicines")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setMedicines(data);
-        }
+        if (Array.isArray(data)) setMedicines(data);
       })
       .catch((err) => console.error("Error fetching medicines:", err));
 
-    // 3. Fetch Pharmacies from Backend
     fetch("http://127.0.0.1:5000/pharmacies")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setPharmacies(data);
-        }
+        if (Array.isArray(data)) setPharmacies(data);
       })
       .catch((err) => console.error("Error fetching pharmacies:", err));
-
   }, []);
 
   const handleLogout = () => {
@@ -119,30 +108,22 @@ export default function Dashboard() {
 
   const scrollToPharmacies = () => {
     setMobileMenuOpen(false);
-    document.getElementById("connected-pharmacies")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    document.getElementById("connected-pharmacies")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToReservations = () => {
     setMobileMenuOpen(false);
-    document.getElementById("reservation-history")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    document.getElementById("reservation-history")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToActiveReservationCard = () => {
     setMobileMenuOpen(false);
-    document.getElementById("active-reservation-card")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    document.getElementById("active-reservation-card")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToMedicineSearch = () => {
     setMobileMenuOpen(false);
-    document.getElementById("medicine-search")?.scrollIntoView({
-      behavior: "smooth",
-    });
+    document.getElementById("medicine-search")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const filteredMedicines = medicines.filter((item) =>
@@ -153,17 +134,11 @@ export default function Dashboard() {
 
   return (
     <div className="mf-db-wrapper">
-      {/* TOP BAR */}
+      {/* ================= TOP BAR ================= */}
       <header className="mf-db-topbar">
         <div className="mf-db-topbar-inner">
+          {/* Row 1 left: LOGO */}
           <div className="mf-db-brand-wrap">
-            <button
-              className="mf-db-mobile-toggle d-lg-none"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Navigation"
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
             <Link to="/" className="mf-brand">
               <span className="mf-logo">
                 <svg viewBox="0 0 40 40" className="mf-logo-svg">
@@ -171,51 +146,60 @@ export default function Dashboard() {
                   <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
                 </svg>
               </span>
-              <span className="mf-brand-text ms-2">
-                <span className="mf-styled-letter">M</span>edi<span className="mf-styled-letter mf-brand-accent">F</span>inder
+              <span className="mf-brand-text">
+                <span className="mf-styled-letter">M</span>edi
+                <span className="mf-styled-letter mf-brand-accent">F</span>inder
               </span>
             </Link>
           </div>
 
-          <div className="mf-db-top-search">
-            <Search size={18} className="search-icon" />
-            <input
+          {/* Row 2 (mobile only): HAMBURGER + SEARCH, same row */}
+          <div className="mf-db-top-search-row">
+            <button
+              className="mf-db-mobile-toggle"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Navigation"
+            >
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+
+            <div className="mf-db-top-search">
+              <Search size={18} className="search-icon" />
+              <input
+              id="top-search"
+              name="top-search"
               type="text"
               placeholder="Search medicines, pharmacies or active holds..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-            />
+              autoComplete="off"
+              />
+            </div>
           </div>
 
+          {/* Row 1 right: THEME TOGGLE — moved to the end so it sits at the right edge */}
           <div className="mf-db-user-actions">
             <button
-              className="mf-db-icon-btn"
+              type="button"
+              className="mf-theme-toggle"
               title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               onClick={toggleDarkMode}
+              aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              {darkMode ? <Sun size={22} strokeWidth={2} /> : <Moon size={22} strokeWidth={2} />}
             </button>
-
-            <button className="mf-db-icon-btn" title="Notifications">
-              <Bell size={20} />
-              <span className="badge-dot"></span>
-            </button>
-            
-            <Link to="/settings" className="text-decoration-none">
-              <div className="mf-db-profile-pill">
-                <div className="avatar-circle">{user.name.charAt(0).toUpperCase()}</div>
-                <div className="user-info d-none d-md-block">
-                  <span className="user-name">{user.name}</span>
-                  <span className="user-role">{user.role}</span>
-                </div>
-              </div>
-            </Link>
           </div>
         </div>
       </header>
 
       {/* MAIN LAYOUT */}
       <div className="mf-db-container">
+        {/* BACKDROP — click to close mobile drawer */}
+        <div
+          className={`mf-db-sidebar-backdrop ${mobileMenuOpen ? "open" : ""}`}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+
         {/* SIDEBAR NAVIGATION */}
         <aside className={`mf-db-sidebar ${mobileMenuOpen ? "open" : ""}`}>
           <div className="sidebar-nav">
@@ -236,57 +220,35 @@ export default function Dashboard() {
               <span>My Reservation Cart</span>
             </Link>
 
-            {/* CONNECTED PHARMACIES BUTTON */}
             <button className="sidebar-link" onClick={scrollToPharmacies}>
               <Building2 size={18} />
               <span>Connected Pharmacies</span>
             </button>
 
             <span className="sidebar-label mt-4">PATIENT HUB</span>
-            
-            {/* RESERVATIONS HISTORY BUTTON */}
-            <button
-              className="sidebar-link"
-              onClick={scrollToReservations}
-            >
+
+            <button className="sidebar-link" onClick={scrollToReservations}>
               <CalendarCheck size={18} />
               <span>Reservations History</span>
             </button>
 
-            {/* ACTIVE RESERVATIONS BUTTON */}
-            <button 
-              className="sidebar-link" 
-              onClick={scrollToActiveReservationCard}
-            >
+            <button className="sidebar-link" onClick={scrollToActiveReservationCard}>
               <Bookmark size={18} />
               <span>Active Reservations</span>
             </button>
 
-            {/* SEARCH MEDICINE AVAILABILITY SIDEBAR BUTTON */}
-            <button
-              className="sidebar-link"
-              onClick={scrollToMedicineSearch}
-            >
+            <button className="sidebar-link" onClick={scrollToMedicineSearch}>
               <FileText size={18} />
               <span>Search Medicine Availability</span>
             </button>
 
             <span className="sidebar-label mt-4">PREFERENCES</span>
-            
-            {/* LINK TO ACCOUNT SETTINGS PAGE */}
-            <Link 
-              to="/settings" 
-              className="sidebar-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+
+            <Link to="/settings" className="sidebar-link" onClick={() => setMobileMenuOpen(false)}>
               <Settings size={18} />
               <span>Account Settings</span>
             </Link>
 
-            <button className="sidebar-link" onClick={() => setMobileMenuOpen(false)}>
-              <HelpCircle size={18} />
-              <span>Help & Support</span>
-            </button>
           </div>
 
           <div className="sidebar-footer">
@@ -306,7 +268,6 @@ export default function Dashboard() {
 
         {/* DASHBOARD CONTENT BODY */}
         <main className="mf-db-main">
-          {/* WELCOME BANNER */}
           <section className="mf-db-welcome-banner">
             <div className="welcome-text">
               <h2>Welcome Back, {user.name}! 👋</h2>
@@ -324,7 +285,6 @@ export default function Dashboard() {
             </div>
           </section>
 
-          {/* DASHBOARD STATISTICS CARDS */}
           <section className="mf-db-stats-grid">
             <div className="stat-card">
               <div className="stat-icon-bg cyan">
@@ -371,12 +331,8 @@ export default function Dashboard() {
             </div>
           </section>
 
-          {/* TWO COLUMN GRID CONTENT */}
           <div className="mf-db-content-grid">
-            {/* LEFT COLUMN */}
             <div className="grid-left">
-              
-              {/* MY RESERVATIONS SECTION */}
               <div id="reservation-history" className="db-card p-4 mb-4">
                 <h4 className="db-card-title mb-3">
                   <CalendarCheck size={20} className="me-2 text-primary" />
@@ -389,14 +345,8 @@ export default function Dashboard() {
                   <div className="text-muted">No reservations found.</div>
                 ) : (
                   reservations.map((res, index) => (
-                    <div
-                      key={`${res.reservation_id || res.id || 'res'}-${index}`}
-                      className="border rounded p-3 mb-3 bg-light"
-                    >
-                      <h6 className="fw-bold">
-                        💊 Reservation #{res.reservation_id || res.id}
-                      </h6>
-
+                    <div key={`${res.reservation_id || res.id || 'res'}-${index}`} className="border rounded p-3 mb-3 bg-light">
+                      <h6 className="fw-bold">💊 Reservation #{res.reservation_id || res.id}</h6>
                       <p className="mb-2">
                         <strong>Medicines:</strong>
                         <br />
@@ -404,39 +354,35 @@ export default function Dashboard() {
                           {res.medicine_names || res.medicine_name || "N/A"}
                         </span>
                       </p>
-
                       <p className="mb-1 text-dark">
                         💰 <strong>Total Amount:</strong> Rs. {res.total_amount || res.price || "0"}
                       </p>
-
                       <p className="mb-2 text-muted small">
                         📅 <strong>Time:</strong> {res.reservation_time || res.created_at || "N/A"}
                       </p>
-
-                      <span className="badge bg-warning text-dark">
-                        {res.status || "Pending"}
-                      </span>
+                      <span className="badge bg-warning text-dark">{res.status || "Pending"}</span>
                     </div>
                   ))
                 )}
               </div>
 
-              {/* SEARCH MEDICINES SECTION */}
               <div id="medicine-search" className="db-card p-4 mb-4">
                 <div className="db-card-header mb-3">
                   <h4 className="db-card-title"><Search size={20} className="me-2 text-primary" /> Search Medicine Availability</h4>
                 </div>
                 <div className="input-group mf-custom-input">
                   <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by medicine name..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button className="btn btn-primary px-4 fw-bold" type="button">
-                    Search Now
-                  </button>
+                  id="medicine-search-input"
+                  name="medicine-search"
+                  type="text"
+                  className="form-control"
+                  placeholder="Search by medicine name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoComplete="off"
+                 />
+                 
+                  <button className="btn btn-primary px-4 fw-bold" type="button">Search Now</button>
                 </div>
                 <div className="popular-searches mt-3 d-flex align-items-center flex-wrap gap-2">
                   <small className="text-muted fw-bold">Popular Searches:</small>
@@ -452,7 +398,6 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* RECENT AVAILABILITY TABLE */}
               <div className="db-card p-4 mb-4">
                 <div className="db-card-header d-flex justify-content-between align-items-center mb-3">
                   <h4 className="db-card-title"><Pill size={20} className="me-2 text-primary" /> Recent Medicine Availability</h4>
@@ -474,23 +419,13 @@ export default function Dashboard() {
                     <tbody>
                       {filteredMedicines.map((item, idx) => (
                         <tr key={item.medicine_id || item.id || idx}>
-                          <td>
-                            <strong className="medicine-name">{item.medicine_name}</strong>
-                          </td>
+                          <td><strong className="medicine-name">{item.medicine_name}</strong></td>
                           <td className="text-muted"><small>-</small></td>
-                          <td>
-                            <span className="pharmacy-badge">Available</span>
-                          </td>
-                          <td>
-                            <span className="status-tag success">
-                              In Stock
-                            </span>
-                          </td>
+                          <td><span className="pharmacy-badge">Available</span></td>
+                          <td><span className="status-tag success">In Stock</span></td>
                           <td className="fw-bold text-dark">Rs. {item.price}</td>
                           <td>
-                            <Link to="/cart" className="btn btn-sm btn-primary-soft rounded-pill px-3">
-                              Reserve
-                            </Link>
+                            <Link to="/cart" className="btn btn-sm btn-primary-soft rounded-pill px-3">Reserve</Link>
                           </td>
                         </tr>
                       ))}
@@ -506,7 +441,6 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* CONNECTED PHARMACIES CARDS */}
               <div id="connected-pharmacies" className="db-card p-4">
                 <div className="db-card-header d-flex justify-content-between align-items-center mb-3">
                   <h4 className="db-card-title"><Building2 size={20} className="me-2 text-primary" /> Connected Pharmacies</h4>
@@ -521,9 +455,7 @@ export default function Dashboard() {
                       <div className="pharmacy-card h-100 p-3 border rounded">
                         <div className="pharm-header mb-2">
                           <h6 className="pharm-name fw-bold mb-1">{pharm.pharmacy_name}</h6>
-                          <span className="badge bg-success-subtle text-success border">
-                            {pharm.status || "Open"}
-                          </span>
+                          <span className="badge bg-success-subtle text-success border">{pharm.status || "Open"}</span>
                         </div>
                         <p className="pharm-address text-muted small mb-1">
                           <MapPin size={14} className="me-1" /> {pharm.address}
@@ -546,9 +478,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN */}
             <div className="grid-right">
-              {/* PATIENT PROFILE SUMMARY CARD */}
               <div className="db-card p-4 text-center mb-4">
                 <div className="profile-avatar-large mx-auto mb-3">
                   {user.name.charAt(0).toUpperCase()}
@@ -556,13 +486,9 @@ export default function Dashboard() {
                 <h5 className="mb-1 fw-bold">{user.name}</h5>
                 <p className="text-muted small mb-1">{user.role} • {user.location}</p>
                 <p className="text-muted small mb-3">{user.email}</p>
-                
-                <Link to="/settings" className="btn btn-sm btn-outline-primary rounded-pill px-4">
-                  Edit Profile
-                </Link>
+                <Link to="/settings" className="btn btn-sm btn-outline-primary rounded-pill px-4">Edit Profile</Link>
               </div>
 
-              {/* DYNAMIC ACTIVE RESERVATION STATUS CARD */}
               <div id="active-reservation-card" className="db-card p-4 mb-4 highlight-card">
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h6 className="fw-bold mb-0 text-primary">
@@ -599,7 +525,6 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* HEALTH REMINDER / QUICK ACTIONS */}
               <div className="db-card p-4">
                 <h6 className="fw-bold mb-3 d-flex align-items-center">
                   <AlertCircle size={18} className="me-2 text-warning" /> Health Reminders
@@ -640,7 +565,6 @@ export default function Dashboard() {
               <p>Find medicines instantly</p>
             </div>
           </div>
-
           <div className="mf-feature">
             <span>🏥</span>
             <div>
@@ -648,7 +572,6 @@ export default function Dashboard() {
               <p>Check nearby stock availability</p>
             </div>
           </div>
-
           <div className="mf-feature">
             <span>📦</span>
             <div>
@@ -663,36 +586,15 @@ export default function Dashboard() {
             <div className="mf-footer-brand">
               <div className="mf-footer-logo">
                 <svg viewBox="0 0 40 40" className="mf-footer-logo-svg">
-                  <rect
-                    x="4"
-                    y="16"
-                    width="32"
-                    height="8"
-                    rx="4"
-                    transform="rotate(-45 20 20)"
-                    fill="#7ccbe6"
-                  />
-                  <rect
-                    x="20"
-                    y="16"
-                    width="16"
-                    height="8"
-                    rx="4"
-                    transform="rotate(-45 20 20)"
-                    fill="#d1f3ed"
-                  />
+                  <rect x="4" y="16" width="32" height="8" rx="4" transform="rotate(-45 20 20)" fill="#7ccbe6" />
+                  <rect x="20" y="16" width="16" height="8" rx="4" transform="rotate(-45 20 20)" fill="#d1f3ed" />
                 </svg>
-
                 <h2 className="mf-footer-title">
                   <span className="mf-styled-letter">M</span>edi
                   <span className="mf-styled-letter mf-footer-accent">F</span>inder
                 </h2>
               </div>
-
-              <p>
-                Helping patients find medicine availability across nearby pharmacies
-                in real time.
-              </p>
+              <p>Helping patients find medicine availability across nearby pharmacies in real time.</p>
             </div>
 
             <div>

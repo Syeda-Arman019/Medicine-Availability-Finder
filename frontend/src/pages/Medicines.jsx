@@ -86,12 +86,15 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
             className="mf-topbar-search"
             onSubmit={(e) => e.preventDefault()}
           >
-            <input
-              type="text"
-              placeholder="Search medicines, e.g. Panadol..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+           <input
+           id="medicine-search"
+           name="medicine-search"
+           type="text"
+           placeholder="Search medicines, e.g. Panadol..."
+           value={searchQuery}
+           onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          
             <button type="submit" aria-label="Search">
               <svg viewBox="0 0 24 24">
                 <circle

@@ -104,11 +104,14 @@ export default function Home() {
           {/* Connected Search Box */}
           <form className="mf-topbar-search" onSubmit={(e) => e.preventDefault()}>
             <input
-              type="text"
-              placeholder="Search medicines, e.g. Panadol..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+            id="medicine-search"
+            name="medicine-search"
+            type="text"
+            placeholder="Search medicines, e.g. Panadol..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+           />
+           
             <button type="submit" aria-label="Search">
               <svg viewBox="0 0 24 24">
                 <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="2" />

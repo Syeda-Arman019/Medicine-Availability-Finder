@@ -152,10 +152,37 @@ export default function Contact() {
                 will contact you shortly.
               </p>
 
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Email Address" />
-              <input type="text" placeholder="Phone Number" />
-              <textarea rows="4" placeholder="Write your message..."></textarea>
+        <input
+        id="name"
+        name="name"
+        placeholder="Name"
+        type="text"
+        autoComplete="name"
+        />
+
+       <input
+       id="email"
+       name="email"
+       placeholder="Email Address"
+       type="email"
+       autoComplete="email"
+       />
+
+      <input
+      id="phone"
+      name="phone"
+      placeholder="Phone Number"
+      type="tel"
+      autoComplete="tel"
+      />
+
+    <textarea
+    id="message"
+    name="message"
+    rows="4"
+    placeholder="Write your message..."
+    autoComplete="off"
+   />
 
               <button type="button">
                 Send Message <span>➤</span>
