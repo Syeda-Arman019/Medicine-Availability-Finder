@@ -48,12 +48,12 @@ export default function Login() {
       if (response.ok) {
         console.log("Logged-in User Data:", data.user);
 
-        // Optional: Save user session/token to localStorage if returned by API
+        // Saves full user object (including phone, country, location)
         if (data.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
         }
 
-        // Redirect user to Home page (or change to '/dashboard' as needed)
+        // Redirect user to Home page
         navigate("/");
       }
     } catch (error) {
@@ -268,7 +268,7 @@ export default function Login() {
             real time.
           </p>
 
-          <div className="footer-lianks">
+          <div className="footer-links">
             <Link to="/">Home</Link>
             <Link to="#">Contact</Link>
             <Link to="#">FAQs</Link>

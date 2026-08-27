@@ -237,12 +237,7 @@ export default function Home() {
                 <Link className="nav-link" to="/about">
                   About Us
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login / Register
-                </Link>
-              </li>
+            </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">
                   Patient Dashboard

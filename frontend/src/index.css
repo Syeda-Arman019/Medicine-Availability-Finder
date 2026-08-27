@@ -82,6 +82,7 @@ h1 {
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
@@ -91,6 +92,7 @@ h2 {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
@@ -108,4 +110,67 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* =========================================================
+   GLOBAL DARK MODE - AUTOMATIC OVERRIDES (Via ThemeContext)
+========================================================= */
+
+/* 1. Base Dark Background for whole App */
+body.dark-theme {
+  background-color: #0f172a !important; /* Login Page Dark Background */
+  color: #f8fafc !important;
+}
+
+/* 2. Target ALL Headers in Dark Mode (Login Header Color) */
+body.dark-theme header,
+body.dark-theme .mf-topbar,
+body.dark-theme .mf-navbar,
+body.dark-theme .login-header {
+  background-color: #040e91 !important; /* Exact Login Header Blue */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Header Links in Dark Mode */
+body.dark-theme .mf-nav-links .nav-link,
+body.dark-theme .mf-navbar a {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.dark-theme .mf-nav-links .nav-link:hover,
+body.dark-theme .mf-nav-links .nav-link.active {
+  color: #20d6d6 !important; /* Login Cyan Accent */
+}
+
+/* 3. Target ALL Footers in Dark Mode (Login Footer Color) */
+body.dark-theme footer,
+body.dark-theme .mf-footer,
+body.dark-theme .login-footer {
+  background-color: #082f63 !important; /* Exact Login Footer Blue */
+  color: #ffffff !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-theme footer p,
+body.dark-theme .mf-footer p,
+body.dark-theme .mf-footer-bottom p {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.dark-theme footer a,
+body.dark-theme .mf-footer a {
+  color: #ffffff !important;
+}
+
+body.dark-theme footer a:hover,
+body.dark-theme .mf-footer a:hover {
+  color: #20d6d6 !important;
+}
+
+/* 4. Target Cards on other pages (Dashboard, Settings, etc.) */
+body.dark-theme .card,
+body.dark-theme .mf-product-card {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
 }

@@ -763,3 +763,186 @@ body.dark-theme .status-tag.danger,
     left: 0;
   }
 }
+
+/* =========================
+   MOBILE DASHBOARD HEADER
+   ========================= */
+
+@media (max-width: 767.98px) {
+
+  .mf-db-topbar {
+    padding: 14px 18px 10px;
+  }
+
+  .mf-db-topbar-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* MediFinder - TOP LEFT */
+  .mf-db-brand-wrap {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mf-db-brand-wrap .mf-db-mobile-toggle {
+    display: none;
+  }
+
+  .mf-db-topbar .mf-brand {
+    gap: 5px;
+  }
+
+  .mf-logo-svg {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .mf-brand-text {
+    font-size: 1.45rem !important;
+  }
+
+  .mf-styled-letter {
+    font-size: 2.25rem !important;
+  }
+
+  /* MOON - TOP RIGHT */
+  .mf-db-user-actions {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .mf-db-user-actions .mf-db-icon-btn:first-child {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    background: #f59e0b;
+    color: #ffffff;
+    border-radius: 50%;
+  }
+
+  /* Hide notification + profile on mobile */
+  .mf-db-user-actions .mf-db-icon-btn:nth-child(2),
+  .mf-db-profile-pill {
+    display: none;
+  }
+
+  /* SEARCH - SECOND ROW */
+  .mf-db-top-search {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    max-width: none;
+  }
+
+  .mf-db-top-search input {
+    height: 44px;
+    font-size: 0.84rem;
+    padding-left: 42px;
+  }
+
+  /* HAMBURGER - THIRD ROW */
+  .mf-db-topbar-inner::after {
+    content: "";
+    display: none;
+  }
+
+  .mf-db-brand-wrap::after {
+    content: "";
+    display: block;
+  }
+
+  /* Put hamburger below search */
+  .mf-db-brand-wrap {
+    position: relative;
+  }
+
+  .mf-db-mobile-toggle {
+    display: flex !important;
+    position: fixed;
+    top: 115px;
+    left: 18px;
+    z-index: 110;
+    width: 42px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    background: #46c5e8;
+    border-radius: 10px;
+    color: #ffffff;
+  }
+
+  /* Give content enough space below header */
+  .mf-db-container {
+    margin-top: 42px;
+  }
+}
+.mf-db-icon-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 0;
+}
+
+.mf-db-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+/* =========================================
+   RESPONSIVE: MOON/SUN + NOTIFICATION
+   ========================================= */
+
+@media (max-width: 768px) {
+  .mf-db-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .mf-db-icon-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0;
+  }
+
+  .mf-db-icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mf-db-user-actions {
+    gap: 6px;
+  }
+
+  .mf-db-icon-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .mf-db-icon-btn svg {
+    width: 19px;
+    height: 19px;
+  }
+}

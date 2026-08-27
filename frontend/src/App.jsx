@@ -13,6 +13,7 @@ import FAQs from "./pages/FAQs";
 import CartPage from "./pages/CartPage";
 import Dashboard from "./pages/Dashboard";
 import Chatbot from "./components/Chatbot";
+import AccountSettings from "./pages/AccountSettings";
 
 export default function App() {
   // 1. Cart State & Helper Logic
@@ -74,6 +75,10 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        
+        {/* Account Settings Route Added Here */}
+        <Route path="/settings" element={<AccountSettings />} />
+
         <Route
           path="/medicines"
           element={
@@ -97,6 +102,6 @@ export default function App() {
         />
       </Routes>
       <Chatbot />
-    </>  
+    </>   
   );
 }

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const ThemeContext = createContext();
+// 1. ThemeContext ko EXPORT karna zaroori tha
+export const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
   // Directly initialize state from localStorage
@@ -28,4 +29,8 @@ export function ThemeProvider({ children }) {
   );
 }
 
+// Custom Hook
 export const useTheme = () => useContext(ThemeContext);
+
+// Default Export for safety
+export default ThemeContext;

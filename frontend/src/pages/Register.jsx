@@ -11,11 +11,12 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Form State
+  // Form State (Added country field)
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
     phone: "",
+    country: "",
     password: "",
     confirmPassword: "",
   });
@@ -48,6 +49,7 @@ export default function Register() {
           full_name: formData.full_name,
           email: formData.email,
           phone: formData.phone,
+          country: formData.country,
           password: formData.password,
         }),
       });
@@ -62,6 +64,7 @@ export default function Register() {
           full_name: "",
           email: "",
           phone: "",
+          country: "",
           password: "",
           confirmPassword: "",
         });
@@ -228,6 +231,20 @@ export default function Register() {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
+                required
+              />
+            </div>
+
+            {/* Country */}
+            <div className="input-group">
+              <label htmlFor="reg-country">Country</label>
+              <input
+                id="reg-country"
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Enter your country"
                 required
               />
             </div>

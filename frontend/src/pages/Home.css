@@ -1213,3 +1213,128 @@ body.dark-theme .mf-footer,
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 991.98px) {
+  .mf-banner-copy {
+    flex: none;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* Top bar ko compact rakho */
+  .mf-topbar {
+    padding: 8px 12px;
+  }
+
+  .mf-topbar-inner {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* MediFinder ko thoda compact karo */
+  .mf-topbar .mf-brand {
+    flex-shrink: 1;
+    min-width: 0;
+    gap: 0;
+  }
+
+  .mf-topbar .mf-brand-text {
+    font-size: 1.35rem !important;
+    white-space: nowrap;
+  }
+
+  .mf-topbar .mf-logo-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mf-topbar .mf-styled-letter {
+    font-size: 2.2rem !important;
+  }
+
+  /* Toggle + Cart ko same row mein rakho */
+  .mf-topbar-inner > .d-flex {
+    margin-left: auto;
+    flex-shrink: 0;
+    gap: 0.35rem !important;
+  }
+
+  /* Search next line par full width */
+  .mf-topbar-search {
+    order: 3;
+    flex-basis: 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 2px 0 0;
+  }
+}
+/* ===== RESPONSIVE BROWSE ALL MEDICINES BUTTON ===== */
+
+.mf-products-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mf-products-btn-wrap .mf-banner-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+/* Tablet */
+@media (max-width: 991.98px) {
+  .mf-products-btn-wrap {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .mf-products-btn-wrap .mf-banner-btn {
+    width: 280px;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+  .mf-products-btn-wrap {
+    width: 100%;
+    justify-content: center;
+    padding: 0 10px;
+    margin-top: 1.5rem;
+  }
+
+  .mf-products-btn-wrap .mf-banner-btn {
+    width: 85%;
+    max-width: 280px;
+    min-width: 220px;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .mf-products-btn-wrap {
+    padding: 0 8px;
+  }
+
+  .mf-products-btn-wrap .mf-banner-btn {
+    width: 90%;
+    max-width: 260px;
+    min-width: 200px;
+  }
+}

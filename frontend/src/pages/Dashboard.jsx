@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext"; // 👈 ThemeContext Hook Import
+import { useTheme } from "../context/ThemeContext";
 import {
   Search,
   Building2,
@@ -24,7 +24,6 @@ import {
   Settings,
   HelpCircle,
   Pill,
-  Heart,
   Sun,
   Moon
 } from "lucide-react";
@@ -32,7 +31,7 @@ import "./Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { darkMode, toggleDarkMode } = useTheme(); // 👈 Context se State aur Toggle use kar rahe hain
+  const { darkMode, toggleDarkMode } = useTheme();
 
   const [user, setUser] = useState({ 
     name: "User", 
@@ -58,9 +57,6 @@ export default function Dashboard() {
       try {
         const parsed = JSON.parse(storedUser);
 
-        console.log("Logged User:", parsed);
-        console.log("User ID:", parsed.user_id);
-
         setUser((prev) => ({
           ...prev,
           name: parsed.full_name || parsed.name || "User",
@@ -73,8 +69,6 @@ export default function Dashboard() {
           fetch(`http://127.0.0.1:5000/my-reservations/${parsed.user_id}`)
             .then((res) => res.json())
             .then((data) => {
-              console.log("Fetched Reservations JSON:", JSON.stringify(data, null, 2));
-
               if (Array.isArray(data)) {
                 setReservations(data);
               }
@@ -123,6 +117,34 @@ export default function Dashboard() {
     navigate("/login");
   };
 
+  const scrollToPharmacies = () => {
+    setMobileMenuOpen(false);
+    document.getElementById("connected-pharmacies")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToReservations = () => {
+    setMobileMenuOpen(false);
+    document.getElementById("reservation-history")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToActiveReservationCard = () => {
+    setMobileMenuOpen(false);
+    document.getElementById("active-reservation-card")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToMedicineSearch = () => {
+    setMobileMenuOpen(false);
+    document.getElementById("medicine-search")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   const filteredMedicines = medicines.filter((item) =>
     item.medicine_name && item.medicine_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -166,11 +188,10 @@ export default function Dashboard() {
           </div>
 
           <div className="mf-db-user-actions">
-            {/* Theme Toggle Button */}
             <button
               className="mf-db-icon-btn"
               title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              onClick={toggleDarkMode} // 👈 Updated to Context Toggle Method
+              onClick={toggleDarkMode}
             >
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -180,13 +201,15 @@ export default function Dashboard() {
               <span className="badge-dot"></span>
             </button>
             
-            <div className="mf-db-profile-pill">
-              <div className="avatar-circle">{user.name.charAt(0).toUpperCase()}</div>
-              <div className="user-info d-none d-md-block">
-                <span className="user-name">{user.name}</span>
-                <span className="user-role">{user.role}</span>
+            <Link to="/settings" className="text-decoration-none">
+              <div className="mf-db-profile-pill">
+                <div className="avatar-circle">{user.name.charAt(0).toUpperCase()}</div>
+                <div className="user-info d-none d-md-block">
+                  <span className="user-name">{user.name}</span>
+                  <span className="user-role">{user.role}</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </header>
@@ -204,42 +227,63 @@ export default function Dashboard() {
               <Activity size={18} />
               <span>Dashboard</span>
             </button>
-            <Link to="/medicines" className="sidebar-link">
+            <Link to="/medicines" className="sidebar-link" onClick={() => setMobileMenuOpen(false)}>
               <Pill size={18} />
               <span>Medicines Search</span>
             </Link>
-            <Link to="/cart" className="sidebar-link">
+            <Link to="/cart" className="sidebar-link" onClick={() => setMobileMenuOpen(false)}>
               <ShoppingBag size={18} />
               <span>My Reservation Cart</span>
             </Link>
-            <button
-              className={`sidebar-link ${activeTab === "pharmacies" ? "active" : ""}`}
-              onClick={() => { setActiveTab("pharmacies"); setMobileMenuOpen(false); }}
-            >
+
+            {/* CONNECTED PHARMACIES BUTTON */}
+            <button className="sidebar-link" onClick={scrollToPharmacies}>
               <Building2 size={18} />
               <span>Connected Pharmacies</span>
             </button>
 
             <span className="sidebar-label mt-4">PATIENT HUB</span>
-            <button className="sidebar-link">
+            
+            {/* RESERVATIONS HISTORY BUTTON */}
+            <button
+              className="sidebar-link"
+              onClick={scrollToReservations}
+            >
               <CalendarCheck size={18} />
               <span>Reservations History</span>
             </button>
-            <button className="sidebar-link">
-              <Heart size={18} />
-              <span>Saved Medicines</span>
+
+            {/* ACTIVE RESERVATIONS BUTTON */}
+            <button 
+              className="sidebar-link" 
+              onClick={scrollToActiveReservationCard}
+            >
+              <Bookmark size={18} />
+              <span>Active Reservations</span>
             </button>
-            <button className="sidebar-link">
+
+            {/* SEARCH MEDICINE AVAILABILITY SIDEBAR BUTTON */}
+            <button
+              className="sidebar-link"
+              onClick={scrollToMedicineSearch}
+            >
               <FileText size={18} />
-              <span>Prescription Records</span>
+              <span>Search Medicine Availability</span>
             </button>
 
             <span className="sidebar-label mt-4">PREFERENCES</span>
-            <button className="sidebar-link">
+            
+            {/* LINK TO ACCOUNT SETTINGS PAGE */}
+            <Link 
+              to="/settings" 
+              className="sidebar-link"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <Settings size={18} />
               <span>Account Settings</span>
-            </button>
-            <button className="sidebar-link">
+            </Link>
+
+            <button className="sidebar-link" onClick={() => setMobileMenuOpen(false)}>
               <HelpCircle size={18} />
               <span>Help & Support</span>
             </button>
@@ -331,8 +375,9 @@ export default function Dashboard() {
           <div className="mf-db-content-grid">
             {/* LEFT COLUMN */}
             <div className="grid-left">
+              
               {/* MY RESERVATIONS SECTION */}
-              <div className="db-card p-4 mb-4">
+              <div id="reservation-history" className="db-card p-4 mb-4">
                 <h4 className="db-card-title mb-3">
                   <CalendarCheck size={20} className="me-2 text-primary" />
                   My Reservations
@@ -377,7 +422,7 @@ export default function Dashboard() {
               </div>
 
               {/* SEARCH MEDICINES SECTION */}
-              <div className="db-card p-4 mb-4">
+              <div id="medicine-search" className="db-card p-4 mb-4">
                 <div className="db-card-header mb-3">
                   <h4 className="db-card-title"><Search size={20} className="me-2 text-primary" /> Search Medicine Availability</h4>
                 </div>
@@ -462,7 +507,7 @@ export default function Dashboard() {
               </div>
 
               {/* CONNECTED PHARMACIES CARDS */}
-              <div className="db-card p-4">
+              <div id="connected-pharmacies" className="db-card p-4">
                 <div className="db-card-header d-flex justify-content-between align-items-center mb-3">
                   <h4 className="db-card-title"><Building2 size={20} className="me-2 text-primary" /> Connected Pharmacies</h4>
                   <span className="badge bg-light text-primary border px-3 py-2 rounded-pill">
@@ -512,13 +557,13 @@ export default function Dashboard() {
                 <p className="text-muted small mb-1">{user.role} • {user.location}</p>
                 <p className="text-muted small mb-3">{user.email}</p>
                 
-                <button className="btn btn-sm btn-outline-primary rounded-pill px-4">
+                <Link to="/settings" className="btn btn-sm btn-outline-primary rounded-pill px-4">
                   Edit Profile
-                </button>
+                </Link>
               </div>
 
               {/* DYNAMIC ACTIVE RESERVATION STATUS CARD */}
-              <div className="db-card p-4 mb-4 highlight-card">
+              <div id="active-reservation-card" className="db-card p-4 mb-4 highlight-card">
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h6 className="fw-bold mb-0 text-primary">
                     <CheckCircle2 size={18} className="me-1" /> Active Reservation
@@ -585,7 +630,7 @@ export default function Dashboard() {
         </main>
       </div>
 
-      {/* UPDATED FOOTER */}
+      {/* FOOTER */}
       <footer className="mf-footer">
         <div className="mf-footer-top">
           <div className="mf-feature">

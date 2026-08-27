@@ -1,0 +1,198 @@
+/* ============ SETTINGS BODY STYLING ============ */
+
+/* Main Container spacing */
+.settings-body-content {
+  min-height: 65vh;
+}
+
+/* Custom Card Layout */
+.settings-card {
+  background-color: var(--mf-bg-card, #ffffff);
+  border: 1px solid var(--mf-line, #e2e8f0);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Profile Avatar Box */
+.settings-avatar {
+  width: 70px;
+  height: 70px;
+  background-color: var(--mf-bg-soft, #eef6f3);
+  color: var(--mf-primary, #0c4998);
+  font-size: 1.8rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Custom Navigation Pills (Sidebar) */
+.settings-nav-pill {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.85rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid var(--mf-line, #e2e8f0);
+  background-color: var(--mf-bg-card, #ffffff);
+  color: var(--mf-text-main, #1e293b);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.settings-nav-pill:hover {
+  background-color: var(--mf-bg-soft, #eef6f3);
+  border-color: var(--mf-primary, #0c4998);
+  color: var(--mf-primary, #0c4998);
+}
+
+.settings-nav-pill.active {
+  background-color: var(--mf-primary, #0c4998) !important;
+  color: #ffffff !important;
+  border-color: var(--mf-primary, #0c4998) !important;
+  box-shadow: 0 4px 12px rgba(12, 73, 152, 0.25);
+}
+
+/* Danger Pill variant */
+.settings-nav-pill.active-danger {
+  background-color: #dc3545 !important;
+  color: #ffffff !important;
+  border-color: #dc3545 !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.25);
+}
+
+/* Form Inputs Styling */
+.settings-body-content .form-label {
+  color: var(--mf-text-main, #1e293b);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.settings-body-content .form-control,
+.settings-body-content .form-select {
+  background-color: var(--mf-bg-card, #ffffff) !important;
+  border: 1px solid var(--mf-line, #cbd5e1) !important;
+  color: var(--mf-text-main, #1e293b) !important;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.settings-body-content .form-control:focus {
+  border-color: var(--mf-primary, #0c4998) !important;
+  box-shadow: 0 0 0 3px rgba(12, 73, 152, 0.15) !important;
+}
+
+/* Password Toggle Wrapper */
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper .form-control {
+  padding-right: 45px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 5px;
+  color: #6c757d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle-btn:hover {
+  color: #0d6efd;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Danger Box Background */
+.bg-light-danger {
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Custom Modal Backdrop for Delete Confirmation */
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  backdrop-filter: blur(3px);
+}
+
+.modal-card-custom {
+  background-color: var(--mf-bg-card, #ffffff);
+  border: 1px solid var(--mf-line, #e2e8f0);
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Theme Overrides */
+.dark-theme .settings-card {
+  background-color: var(--mf-bg-card, #111c2e);
+  border-color: var(--mf-line, #24344d);
+}
+
+.dark-theme .settings-nav-pill {
+  background-color: var(--mf-bg-card, #111c2e);
+  border-color: var(--mf-line, #24344d);
+  color: #f1f5f9;
+}
+
+.dark-theme .settings-nav-pill:hover {
+  background-color: var(--mf-bg-soft, #1a283d);
+}
+
+.dark-theme .settings-body-content .form-control {
+  background-color: var(--mf-bg-soft, #1a283d) !important;
+  border-color: var(--mf-line, #24344d) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark-theme .modal-card-custom {
+  background-color: var(--mf-bg-card, #111c2e);
+  border-color: var(--mf-line, #24344d);
+  color: #f1f5f9;
+}
+
+/* Responsive Mobile Layout */
+@media (max-width: 767.98px) {
+  .settings-nav-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    gap: 8px;
+  }
+
+  .settings-nav-pill {
+    white-space: nowrap;
+    width: auto;
+  }
+}

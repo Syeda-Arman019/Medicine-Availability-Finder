@@ -11,7 +11,7 @@ const CAPSULE_ICON = (
 
 const INITIAL_MESSAGE = {
   sender: "bot",
-  text: "Hi, I'm the MedFinder assistant. Ask me if a medicine is available nearby, e.g. **\"Is paracetamol available?\"**",
+  text: "Hi, I'm the MediFinder assistant. Ask me if a medicine is available nearby, e.g. **\"Is paracetamol available?\"**",
 };
 
 export default function Chatbot() {
@@ -73,7 +73,7 @@ export default function Chatbot() {
             <div className="chatbot-header-brand">
               <span className="chatbot-header-icon">{CAPSULE_ICON}</span>
               <div className="chatbot-header-text">
-                <span className="chatbot-header-title">MedFinder Assistant</span>
+                <span className="chatbot-header-title">MediFinder Assistant</span>
                 <span className="chatbot-header-subtitle">Usually replies instantly</span>
               </div>
             </div>
