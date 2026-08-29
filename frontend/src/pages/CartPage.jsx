@@ -32,7 +32,7 @@ export default function CartPage({ cart = [], updateQuantity, removeFromCart }) 
         "City Health Pharmacy": 3,
       };
 
-      const response = await fetch("http://127.0.0.1:5000/reserve", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/reserve`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -215,3 +215,4 @@ export default function CartPage({ cart = [], updateQuantity, removeFromCart }) 
     </div>
   );
 }
+

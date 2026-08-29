@@ -24,8 +24,11 @@ import {
   Pill,
   Sun,
   Moon
-} from "lucide-react";
+}
+  from "lucide-react";
 import "./Dashboard.css";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -49,6 +52,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    const API_URL = import.meta.env.VITE_API_URL;
 
     if (storedUser) {
       try {
@@ -63,12 +67,13 @@ export default function Dashboard() {
         }));
 
         if (parsed.user_id) {
-          fetch(`http://127.0.0.1:5000/my-reservations/${parsed.user_id}`)
+          fetch(`${API_URL}/my-reservations/${parsed.user_id}`)
             .then((res) => res.json())
             .then((data) => {
               if (Array.isArray(data)) {
                 setReservations(data);
               }
+
               setLoadingReservations(false);
             })
             .catch((err) => {
@@ -86,19 +91,27 @@ export default function Dashboard() {
       setLoadingReservations(false);
     }
 
-    fetch("http://127.0.0.1:5000/medicines")
+    fetch(`${API_URL}/medicines`)
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) setMedicines(data);
+        if (Array.isArray(data)) {
+          setMedicines(data);
+        }
       })
-      .catch((err) => console.error("Error fetching medicines:", err));
+      .catch((err) => {
+        console.error("Error fetching medicines:", err);
+      });
 
-    fetch("http://127.0.0.1:5000/pharmacies")
+    fetch(`${API_URL}/pharmacies`)
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) setPharmacies(data);
+        if (Array.isArray(data)) {
+          setPharmacies(data);
+        }
       })
-      .catch((err) => console.error("Error fetching pharmacies:", err));
+      .catch((err) => {
+        console.error("Error fetching pharmacies:", err);
+      });
   }, []);
 
   const handleLogout = () => {
@@ -166,13 +179,13 @@ export default function Dashboard() {
             <div className="mf-db-top-search">
               <Search size={18} className="search-icon" />
               <input
-              id="top-search"
-              name="top-search"
-              type="text"
-              placeholder="Search medicines, pharmacies or active holds..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              autoComplete="off"
+                id="top-search"
+                name="top-search"
+                type="text"
+                placeholder="Search medicines, pharmacies or active holds..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoComplete="off"
               />
             </div>
           </div>
@@ -357,8 +370,20 @@ export default function Dashboard() {
                       <p className="mb-1 text-dark">
                         💰 <strong>Total Amount:</strong> Rs. {res.total_amount || res.price || "0"}
                       </p>
+
                       <p className="mb-2 text-muted small">
-                        📅 <strong>Time:</strong> {res.reservation_time || res.created_at || "N/A"}
+                        📅 <strong>Time:</strong>{" "}
+                        {res.reservation_time || res.created_at
+                          ? new Date(res.reservation_time || res.created_at).toLocaleString("en-PK", {
+                            timeZone: "Asia/Karachi",
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                            hour: "numeric",
+                            minute: "2-digit",
+                            hour12: true,
+                          })
+                          : "N/A"}
                       </p>
                       <span className="badge bg-warning text-dark">{res.status || "Pending"}</span>
                     </div>
@@ -372,16 +397,16 @@ export default function Dashboard() {
                 </div>
                 <div className="input-group mf-custom-input">
                   <input
-                  id="medicine-search-input"
-                  name="medicine-search"
-                  type="text"
-                  className="form-control"
-                  placeholder="Search by medicine name..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoComplete="off"
-                 />
-                 
+                    id="medicine-search-input"
+                    name="medicine-search"
+                    type="text"
+                    className="form-control"
+                    placeholder="Search by medicine name..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoComplete="off"
+                  />
+
                   <button className="btn btn-primary px-4 fw-bold" type="button">Search Now</button>
                 </div>
                 <div className="popular-searches mt-3 d-flex align-items-center flex-wrap gap-2">

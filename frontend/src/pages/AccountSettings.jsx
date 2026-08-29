@@ -93,7 +93,7 @@ const AccountSettings = () => {
     if (!currentUser?.user_id) return;
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/update-notifications", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/update-notifications`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -149,7 +149,7 @@ const AccountSettings = () => {
     setSuccessMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/update-profile", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/update-profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -218,7 +218,7 @@ const AccountSettings = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/change-password", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/change-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -267,7 +267,7 @@ const AccountSettings = () => {
     setErrorMessage("");
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/delete-account", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/delete-account`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -761,3 +761,4 @@ const AccountSettings = () => {
 };
 
 export default AccountSettings;
+

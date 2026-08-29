@@ -15,7 +15,7 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
 
   // Fetch medicines data from Flask API
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/medicines")
+    fetch(`${import.meta.env.VITE_API_URL}/medicines`)
       .then((response) => response.json())
       .then((data) => {
         setMedicines(data);
@@ -447,3 +447,4 @@ export default function Medicines({ cart = [], addToCart, removeFromCart }) {
     </div>
   );
 }
+
