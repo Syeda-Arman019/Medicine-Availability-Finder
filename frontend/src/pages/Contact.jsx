@@ -5,8 +5,6 @@ import contactMobile from "../assets/images/contact-mobile.png";
 import "./Home.css";
 import { useTheme } from "../context/ThemeContext";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 export default function Contact() {
   const { darkMode, toggleDarkMode } = useTheme();
 
@@ -18,29 +16,26 @@ export default function Contact() {
 
     const form = e.target;
 
-    const formData = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      message: form.message.value,
-    };
+    const formData = new FormData();
+    formData.append("name", form.name.value);
+    formData.append("email", form.email.value);
+    formData.append("phone", form.phone.value);
+    formData.append("message", form.message.value);
 
     try {
-      const response = await fetch(`${API_URL}/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
+      const response = await fetch(
+        "https://formsubmit.co/medifinder.project@gmail.com",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         alert("Message sent successfully!");
         form.reset();
       } else {
-        alert(data.message || "Failed to send message.");
+        alert("Failed to send message.");
       }
     } catch (error) {
       console.error("Contact form error:", error);
@@ -297,6 +292,8 @@ export default function Contact() {
               onSubmit={sendMessage}
               className="mf-message-box"
             >
+              <input type="hidden" name="_subject" value="MediFinder Contact Message" />
+              <input type="hidden" name="_captcha" value="false" />
 
               <h3>
                 Send Us a Message
