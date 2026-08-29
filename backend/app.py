@@ -1,6 +1,4 @@
 import os
-import resend
-
 import mysql.connector
 from config import Config
 from flask import Flask, jsonify, request
@@ -58,55 +56,6 @@ def home():
     return {
         "message": "Medicine Availability Finder Backend Running Successfully!"
     }
-
-
-# ================= CONTACT FORM ENDPOINT ================= #
-@app.route("/contact", methods=["POST"])
-def contact():
-    data = request.get_json() or {}
-
-    name = data.get("name")
-    email = data.get("email")
-    phone = data.get("phone", "")
-    message = data.get("message")
-
-    if not name or not email or not message:
-        return jsonify({"error": "Required fields are missing"}), 400
-
-    try:
-        resend.api_key = os.getenv("RESEND_API_KEY")
-
-        if not resend.api_key:
-            return jsonify({"error": "RESEND_API_KEY is missing"}), 500
-
-        resend.Emails.send({
-            "from": "MediFinder <onboarding@resend.dev>",
-            "to": ["medifinder.project@gmail.com"],
-            "reply_to": email,
-            "subject": f"MediFinder Contact Message - {name}",
-            "html": f"""
-                <h2>New Contact Message</h2>
-                <p><strong>Name:</strong> {name}</p>
-                <p><strong>Email:</strong> {email}</p>
-                <p><strong>Phone:</strong> {phone}</p>
-                <hr>
-                <h3>Message:</h3>
-                <p>{message}</p>
-            """
-        })
-
-        print("✅ Contact email sent successfully!")
-
-        return jsonify({
-            "message": "Message sent successfully!"
-        }), 200
-
-    except Exception as e:
-        print("❌ Email Error:", repr(e))
-        return jsonify({
-            "error": "Failed to send email"
-        }), 500
-    
 # ================= ACCOUNT SETTINGS ENDPOINTS ================= #
 
 @app.route("/update-profile", methods=["PUT"])
