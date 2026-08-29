@@ -18,7 +18,11 @@ from routes.search_routes import search_bp
 app = Flask(__name__)
 app.config.from_object(Config)
 
-CORS(app)
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    supports_credentials=True
+)
 
 # Register Blueprints
 app.register_blueprint(pharmacy_bp)
