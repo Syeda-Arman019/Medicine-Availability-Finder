@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Contact.css";
 import contactMobile from "../assets/images/contact-mobile.png";
@@ -7,44 +7,6 @@ import { useTheme } from "../context/ThemeContext";
 
 export default function Contact() {
   const { darkMode, toggleDarkMode } = useTheme();
-
-  const [sending, setSending] = useState(false);
-
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    setSending(true);
-
-    const form = e.target;
-
-    const formData = new FormData();
-    formData.append("name", form.name.value);
-    formData.append("email", form.email.value);
-    formData.append("_replyto", form.email.value);
-    formData.append("phone", form.phone.value);
-    formData.append("message", form.message.value);
-
-    try {
-      const response = await fetch(
-        "https://formsubmit.co/medifinder.project@gmail.com",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (response.ok) {
-        alert("Message sent successfully!");
-        form.reset();
-      } else {
-        alert("Failed to send message.");
-      }
-    } catch (error) {
-      console.error("Contact form error:", error);
-      alert("Unable to send message. Please try again.");
-    } finally {
-      setSending(false);
-    }
-  };
 
   return (
     <div className={`mf-page contact-page ${darkMode ? "dark-theme" : ""}`}>
@@ -96,6 +58,7 @@ export default function Contact() {
         </div>
       </div>
 
+
       {/* NAVBAR */}
       <nav className="navbar navbar-expand-lg mf-navbar">
         <div className="container mf-navbar-inner">
@@ -113,6 +76,7 @@ export default function Contact() {
           </button>
 
           <div className="collapse navbar-collapse" id="mfNav">
+
             <ul className="navbar-nav mf-nav-links">
 
               <li className="nav-item">
@@ -158,13 +122,16 @@ export default function Contact() {
               </li>
 
             </ul>
+
           </div>
 
         </div>
       </nav>
 
+
       {/* HERO */}
       <section className="mf-contact-hero">
+
         <div className="container mf-contact-container">
 
           {/* LEFT SIDE */}
@@ -185,11 +152,15 @@ export default function Contact() {
               medicine availability, pharmacy information and healthcare support.
             </p>
 
+
             {/* CONTACT INFO */}
             <div className="mf-contact-info">
 
               <div className="mf-info-card">
-                <div className="mf-info-icon">📞</div>
+
+                <div className="mf-info-icon">
+                  📞
+                </div>
 
                 <div>
                   <h4>Phone</h4>
@@ -201,10 +172,15 @@ export default function Contact() {
                     +92 300 1234567
                   </a>
                 </div>
+
               </div>
 
+
               <div className="mf-info-card">
-                <div className="mf-info-icon">📧</div>
+
+                <div className="mf-info-icon">
+                  📧
+                </div>
 
                 <div>
                   <h4>Email</h4>
@@ -216,10 +192,15 @@ export default function Contact() {
                     medifinder.project@gmail.com
                   </a>
                 </div>
+
               </div>
 
+
               <div className="mf-info-card">
-                <div className="mf-info-icon">📍</div>
+
+                <div className="mf-info-icon">
+                  📍
+                </div>
 
                 <div>
                   <h4>Address</h4>
@@ -232,10 +213,15 @@ export default function Contact() {
                     Hyderabad, Sindh, Pakistan
                   </p>
                 </div>
+
               </div>
 
+
               <div className="mf-info-card">
-                <div className="mf-info-icon">🕒</div>
+
+                <div className="mf-info-icon">
+                  🕒
+                </div>
 
                 <div>
                   <h4>Working Hours</h4>
@@ -248,9 +234,11 @@ export default function Contact() {
                     9:00 AM – 6:00 PM
                   </p>
                 </div>
+
               </div>
 
             </div>
+
 
             {/* BUTTONS */}
             <div className="mf-contact-buttons">
@@ -273,6 +261,7 @@ export default function Contact() {
 
           </div>
 
+
           {/* RIGHT SIDE */}
           <div className="mf-contact-right">
 
@@ -288,13 +277,27 @@ export default function Contact() {
 
             </div>
 
+
             {/* MESSAGE FORM */}
             <form
-              onSubmit={sendMessage}
+              action="https://formsubmit.co/medifinder.project@gmail.com"
+              method="POST"
               className="mf-message-box"
             >
-              <input type="hidden" name="_subject" value="MediFinder Contact Message" />
-              <input type="hidden" name="_captcha" value="false" />
+
+              {/* EMAIL SUBJECT */}
+              <input
+                type="hidden"
+                name="_subject"
+                value="MediFinder Contact Message"
+              />
+
+              {/* DISABLE CAPTCHA */}
+              <input
+                type="hidden"
+                name="_captcha"
+                value="false"
+              />
 
               <h3>
                 Send Us a Message
@@ -305,6 +308,7 @@ export default function Contact() {
                 will contact you shortly.
               </p>
 
+
               <input
                 id="name"
                 name="name"
@@ -313,10 +317,10 @@ export default function Contact() {
                 autoComplete="name"
                 required
               />
-
+              
               <input
                 id="email"
-                name="email"
+                name="_replyto"
                 placeholder="Email Address"
                 type="email"
                 autoComplete="email"
@@ -331,6 +335,7 @@ export default function Contact() {
                 autoComplete="tel"
               />
 
+
               <textarea
                 id="message"
                 name="message"
@@ -340,15 +345,10 @@ export default function Contact() {
                 required
               ></textarea>
 
-              <button
-                type="submit"
-                disabled={sending}
-              >
-                {sending ? "Sending..." : "Send Message"}
 
-                {!sending && (
-                  <span>➤</span>
-                )}
+              <button type="submit">
+                Send Message
+                <span>➤</span>
               </button>
 
             </form>
@@ -356,7 +356,9 @@ export default function Contact() {
           </div>
 
         </div>
+
       </section>
+
 
       {/* LOCATION */}
       <section className="mf-location-section">
@@ -379,6 +381,7 @@ export default function Contact() {
             </p>
 
           </div>
+
 
           <div className="mf-location-grid">
 
@@ -406,6 +409,7 @@ export default function Contact() {
 
             </div>
 
+
             <div className="mf-map">
 
               <iframe
@@ -422,12 +426,14 @@ export default function Contact() {
 
       </section>
 
+
       {/* FOOTER */}
       <footer className="mf-footer">
 
         <div className="mf-footer-top">
 
           <div className="mf-feature">
+
             <span>🚚</span>
 
             <div>
@@ -439,9 +445,12 @@ export default function Contact() {
                 Medicine reservation made easy
               </p>
             </div>
+
           </div>
 
+
           <div className="mf-feature">
+
             <span>💊</span>
 
             <div>
@@ -453,9 +462,12 @@ export default function Contact() {
                 Trusted pharmacy partners
               </p>
             </div>
+
           </div>
 
+
           <div className="mf-feature">
+
             <span>📍</span>
 
             <div>
@@ -467,9 +479,11 @@ export default function Contact() {
                 Find medicines around you
               </p>
             </div>
+
           </div>
 
         </div>
+
 
         <div className="container">
 
@@ -506,21 +520,25 @@ export default function Contact() {
 
                 </svg>
 
+
                 <h2 className="mf-footer-title">
 
                   <span className="mf-styled-letter">
                     M
                   </span>
+
                   edi
 
                   <span className="mf-styled-letter mf-footer-accent">
                     F
                   </span>
+
                   inder
 
                 </h2>
 
               </div>
+
 
               <p>
                 Helping patients find medicine availability across nearby
@@ -528,6 +546,7 @@ export default function Contact() {
               </p>
 
             </div>
+
 
             <div>
 
@@ -559,6 +578,7 @@ export default function Contact() {
 
             </div>
 
+
             <div>
 
               <h4>
@@ -588,6 +608,7 @@ export default function Contact() {
               </ul>
 
             </div>
+
 
             <div>
 
@@ -620,6 +641,7 @@ export default function Contact() {
             </div>
 
           </div>
+
 
           <div className="mf-footer-bottom">
             © {new Date().getFullYear()} MediFinder. All Rights Reserved.
