@@ -137,7 +137,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s ease;
+ transition: background 0.2s ease;
 }
 
 .mf-topbar-search button svg {
@@ -366,7 +366,7 @@ html, body, #root {
   color: var(--mf-ink);
   padding: 0.45rem 0.6rem;
   border-radius: 999px;
-  transition: background 0.2s ease, color 0.2s ease;
+ transition: background 0.2s ease, color 0.2s ease;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -421,7 +421,7 @@ html, body, #root {
   padding: 0.85rem 1.75rem;
   border-radius: 999px;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease;
+transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .mf-banner-btn:hover {
@@ -1292,17 +1292,38 @@ body.dark-theme .mf-footer,
 
 /* Tablet */
 @media (max-width: 991.98px) {
-  .mf-products-btn-wrap {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 0 15px;
-  }
-
-  .mf-products-btn-wrap .mf-banner-btn {
-    width: 280px;
-    max-width: 100%;
+.mf-split-section {
+    flex-direction: column;
+    align-items: stretch;
     text-align: center;
+    padding: 60px 20px;
+  }
+  .mf-quote-section {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  .mf-quote-section .mf-subtext {
+    margin: auto;
+  }
+  .mf-capsule-section {
+    width: 100%;
+  }
+  .mf-capsule-stage {
+    width: min(320px, 80vw);
+    height: min(320px, 80vw);
+  }
+  .mf-orbit-ring {
+    width: min(280px, 70vw);
+    height: min(280px, 70vw);
+  }
+  .mf-capsule-glow {
+    width: min(260px, 65vw);
+    height: min(260px, 65vw);
+  }
+  .mf-stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
   }
 }
 
