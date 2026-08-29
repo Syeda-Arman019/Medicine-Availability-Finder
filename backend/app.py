@@ -1,15 +1,19 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+import os
+import smtplib
+from email.mime.text import MIMEText
+
 import mysql.connector
 from config import Config
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
-from routes.pharmacy_routes import pharmacy_bp
-from routes.medicine_routes import medicine_bp
-from routes.inventory_routes import inventory_bp
-from routes.search_routes import search_bp
 from routes.auth_routes import auth_bp
-from routes.reservation_routes import reservation_bp
 from routes.chatbot_routes import chatbot_bp
+from routes.inventory_routes import inventory_bp
+from routes.medicine_routes import medicine_bp
+from routes.pharmacy_routes import pharmacy_bp
+from routes.reservation_routes import reservation_bp
+from routes.search_routes import search_bp
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -46,6 +50,48 @@ def home():
     return {
         "message": "Medicine Availability Finder Backend Running Successfully!"
     }
+
+# ================= CONTACT FORM ENDPOINT ================= #
+
+@app.route("/contact", methods=["POST"])
+def contact():
+    data = request.get_json() or {}
+
+    name = data.get("name")
+    email = data.get("email")
+    phone = data.get("phone", "")
+    message = data.get("message")
+
+    if not name or not email or not message:
+        return jsonify({"error": "Required fields are missing"}), 400
+
+    try:
+        msg = MIMEText(
+            f"Name: {name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone}\n\n"
+            f"Message:\n{message}"
+        )
+
+        msg["Subject"] = f"MediFinder Contact Message - {name}"
+        msg["From"] = os.getenv("EMAIL_USER")
+        msg["To"] = os.getenv("EMAIL_USER")
+        msg["Reply-To"] = email
+
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(
+            os.getenv("EMAIL_USER"),
+            os.getenv("EMAIL_PASS")
+        )
+        server.send_message(msg)
+        server.quit()
+
+        return jsonify({"message": "Message sent successfully!"}), 200
+
+    except Exception as e:
+        print("Email Error:", e)
+        return jsonify({"error": "Failed to send email"}), 500
 
 # ================= ACCOUNT SETTINGS ENDPOINTS ================= #
 

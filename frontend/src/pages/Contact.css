@@ -174,7 +174,7 @@
 }
 
 /* ==========================================
-   RIGHT SIDE — phone stage + message box
+   RIGHT SIDE
 ========================================== */
 
 .mf-contact-right {
@@ -202,10 +202,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle,
-      rgba(32, 214, 214, .22) 0%,
-      rgba(90, 175, 255, .10) 60%,
-      transparent 80%);
+  background: radial-gradient(
+    circle,
+    rgba(32, 214, 214, .22) 0%,
+    rgba(90, 175, 255, .10) 60%,
+    transparent 80%
+  );
   filter: blur(20px);
   z-index: 1;
 }
@@ -221,9 +223,17 @@
 }
 
 @keyframes phoneFloat {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================
@@ -238,6 +248,7 @@
   border-radius: 26px;
   color: #ffffff;
   box-shadow: 0 25px 55px rgba(12, 30, 80, .3);
+  box-sizing: border-box;
 }
 
 .mf-message-box h3 {
@@ -266,6 +277,7 @@
   font-size: 14px;
   font-family: var(--mf-font-body);
   color: #06304f;
+  box-sizing: border-box;
 }
 
 .mf-message-box textarea {
@@ -292,6 +304,12 @@
 .mf-message-box button:hover {
   background: #17c1c1;
   transform: translateY(-3px);
+}
+
+.mf-message-box button:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* ==========================================
@@ -373,8 +391,30 @@
     padding: 0 20px;
   }
 
+  .mf-contact-left {
+    padding-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mf-contact-text {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mf-contact-info {
+    width: 100%;
+  }
+
+  .mf-contact-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
   .mf-contact-right {
     padding-top: 10px;
+    width: 100%;
   }
 
   .mf-location-grid {
@@ -388,20 +428,73 @@
     padding: 50px 0 60px;
   }
 
+  .mf-contact-container {
+    padding: 0 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mf-contact-left {
+    padding-left: 0;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .mf-eyebrow {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .mf-contact-title {
     font-size: 36px;
+    text-align: center;
   }
 
   .mf-contact-text {
     font-size: 15.5px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .mf-contact-info {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mf-info-card {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .mf-contact-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .mf-contact-buttons .mf-banner-btn,
+  .mf-contact-buttons .mf-contact-btn2 {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
   }
 
   .mf-phone-stage {
     height: 380px;
+    width: 100%;
   }
 
   .mf-contact-image {
     width: 220px;
+    max-width: 75%;
   }
 
   .mf-contact-circle {
@@ -410,17 +503,10 @@
   }
 
   .mf-message-box {
-    padding: 22px;
-  }
-
-  .mf-contact-buttons {
-    flex-direction: column;
-  }
-
-  .mf-contact-btn2,
-  .mf-banner-btn {
     width: 100%;
-    justify-content: center;
+    padding: 22px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .mf-location-header h2 {
@@ -429,7 +515,7 @@
 }
 
 /* ==========================================
-   CONTACT PAGE — DARK THEME OVERRIDES
+   DARK THEME
 ========================================== */
 
 .dark-theme .contact-page,
@@ -485,10 +571,12 @@
 }
 
 .dark-theme .mf-contact-circle {
-  background: radial-gradient(circle,
-      rgba(56, 189, 248, .22) 0%,
-      rgba(56, 189, 248, .08) 60%,
-      transparent 80%) !important;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, .22) 0%,
+    rgba(56, 189, 248, .08) 60%,
+    transparent 80%
+  ) !important;
 }
 
 .dark-theme .mf-message-box {
