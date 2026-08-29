@@ -11,7 +11,7 @@ load_dotenv()
 
 chatbot_bp = Blueprint("chatbot", __name__)
 
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "openai/gpt-oss-120b"
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Don't crash the whole Flask app if the key isn't set yet - just disable the chatbot.
