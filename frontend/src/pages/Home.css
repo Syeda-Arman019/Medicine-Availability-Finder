@@ -1325,6 +1325,10 @@ body.dark-theme .mf-footer,
     width: min(260px, 65vw);
     height: min(260px, 65vw);
   }
+  .mf-stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
 }
 
 
