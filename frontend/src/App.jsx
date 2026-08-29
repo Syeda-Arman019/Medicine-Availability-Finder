@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Pages
 import Home from "./pages/Home";
@@ -19,7 +20,8 @@ export default function App() {
   // 1. Cart State & Helper Logic
   const [cart, setCart] = useState([]);
 
-  // Helper function to safely extract the item ID (handles medicine_id from Flask OR id)
+  // Helper function to safely extract the item ID
+  // Handles medicine_id from Flask OR id
   const getItemId = (item) => item.medicine_id ?? item.id;
 
   const addToCart = (medicine) => {
@@ -48,10 +50,12 @@ export default function App() {
         .map((item) => {
           if (getItemId(item) === id) {
             const newQty = item.quantity + delta;
+
             return newQty > 0
               ? { ...item, quantity: newQty }
               : null;
           }
+
           return item;
         })
         .filter(Boolean)
@@ -67,18 +71,31 @@ export default function App() {
   // 2. Render Routes
   return (
     <>
+      {/* Scroll page to top whenever route changes */}
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        
-        {/* Account Settings Route Added Here */}
-        <Route path="/settings" element={<AccountSettings />} />
 
+        <Route path="/about" element={<About />} />
+
+        <Route path="/contact" element={<Contact />} />
+
+        <Route path="/faqs" element={<FAQs />} />
+
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Account Settings */}
+        <Route
+          path="/settings"
+          element={<AccountSettings />}
+        />
+
+        {/* Medicines */}
         <Route
           path="/medicines"
           element={
@@ -89,7 +106,14 @@ export default function App() {
             />
           }
         />
-        <Route path="/terms" element={<Terms />} />
+
+        {/* Terms */}
+        <Route
+          path="/terms"
+          element={<Terms />}
+        />
+
+        {/* Cart */}
         <Route
           path="/cart"
           element={
@@ -101,7 +125,9 @@ export default function App() {
           }
         />
       </Routes>
+
+      {/* Chatbot */}
       <Chatbot />
-    </>   
+    </>
   );
 }
