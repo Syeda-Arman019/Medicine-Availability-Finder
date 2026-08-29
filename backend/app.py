@@ -1,5 +1,6 @@
 import os
-import resend
+import smtplib
+from email.mime.text import MIMEText
 
 import mysql.connector
 from config import Config
@@ -61,7 +62,6 @@ def home():
 
 
 # ================= CONTACT FORM ENDPOINT ================= #
-
 @app.route("/contact", methods=["POST"])
 def contact():
     data = request.get_json() or {}
@@ -72,47 +72,35 @@ def contact():
     message = data.get("message")
 
     if not name or not email or not message:
-        return jsonify({
-            "error": "Required fields are missing"
-        }), 400
+        return jsonify({"error": "Required fields are missing"}), 400
 
     try:
-        resend.api_key = os.getenv("RESEND_API_KEY")
+        msg = MIMEText(
+            f"Name: {name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone}\n\n"
+            f"Message:\n{message}"
+        )
 
-        if not resend.api_key:
-            print("❌ RESEND_API_KEY is missing")
-            return jsonify({
-                "error": "Email service is not configured"
-            }), 500
+        msg["Subject"] = f"MediFinder Contact Message - {name}"
+        msg["From"] = os.getenv("EMAIL_USER")
+        msg["To"] = "medifinder.project@gmail.com"
+        msg["Reply-To"] = email
 
-        resend.Emails.send({
-            "from": "MediFinder <onboarding@resend.dev>",
-            "to": ["medifinder.project@gmail.com"],
-            "reply_to": email,
-            "subject": f"MediFinder Contact Message - {name}",
-            "html": f"""
-                <h2>New Contact Message</h2>
-                <p><strong>Name:</strong> {name}</p>
-                <p><strong>Email:</strong> {email}</p>
-                <p><strong>Phone:</strong> {phone}</p>
-                <hr>
-                <h3>Message:</h3>
-                <p>{message}</p>
-            """
-        })
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=15)
+        server.starttls()
+        server.login(
+            os.getenv("EMAIL_USER"),
+            os.getenv("EMAIL_PASS")
+        )
+        server.send_message(msg)
+        server.quit()
 
-        print("✅ Contact email sent successfully!")
-
-        return jsonify({
-            "message": "Message sent successfully!"
-        }), 200
+        return jsonify({"message": "Message sent successfully!"}), 200
 
     except Exception as e:
-        print("❌ Email Error:", repr(e))
-
-        return jsonify({
-            "error": "Failed to send email"
-        }), 500
+        print("❌ Email Error:", e)
+        return jsonify({"error": "Failed to send email"}), 500
 
 # ================= ACCOUNT SETTINGS ENDPOINTS ================= #
 
