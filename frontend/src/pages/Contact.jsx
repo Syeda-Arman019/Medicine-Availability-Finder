@@ -19,6 +19,7 @@ export default function Contact() {
     const formData = new FormData();
     formData.append("name", form.name.value);
     formData.append("email", form.email.value);
+    formData.append("_replyto", form.email.value);
     formData.append("phone", form.phone.value);
     formData.append("message", form.message.value);
 
