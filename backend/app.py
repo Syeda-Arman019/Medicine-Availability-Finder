@@ -1,6 +1,5 @@
 import os
-import smtplib
-from email.mime.text import MIMEText
+import resend
 
 import mysql.connector
 from config import Config
@@ -15,6 +14,7 @@ from routes.pharmacy_routes import pharmacy_bp
 from routes.reservation_routes import reservation_bp
 from routes.search_routes import search_bp
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -23,6 +23,7 @@ CORS(
     resources={r"/*": {"origins": "*"}},
     supports_credentials=True
 )
+
 
 # Register Blueprints
 app.register_blueprint(pharmacy_bp)
@@ -33,6 +34,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(reservation_bp)
 app.register_blueprint(chatbot_bp)
 
+
 # Helper function to get database connection
 def get_db_connection():
     return mysql.connector.connect(
@@ -42,6 +44,7 @@ def get_db_connection():
         database=Config.DB_NAME
     )
 
+
 try:
     db = get_db_connection()
     print("✅ MySQL Connected Successfully!")
@@ -49,11 +52,13 @@ try:
 except Exception as e:
     print("❌ Database Connection Error:", e)
 
+
 @app.route("/")
 def home():
     return {
         "message": "Medicine Availability Finder Backend Running Successfully!"
     }
+
 
 # ================= CONTACT FORM ENDPOINT ================= #
 
@@ -67,41 +72,54 @@ def contact():
     message = data.get("message")
 
     if not name or not email or not message:
-        return jsonify({"error": "Required fields are missing"}), 400
+        return jsonify({
+            "error": "Required fields are missing"
+        }), 400
 
     try:
-        msg = MIMEText(
-            f"Name: {name}\n"
-            f"Email: {email}\n"
-            f"Phone: {phone}\n\n"
-            f"Message:\n{message}"
-        )
+        resend.api_key = os.getenv("RESEND_API_KEY")
 
-        msg["Subject"] = f"MediFinder Contact Message - {name}"
-        msg["From"] = os.getenv("EMAIL_USER")
-        msg["To"] = os.getenv("EMAIL_USER")
-        msg["Reply-To"] = email
+        if not resend.api_key:
+            print("❌ RESEND_API_KEY is missing")
+            return jsonify({
+                "error": "Email service is not configured"
+            }), 500
 
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(
-            os.getenv("EMAIL_USER"),
-            os.getenv("EMAIL_PASS")
-        )
-        server.send_message(msg)
-        server.quit()
+        resend.Emails.send({
+            "from": "MediFinder <onboarding@resend.dev>",
+            "to": ["medifinder.project@gmail.com"],
+            "reply_to": email,
+            "subject": f"MediFinder Contact Message - {name}",
+            "html": f"""
+                <h2>New Contact Message</h2>
+                <p><strong>Name:</strong> {name}</p>
+                <p><strong>Email:</strong> {email}</p>
+                <p><strong>Phone:</strong> {phone}</p>
+                <hr>
+                <h3>Message:</h3>
+                <p>{message}</p>
+            """
+        })
 
-        return jsonify({"message": "Message sent successfully!"}), 200
+        print("✅ Contact email sent successfully!")
+
+        return jsonify({
+            "message": "Message sent successfully!"
+        }), 200
 
     except Exception as e:
-        print("Email Error:", e)
-        return jsonify({"error": "Failed to send email"}), 500
+        print("❌ Email Error:", repr(e))
+
+        return jsonify({
+            "error": "Failed to send email"
+        }), 500
 
 # ================= ACCOUNT SETTINGS ENDPOINTS ================= #
 
 @app.route("/update-profile", methods=["PUT"])
 def update_profile():
     data = request.get_json() or {}
+
     user_id = data.get("user_id")
     full_name = data.get("full_name")
     email = data.get("email")
@@ -110,28 +128,54 @@ def update_profile():
     location = data.get("location")
 
     if not user_id:
-        return jsonify({"error": "User ID is required"}), 400
+        return jsonify({
+            "error": "User ID is required"
+        }), 400
 
     conn = None
     cursor = None
+
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
         query = """
-            UPDATE users 
-            SET full_name = %s, email = %s, phone = %s, country = %s, location = %s 
+            UPDATE users
+            SET full_name = %s,
+                email = %s,
+                phone = %s,
+                country = %s,
+                location = %s
             WHERE user_id = %s
         """
-        cursor.execute(query, (full_name, email, phone, country, location, user_id))
+
+        cursor.execute(
+            query,
+            (
+                full_name,
+                email,
+                phone,
+                country,
+                location,
+                user_id
+            )
+        )
+
         conn.commit()
 
-        return jsonify({"message": "Profile updated successfully"}), 200
+        return jsonify({
+            "message": "Profile updated successfully"
+        }), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
@@ -139,37 +183,60 @@ def update_profile():
 @app.route("/change-password", methods=["PUT"])
 def change_password():
     data = request.get_json() or {}
+
     user_id = data.get("user_id")
     current_password = data.get("current_password")
     new_password = data.get("new_password")
 
     if not user_id or not current_password or not new_password:
-        return jsonify({"error": "All fields are required"}), 400
+        return jsonify({
+            "error": "All fields are required"
+        }), 400
 
     conn = None
     cursor = None
+
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT password FROM users WHERE user_id = %s", (user_id,))
+        cursor.execute(
+            "SELECT password FROM users WHERE user_id = %s",
+            (user_id,)
+        )
+
         user = cursor.fetchone()
 
         if not user:
-            return jsonify({"error": "User not found"}), 404
+            return jsonify({
+                "error": "User not found"
+            }), 404
 
         if user["password"] != current_password:
-            return jsonify({"error": "Incorrect current password"}), 400
+            return jsonify({
+                "error": "Incorrect current password"
+            }), 400
 
-        cursor.execute("UPDATE users SET password = %s WHERE user_id = %s", (new_password, user_id))
+        cursor.execute(
+            "UPDATE users SET password = %s WHERE user_id = %s",
+            (new_password, user_id)
+        )
+
         conn.commit()
 
-        return jsonify({"message": "Password changed successfully"}), 200
+        return jsonify({
+            "message": "Password changed successfully"
+        }), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
@@ -177,33 +244,54 @@ def change_password():
 @app.route("/update-notifications", methods=["PUT"])
 def update_notifications():
     data = request.get_json() or {}
+
     user_id = data.get("user_id")
     email_alerts = data.get("email_alerts")
     security_alerts = data.get("security_alerts")
 
     if not user_id:
-        return jsonify({"error": "User ID is required"}), 400
+        return jsonify({
+            "error": "User ID is required"
+        }), 400
 
     conn = None
     cursor = None
+
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
         query = """
-            UPDATE users 
-            SET email_alerts = %s, security_alerts = %s 
+            UPDATE users
+            SET email_alerts = %s,
+                security_alerts = %s
             WHERE user_id = %s
         """
-        cursor.execute(query, (email_alerts, security_alerts, user_id))
+
+        cursor.execute(
+            query,
+            (
+                email_alerts,
+                security_alerts,
+                user_id
+            )
+        )
+
         conn.commit()
 
-        return jsonify({"message": "Notification settings saved"}), 200
+        return jsonify({
+            "message": "Notification settings saved"
+        }), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
@@ -211,41 +299,67 @@ def update_notifications():
 @app.route("/delete-account", methods=["DELETE"])
 def delete_account():
     data = request.get_json() or {}
+
     user_id = data.get("user_id")
     password = data.get("password")
 
     if not user_id or not password:
-        return jsonify({"error": "User ID and Password are required"}), 400
+        return jsonify({
+            "error": "User ID and Password are required"
+        }), 400
 
     conn = None
     cursor = None
+
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
 
-        cursor.execute("SELECT password FROM users WHERE user_id = %s", (user_id,))
+        cursor.execute(
+            "SELECT password FROM users WHERE user_id = %s",
+            (user_id,)
+        )
+
         user = cursor.fetchone()
 
         if not user:
-            return jsonify({"error": "User not found"}), 404
+            return jsonify({
+                "error": "User not found"
+            }), 404
 
         if user["password"] != password:
-            return jsonify({"error": "Incorrect password. Account not deleted."}), 400
+            return jsonify({
+                "error": "Incorrect password. Account not deleted."
+            }), 400
 
         try:
-            cursor.execute("DELETE FROM reservations WHERE user_id = %s", (user_id,))
+            cursor.execute(
+                "DELETE FROM reservations WHERE user_id = %s",
+                (user_id,)
+            )
         except Exception:
             pass
 
-        cursor.execute("DELETE FROM users WHERE user_id = %s", (user_id,))
+        cursor.execute(
+            "DELETE FROM users WHERE user_id = %s",
+            (user_id,)
+        )
+
         conn.commit()
 
-        return jsonify({"message": "Account deleted permanently"}), 200
+        return jsonify({
+            "message": "Account deleted permanently"
+        }), 200
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
+
     finally:
         if cursor:
             cursor.close()
+
         if conn:
             conn.close()
 
