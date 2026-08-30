@@ -1359,9 +1359,8 @@ body.dark-theme .mf-footer,
     min-width: 200px;
   }
 }
-
 /* =========================================================
-   iPHONE 7 PLUS / 414px MOBILE FIX
+   iPHONE 7 PLUS / 414px FINAL FIX - TOPBAR + STATS + FOOTER
    ========================================================= */
 
 @media only screen and (min-width: 400px) and (max-width: 430px) {
@@ -1373,237 +1372,104 @@ body.dark-theme .mf-footer,
   .mf-page .container {
     margin: 0 auto !important;
     max-width: 100% !important;
+    padding: 0 12px;
   }
 
-  /* ---------- PAGE ---------- */
-  .mf-page {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* ---------- TOP BAR ---------- */
+  /* ========== 1. TOPBAR 2 ROW LAYOUT ========== */
   .mf-topbar {
-    padding: 8px 12px;
-  }
-
-  .mf-topbar-inner {
-    width: 100%;
-    gap: 8px;
-  }
-
-  .mf-topbar .mf-brand {
-    min-width: 0;
-    gap: 0;
-  }
-
-  .mf-topbar .mf-logo-svg {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
-  .mf-topbar .mf-brand-text {
-    font-size: 1.25rem !important;
-    white-space: nowrap;
-  }
-
-  .mf-topbar .mf-styled-letter {
-    font-size: 2.1rem !important;
-  }
-
-  /* Search */
-  .mf-topbar-search {
-    width: 100%;
-    max-width: 100%;
-    flex-basis: 100%;
-    margin: 3px 0 0;
-    padding: 0.3rem 0.3rem 0.3rem 0.9rem;
-  }
-
-  .mf-topbar-search input {
-    font-size: 0.82rem;
-  }
-
-  .mf-topbar-search button {
-    width: 36px;
-    height: 36px;
-  }
-
-  /* ---------- NAVBAR ---------- */
-  .mf-navbar {
     padding: 8px 10px;
   }
 
-  .mf-navbar-inner {
-    width: 100%;
+  .mf-topbar-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 6px;
   }
 
-  .mf-nav-links {
-    width: 100%;
-    gap: 3px;
+  /* ROW 1: LOGO LEFT - CHOTA + THORA LEFT */
+  .mf-topbar .mf-brand {
+    order: 1 !important;
+    margin-right: auto !important;
+    gap: 4px;
+    padding-left: 0;
   }
 
-  .mf-nav-links .nav-link {
-    font-size: 0.82rem;
-    padding: 0.4rem 0.5rem;
+  .mf-topbar .mf-logo-svg {
+    width: 26px !important; /* 40 se 26 kiya */
+    height: 26px !important;
+    margin-left: -3px; /* thora left */
   }
 
-  .mf-header-btn {
-    font-size: 0.8rem;
-    padding: 8px 15px;
+  .mf-topbar .mf-brand-text {
+    font-size: 1.1rem !important; /* 1.3 se 1.1 */
   }
 
-  /* ---------- HERO ---------- */
-  .mf-banner {
-    padding: 15px 12px;
+  .mf-topbar .mf-styled-letter {
+    font-size: 1.8rem !important; /* 2.8 se 1.8 */
   }
 
-  .mf-banner-inner {
-    width: 100%;
-    gap: 1.2rem;
+  /* ROW 1: ICONS RIGHT - TOGGLE PEHLE PHIR CART */
+  .mf-topbar-inner .mf-theme-toggle,
+  .mf-topbar-inner button[aria-label*="theme"],
+  .mf-topbar-inner button[aria-label*="dark"] {
+    order: 2 !important;
+    width: 38px !important;
+    height: 38px !important;
   }
 
-  .mf-banner-copy {
-    width: 100%;
-    min-width: 0;
+  .mf-cart-wrap,
+  .mf-topbar-inner .mf-cart-btn {
+    order: 3 !important;
+    width: 38px !important;
+    height: 38px !important;
   }
 
-  .mf-eyebrow {
-    font-size: 17px;
-    padding: 0.3rem 0.65rem;
+  .mf-cart-badge {
+    top: -4px !important;
+    right: -4px !important;
+    font-size: 10px !important;
+    min-width: 16px !important;
+    height: 16px !important;
   }
 
-  .mf-banner-btn {
+  /* ROW 2: SEARCH CENTER FULL WIDTH */
+  .mf-topbar-search {
+    order: 4 !important;
+    width: 100% !important;
+    flex-basis: 100% !important;
+    margin: 6px 0 0 !important;
+    padding: 0.35rem 0.35rem 0.35rem 1rem;
+  }
+
+  .mf-topbar-search input {
     font-size: 0.85rem;
-    padding: 0.7rem 1.3rem;
   }
 
-  .mf-banner-image {
-    width: 100%;
-    min-width: 0;
+  .mf-topbar-search button {
+    width: 42px !important; /* chota tha */
+    height: 42px !important;
   }
 
-  .mf-banner-img {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 14px;
+  .mf-topbar-search button svg {
+    width: 20px !important; /* icon bara */
+    height: 20px !important;
   }
 
-  /* ---------- CAPSULE ---------- */
-  .mf-capsule-section {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .mf-capsule-stage {
-    width: 290px;
-    height: 290px;
-    max-width: 90vw;
-  }
-
-  .mf-capsule-glow {
-    width: 235px;
-    height: 235px;
-  }
-
-  .mf-orbit-ring {
-    width: 255px;
-    height: 255px;
-  }
-
-  .mf-capsule {
-    width: 110px;
-    height: 44px;
-  }
-
-  .mf-capsule-half {
-    width: 55px;
-    height: 44px;
-  }
-
-  .mf-capsule-half-left {
-    border-radius: 22px 0 0 22px;
-  }
-
-  .mf-capsule-half-right {
-    border-radius: 0 22px 22px 0;
-  }
-
-  .mf-capsule-tagline {
-    font-size: 1.05rem;
-    max-width: 340px;
-    margin-top: 1rem;
-    padding: 0 10px;
-  }
-
-  /* ---------- PRODUCTS ---------- */
-  .mf-products {
-    padding: 2rem 12px;
-  }
-
-  .mf-products-head {
-    margin-bottom: 1.2rem;
-  }
-
-  .mf-products-head h2 {
-    font-size: 1.4rem;
-  }
-
-  .mf-product-scroll {
-    gap: 0.8rem;
-    padding: 0.25rem 0.6rem 1rem;
-    margin: 0 -0.6rem;
-  }
-
-  .mf-product-card {
-    flex: 0 0 180px;
-    min-height: 310px;
-    padding: 0.8rem;
-  }
-
-  .mf-product-image {
-    height: 125px;
-  }
-
-  /* ---------- QUOTE ---------- */
-  .mf-split-section {
-    width: 100%;
-    padding: 35px 12px;
-    gap: 25px;
-  }
-
-  .mf-quote-section {
-    width: 100%;
-    padding: 30px 18px;
-    border-radius: 18px;
-  }
-
-  .mf-quote-section .mf-headline {
-    font-size: 24px;
-    line-height: 1.2;
-  }
-
-  .mf-quote-section .mf-subtext {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .mf-headline-accent {
-    font-size: 1.8rem;
-  }
-
-  /* ---------- STATS ---------- */
+  /* ========== 2. STATS 2x2 GRID ========== */
   .mf-stats-section {
     padding: 35px 12px;
   }
 
   .mf-stats-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 4 se 2x2 */
+    gap: 14px !important;
   }
 
   .mf-stat-card {
-    padding: 22px 10px;
+    padding: 20px 12px;
     border-radius: 18px;
   }
 
@@ -1611,52 +1477,55 @@ body.dark-theme .mf-footer,
     width: 52px;
     height: 52px;
     font-size: 24px;
-    margin-bottom: 12px;
   }
 
   .mf-stat-card h2 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .mf-stat-card p {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
   }
 
-  /* ---------- FOOTER ---------- */
+  /* ========== 3. FOOTER CENTER ========== */
   .mf-footer {
     margin-top: 70px;
     padding-top: 45px;
   }
 
   .mf-footer-top {
-    width: 100%;
-    padding: 18px 12px;
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    flex-direction: column;
+    align-items: center;
     gap: 15px;
-  }
-
-  .mf-feature {
-    gap: 10px;
-  }
-
-  .mf-feature span {
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
+    padding: 20px 12px;
   }
 
   .mf-footer .container {
     padding: 0 15px;
+    text-align: center;
   }
 
   .mf-footer-grid {
+    grid-template-columns: 1fr !important; /* 1 column stack */
+    justify-items: center;
     gap: 30px;
+    text-align: center;
+  }
+
+  .mf-footer-brand p {
+    padding-right: 0;
+  }
+
+  .mf-footer-logo {
+    justify-content: center;
   }
 
   .mf-footer-title {
-    font-size: 1.7rem;
-  }
-
-  .mf-footer-bottom {
-    margin-top: 30px;
+    font-size: 1.6rem;
+    justify-content: center;
   }
 }
