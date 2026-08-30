@@ -1238,7 +1238,6 @@ body.dark-theme .mf-footer,
     flex-wrap: wrap;
   }
 
-  /* MediFinder ko thoda compact karo */
   .mf-topbar .mf-brand {
     flex-shrink: 1;
     min-width: 0;
@@ -1259,14 +1258,12 @@ body.dark-theme .mf-footer,
     font-size: 2.2rem !important;
   }
 
-  /* Toggle + Cart ko same row mein rakho */
   .mf-topbar-inner > .d-flex {
     margin-left: auto;
     flex-shrink: 0;
     gap: 0.35rem !important;
   }
 
-  /* Search next line par full width */
   .mf-topbar-search {
     order: 3;
     flex-basis: 100%;
@@ -1350,7 +1347,6 @@ body.dark-theme .mf-footer,
   }
 }
 
-
 /* Very small phones */
 @media (max-width: 380px) {
   .mf-products-btn-wrap {
@@ -1369,6 +1365,15 @@ body.dark-theme .mf-footer,
    ========================================================= */
 
 @media only screen and (min-width: 400px) and (max-width: 430px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+  
+  .mf-page .container {
+    margin: 0 auto !important;
+    max-width: 100% !important;
+  }
 
   /* ---------- PAGE ---------- */
   .mf-page {
