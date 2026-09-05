@@ -418,7 +418,6 @@ body.dark-theme .mf-theme-toggle:hover,
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 10px;
-  color:#ffffff;
 }
 
 .welcome-text p {
@@ -871,6 +870,10 @@ body.dark-theme .status-tag.danger,
 }
 
 @media (max-width: 991.98px) {
+  .mf-db-content-grid {
+    grid-template-columns: 1fr;
+  }
+
   .mf-db-sidebar-backdrop {
     display: none;
     position: fixed;
@@ -884,16 +887,15 @@ body.dark-theme .status-tag.danger,
   }
 
   .mf-db-sidebar {
-    position: fixed; 
-    top: 122px; 
-    left: -280px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    bottom: 0;
+    height: 100vh;
     width: 280px;
-    height: calc(100vh - 122px); /* baqi screen */
     z-index: 99;
-    background: var(--mf-sidebar-bg);
-    border-right: 1px solid var(--mf-line);
-    padding: 24px 16px;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+    will-change: left;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     border-radius: 0;
@@ -1038,6 +1040,95 @@ body.dark-theme .status-tag.danger,
 
   .mf-custom-input {
     flex-wrap: nowrap;
+  }
+}
+
+/* ================= PREMIUM FOOTER FIX ================= */
+
+/* Keep all 3 footer features in ONE ROW */
+.mf-footer-top {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  align-items: center;
+  justify-items: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 1280px;
+}
+
+.mf-feature {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-width: 0;
+}
+
+.mf-feature > div {
+  min-width: 0;
+}
+
+.mf-feature h5 {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.mf-feature p {
+  white-space: nowrap;
+}
+
+
+/* ---------- TABLET ---------- */
+@media (max-width: 991.98px) {
+  .mf-footer-top {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px;
+    width: 94%;
+  }
+
+  .mf-feature {
+    gap: 8px;
+  }
+
+  .mf-feature span {
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+    flex-shrink: 0;
+  }
+
+  .mf-feature h5 {
+    font-size: 0.9rem;
+  }
+
+  .mf-feature p {
+    font-size: 11px;
+  }
+}
+
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 767.98px) {
+  .mf-footer-top {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+    border-radius: 0;
+    padding: 18px 12px;
+  }
+
+  .mf-feature {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .mf-feature h5,
+  .mf-feature p {
+    white-space: normal;
   }
 }
 
