@@ -280,7 +280,7 @@ export default function Contact() {
 
             {/* MESSAGE FORM */}
             <form
-              action="https://formsubmit.co/medifinder.project@gmail.com"
+              action="https://formsubmit.co/c1b29c770d654639ba6230da6550668d"
               method="POST"
               className="mf-message-box"
             >
