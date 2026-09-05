@@ -418,6 +418,7 @@ body.dark-theme .mf-theme-toggle:hover,
   font-weight: 700;
   font-size: 1.8rem;
   margin-bottom: 10px;
+  color:#ffffff;
 }
 
 .welcome-text p {
@@ -870,10 +871,6 @@ body.dark-theme .status-tag.danger,
 }
 
 @media (max-width: 991.98px) {
-  .mf-db-content-grid {
-    grid-template-columns: 1fr;
-  }
-
   .mf-db-sidebar-backdrop {
     display: none;
     position: fixed;
@@ -887,15 +884,16 @@ body.dark-theme .status-tag.danger,
   }
 
   .mf-db-sidebar {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    bottom: 0;
-    height: 100vh;
+    position: fixed; 
+    top: 122px; 
+    left: -280px;
     width: 280px;
+    height: calc(100vh - 122px); /* baqi screen */
     z-index: 99;
+    background: var(--mf-sidebar-bg);
+    border-right: 1px solid var(--mf-line);
+    padding: 24px 16px;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
-    will-change: left;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     border-radius: 0;

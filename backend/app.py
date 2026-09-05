@@ -257,6 +257,7 @@ def delete_account():
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
 
+        # 1. Check user and password
         cursor.execute(
             "SELECT password FROM users WHERE user_id = %s",
             (user_id,)
@@ -274,19 +275,37 @@ def delete_account():
                 "error": "Incorrect password. Account not deleted."
             }), 400
 
-        try:
-            cursor.execute(
-                "DELETE FROM reservations WHERE user_id = %s",
-                (user_id,)
-            )
-        except Exception:
-            pass
+        # Start transaction
+        conn.start_transaction()
 
+        # 2. Delete reservation items FIRST
+        cursor.execute("""
+            DELETE ri
+            FROM reservation_items ri
+            INNER JOIN reservations r
+                ON ri.reservation_id = r.reservation_id
+            WHERE r.user_id = %s
+        """, (user_id,))
+
+        # 3. Delete reservations
+        cursor.execute(
+            "DELETE FROM reservations WHERE user_id = %s",
+            (user_id,)
+        )
+
+        # 4. Delete cart items
+        cursor.execute(
+            "DELETE FROM cart WHERE user_id = %s",
+            (user_id,)
+        )
+
+        # 5. Finally delete user
         cursor.execute(
             "DELETE FROM users WHERE user_id = %s",
             (user_id,)
         )
 
+        # Save changes
         conn.commit()
 
         return jsonify({
@@ -294,6 +313,12 @@ def delete_account():
         }), 200
 
     except Exception as e:
+
+        if conn:
+            conn.rollback()
+
+        print("❌ Delete account error:", str(e))
+
         return jsonify({
             "error": str(e)
         }), 500
