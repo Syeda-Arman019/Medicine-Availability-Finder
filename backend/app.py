@@ -264,7 +264,6 @@ def delete_account():
         )
 
         user = cursor.fetchone()
-
         if not user:
             return jsonify({
                 "error": "User not found"
@@ -274,9 +273,6 @@ def delete_account():
             return jsonify({
                 "error": "Incorrect password. Account not deleted."
             }), 400
-
-        # Start transaction
-        conn.start_transaction()
 
         # 2. Delete reservation items FIRST
         cursor.execute("""
