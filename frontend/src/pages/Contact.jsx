@@ -357,9 +357,8 @@ export default function Contact() {
   <input
     type="hidden"
     name="_next"
-    value="https://medifinder-health.netlify.app/contact"
+    value="https://medifinder-health.netlify.app/"
   />
-
   <h3>Send Us a Message</h3>
 
   <p>
