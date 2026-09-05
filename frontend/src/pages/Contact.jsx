@@ -328,83 +328,90 @@ export default function Contact() {
 
             {/* ================= CONTACT FORM ================= */}
             <form
-              action="https://formsubmit.co/c1b29c770d654639ba6230da6550668d"
-              method="POST"
-              className="mf-message-box"
-            >
-              {/* EMAIL SUBJECT */}
-              <input
-                type="hidden"
-                name="_subject"
-                value="MediFinder Contact Message"
-              />
+  action="https://formsubmit.co/c1b29c770d654639ba6230da6550668d"
+  method="POST"
+  className="mf-message-box"
+>
+  {/* EMAIL SUBJECT */}
+  <input
+    type="hidden"
+    name="_subject"
+    value="MediFinder Contact Message"
+  />
 
-              {/* DISABLE CAPTCHA */}
-              <input
-                type="hidden"
-                name="_captcha"
-                value="false"
-              />
+  {/* DISABLE CAPTCHA */}
+  <input
+    type="hidden"
+    name="_captcha"
+    value="false"
+  />
 
-              {/* REDIRECT AFTER SUBMISSION */}
-              <input
-                type="hidden"
-                name="_next"
-                value="https://medifinder-health.netlify.app/contact"
-              />
+  {/* EMAIL TEMPLATE */}
+  <input
+    type="hidden"
+    name="_template"
+    value="table"
+  />
 
-              <h3>Send Us a Message</h3>
+  {/* REDIRECT AFTER SUBMISSION */}
+  <input
+    type="hidden"
+    name="_next"
+    value="https://medifinder-health.netlify.app/contact"
+  />
 
-              <p>
-                We'd love to hear from you. Fill out the form and our team
-                will contact you shortly.
-              </p>
+  <h3>Send Us a Message</h3>
 
-              {/* NAME */}
-              <input
-                id="name"
-                name="name"
-                placeholder="Name"
-                type="text"
-                autoComplete="name"
-                required
-              />
+  <p>
+    We'd love to hear from you. Fill out the form and our team
+    will contact you shortly.
+  </p>
 
-              {/* EMAIL */}
-              <input
-                id="email"
-                name="email"
-                placeholder="Email Address"
-                type="email"
-                autoComplete="email"
-                required
-              />
+  {/* NAME */}
+  <input
+    id="name"
+    name="name"
+    placeholder="Name"
+    type="text"
+    autoComplete="name"
+    required
+  />
 
-              {/* PHONE */}
-              <input
-                id="phone"
-                name="phone"
-                placeholder="Phone Number"
-                type="tel"
-                autoComplete="tel"
-              />
+  {/* EMAIL */}
+  <input
+    id="email"
+    name="email"
+    placeholder="Email Address"
+    type="email"
+    autoComplete="email"
+    required
+  />
 
-              {/* MESSAGE */}
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Write your message..."
-                autoComplete="off"
-                required
-              ></textarea>
+  {/* PHONE */}
+  <input
+    id="phone"
+    name="phone"
+    placeholder="Phone Number"
+    type="tel"
+    autoComplete="tel"
+  />
 
-              {/* SUBMIT */}
-              <button type="submit">
-                Send Message
-                <span>➤</span>
-              </button>
-            </form>
+  {/* MESSAGE */}
+  <textarea
+    id="message"
+    name="message"
+    rows="4"
+    placeholder="Write your message..."
+    autoComplete="off"
+    required
+  ></textarea>
+
+  {/* SUBMIT */}
+  <button type="submit">
+    Send Message
+    <span>➤</span>
+  </button>
+</form>
 
           </div>
 
