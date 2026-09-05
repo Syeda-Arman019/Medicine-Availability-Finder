@@ -12,6 +12,11 @@ load_dotenv()
 auth_bp = Blueprint("auth", __name__)
 
 
+# =========================================================
+# WELCOME EMAIL FUNCTION
+# =========================================================
+# Email function abhi rakhi hui hai, lekin register ke andar
+# call nahi ki ja rahi, taake Railway par SMTP timeout na ho.
 def send_welcome_email(receiver_email, username):
     try:
         EMAIL_USER = os.getenv("EMAIL_USER")
@@ -61,8 +66,12 @@ MediFinder Team
         return False
 
 
+# =========================================================
+# REGISTER
+# =========================================================
 @auth_bp.route("/register", methods=["POST"])
 def register():
+
     data = request.get_json() or {}
 
     full_name = data.get("full_name")
@@ -71,67 +80,126 @@ def register():
     country = data.get("country")
     password = data.get("password")
 
+    # Check required fields
     if not full_name or not email or not password:
-        return jsonify({"error": "Full Name, Email, and Password are required!"}), 400
+        return jsonify({
+            "error": "Full Name, Email, and Password are required!"
+        }), 400
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     try:
-        # 1. Duplicate email check
-        cursor.execute("SELECT user_id FROM users WHERE email = %s", (email,))
+
+        # -------------------------------------------------
+        # 1. Check duplicate email
+        # -------------------------------------------------
+        cursor.execute(
+            "SELECT user_id FROM users WHERE email = %s",
+            (email,)
+        )
+
         existing_user = cursor.fetchone()
 
         if existing_user:
-            return jsonify({"error": "Email is already registered!"}), 400
+            return jsonify({
+                "error": "Email is already registered!"
+            }), 400
 
-        # 2. Insert new user into database (Updated with country)
+        # -------------------------------------------------
+        # 2. Insert user
+        # -------------------------------------------------
         cursor.execute("""
-            INSERT INTO users (full_name, email, phone, country, password)
+            INSERT INTO users (
+                full_name,
+                email,
+                phone,
+                country,
+                password
+            )
             VALUES (%s, %s, %s, %s, %s)
-        """, (full_name, email, phone, country, password))
+        """, (
+            full_name,
+            email,
+            phone,
+            country,
+            password
+        ))
 
         connection.commit()
 
-        # 3. Send Welcome Email
-        send_welcome_email(email, full_name)
+        # -------------------------------------------------
+        # 3. Welcome Email
+        # -------------------------------------------------
+        # TEMPORARILY DISABLED
+        # Railway par Gmail SMTP timeout ho raha tha,
+        # isliye registration ko fast rakhne ke liye
+        # email function abhi call nahi ho rahi.
+        
+        # send_welcome_email(email, full_name)
 
+        # -------------------------------------------------
+        # 4. Success Response
+        # -------------------------------------------------
         return jsonify({
             "message": "User registered successfully!"
         }), 201
 
     except Exception as e:
+
         connection.rollback()
-        return jsonify({"error": f"Database error: {str(e)}"}), 500
+
+        return jsonify({
+            "error": f"Database error: {str(e)}"
+        }), 500
 
     finally:
+
         cursor.close()
         connection.close()
 
 
+# =========================================================
+# LOGIN
+# =========================================================
 @auth_bp.route("/login", methods=["POST"])
 def login():
+
     data = request.get_json() or {}
 
     email = data.get("email")
     password = data.get("password")
 
     if not email or not password:
-        return jsonify({"error": "Email and Password are required!"}), 400
+        return jsonify({
+            "error": "Email and Password are required!"
+        }), 400
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     try:
-        # Updated SELECT query to return complete user data
+
         cursor.execute("""
-            SELECT user_id, full_name, email, phone, country, location FROM users
-            WHERE email = %s AND password = %s
-        """, (email, password))
+            SELECT
+                user_id,
+                full_name,
+                email,
+                phone,
+                country,
+                location
+            FROM users
+            WHERE email = %s
+            AND password = %s
+        """, (
+            email,
+            password
+        ))
 
         user = cursor.fetchone()
 
         if user:
+
             return jsonify({
                 "message": "Login successful!",
                 "user": user
@@ -142,15 +210,23 @@ def login():
         }), 401
 
     except Exception as e:
-        return jsonify({"error": f"Database error: {str(e)}"}), 500
+
+        return jsonify({
+            "error": f"Database error: {str(e)}"
+        }), 500
 
     finally:
+
         cursor.close()
         connection.close()
 
 
+# =========================================================
+# CHANGE PASSWORD
+# =========================================================
 @auth_bp.route("/change-password", methods=["PUT"])
 def change_password():
+
     data = request.get_json() or {}
 
     user_id = data.get("user_id")
@@ -166,7 +242,10 @@ def change_password():
     cursor = connection.cursor(dictionary=True)
 
     try:
+
+        # -------------------------------------------------
         # 1. Check current password
+        # -------------------------------------------------
         cursor.execute("""
             SELECT user_id, password
             FROM users
@@ -176,27 +255,37 @@ def change_password():
         user = cursor.fetchone()
 
         if not user:
+
             return jsonify({
                 "error": "User not found!"
             }), 404
 
         if user["password"] != current_password:
+
             return jsonify({
                 "error": "Current password is incorrect!"
             }), 401
 
+        # -------------------------------------------------
         # 2. Prevent same password
+        # -------------------------------------------------
         if current_password == new_password:
+
             return jsonify({
                 "error": "New password must be different from current password!"
             }), 400
 
+        # -------------------------------------------------
         # 3. Update password
+        # -------------------------------------------------
         cursor.execute("""
             UPDATE users
             SET password = %s
             WHERE user_id = %s
-        """, (new_password, user_id))
+        """, (
+            new_password,
+            user_id
+        ))
 
         connection.commit()
 
@@ -205,18 +294,25 @@ def change_password():
         }), 200
 
     except Exception as e:
+
         connection.rollback()
+
         return jsonify({
             "error": f"Database error: {str(e)}"
         }), 500
 
     finally:
+
         cursor.close()
         connection.close()
 
 
+# =========================================================
+# UPDATE PROFILE
+# =========================================================
 @auth_bp.route("/update-profile", methods=["PUT"])
 def update_profile():
+
     data = request.get_json() or {}
 
     user_id = data.get("user_id")
@@ -227,6 +323,7 @@ def update_profile():
     location = data.get("location")
 
     if not user_id or not full_name or not email:
+
         return jsonify({
             "error": "User ID, Full Name and Email are required!"
         }), 400
@@ -235,9 +332,11 @@ def update_profile():
     cursor = connection.cursor()
 
     try:
+
         cursor.execute("""
             UPDATE users
-            SET full_name = %s,
+            SET
+                full_name = %s,
                 email = %s,
                 phone = %s,
                 country = %s,
@@ -259,9 +358,14 @@ def update_profile():
         }), 200
 
     except Exception as e:
+
         connection.rollback()
-        return jsonify({"error": str(e)}), 500
+
+        return jsonify({
+            "error": str(e)
+        }), 500
 
     finally:
+
         cursor.close()
         connection.close()
