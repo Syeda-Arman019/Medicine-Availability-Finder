@@ -18,8 +18,8 @@ def send_welcome_email(receiver_email, username):
         EMAIL_PASS = os.getenv("EMAIL_PASS")
 
         if not EMAIL_USER or not EMAIL_PASS:
-            print("⚠️ EMAIL_USER or EMAIL_PASS missing in .env file!")
-            return
+            print("⚠️ EMAIL_USER or EMAIL_PASS missing in Railway variables!")
+            return False
 
         msg = EmailMessage()
         msg["Subject"] = "Welcome to MediFinder"
@@ -40,15 +40,25 @@ Regards,
 MediFinder Team
 """)
 
-        with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
-            smtp.starttls()
-            smtp.login(EMAIL_USER, EMAIL_PASS)
-            smtp.send_message(msg)
+        print("📧 Connecting to Gmail SMTP...")
 
-        print(f"✅ Welcome email sent to {receiver_email}")
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as smtp:
+            print("📧 SMTP connection successful!")
+
+            smtp.starttls()
+            print("📧 TLS started!")
+
+            smtp.login(EMAIL_USER, EMAIL_PASS)
+            print("📧 Gmail login successful!")
+
+            smtp.send_message(msg)
+            print(f"✅ Welcome email sent to {receiver_email}")
+
+        return True
 
     except Exception as e:
-        print("❌ Email Error:", e)
+        print("❌ Email Error:", repr(e))
+        return False
 
 
 @auth_bp.route("/register", methods=["POST"])
